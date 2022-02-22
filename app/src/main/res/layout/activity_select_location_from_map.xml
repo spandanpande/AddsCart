@@ -84,7 +84,7 @@
             android:layout_width="300dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
-            android:backgroundTint="@android:color/holo_green_light"
+            android:backgroundTint="#29bb8a"
             android:text="Continue"
             android:textSize="20dp"
             android:textAllCaps="false"
