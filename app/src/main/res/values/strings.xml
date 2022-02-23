@@ -1,3 +1,17 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">addscart</string>
+    <string name="title_activity_splash_screen">SplashScreen</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="heading1">Select\nscrap items for selling</string>
+    <string name="heading2">Choose\na date for scrap pickup</string>
+    <string name="heading3">Pickup boys will arrive at your home</string>
+    <string name="heading4">Scrap sold :)</string>
+
+    <string name="description1">We collect scrap from wide list of items like Newspaper, Iron, Electronic machine, Beer Bottle etc. We do not pick up cloth, wood and glass.</string>
+    <string name="description2">Choose a date when you want our executives to come for scrap pickup. You can book a request for the next day. \nOur pickup time will be betweer 10 am to 6 pm.</string>
+    <string name="description3">On the scheduled day, Our pickup executives will call you 1 hour before coming.\n\nThey will bring an electronic machine to weigh each scrap item separately.</string>
+    <string name="description4">You will get a bill on your mobile and the amount will be transferred to your bank account immediately.
+\n\nThe rates are non-negotiable, please check the rates before booking a pickup request.</string>
 </resources>
