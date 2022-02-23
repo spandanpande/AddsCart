@@ -6,5 +6,18 @@
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
+    <item name="White" type="color">#FFFFFF</item>
+    <item name="Grey300" type="color">#E0E0E0</item>
+    <item name="Grey50" type="color">#FAFAFA</item>
     <color name="white">#FFFFFFFF</color>
+    <color name="colorgrey">#CFCFCF</color>
+    <color name="colorPrimary">#29bb8a</color>
+    <color name="colorPrimaryclick">#29bb8a</color>
+    <color name="colorPrimaryDark">#29bb8a</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="black1">#404040</color>
+    <color name="yello">#FFC107</color>
+    <color name="colorgrey1">#F4F3F3</color>
+    <color name="colorred">#FF6F6F</color>
+    <color name="tranfarnt">#00D32A1E</color>
 </resources>
