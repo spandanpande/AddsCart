@@ -23,7 +23,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="50dp"
             android:gravity="center"
             android:background="@drawable/top_bg"
             >
@@ -45,9 +45,10 @@
 
             <SearchView
                 android:id="@+id/searchView"
-                style="@style/Base.CardView"
+                style="none"
                 android:layout_width="320dp"
                 android:layout_height="45dp"
+                android:elevation="5dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="20dp"
                 android:autoSizeTextType="uniform"
@@ -63,7 +64,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="12dp"
                 android:onClick="HomeLocation"
                 android:src="@drawable/ic_my_location"
                 tools:ignore="OnClick" />
@@ -74,23 +75,23 @@
     <LinearLayout
         android:id="@+id/ContinueLayout"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginBottom="15dp">
 
         <Button
             android:id="@+id/continueBtn"
-            android:layout_width="300dp"
+            android:layout_width="360dp"
             android:layout_height="60dp"
             android:layout_gravity="center"
             android:backgroundTint="#29bb8a"
             android:text="Continue"
-            android:textSize="20dp"
+            android:textSize="17dp"
             android:textAllCaps="false"
-            android:textStyle="bold"
             android:onClick="Continue"
-            />
+            tools:ignore="OnClick" />
 
     </LinearLayout>
 

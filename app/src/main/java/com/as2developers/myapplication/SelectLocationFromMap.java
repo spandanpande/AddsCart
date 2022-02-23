@@ -21,8 +21,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RadioGroup;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -70,6 +72,10 @@ public class SelectLocationFromMap extends AppCompatActivity {
     BottomSheetDialog sheetDialog;
     Double latGlobal,lonGlobal;
     MarkerOptions optionsGlobal;
+    RadioGroup radioGroup;
+    String radioValue;
+    Button next;
+    String radioS;
 
 
     @Override
@@ -80,8 +86,8 @@ public class SelectLocationFromMap extends AppCompatActivity {
         searchBtn = (ImageView)findViewById(R.id.searchBtn);
         searchView = (SearchView)findViewById(R.id.searchView);
         //for fullscreen mode
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+//                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 
         //noe assigning the variable
@@ -295,6 +301,33 @@ public class SelectLocationFromMap extends AppCompatActivity {
         sheetDialog.show();
         Toast.makeText(this,  "lat: "+latS+", lan: "+lonS+" LocationName: "+latLngGlobal, Toast.LENGTH_SHORT).show();
 
+
+        next = (Button) sheetDialog.findViewById(R.id.nextBtn);
+        radioGroup = (RadioGroup) sheetDialog.findViewById(R.id.radio_Group);
+        sheetDialog.show();
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                switch (i){
+                    case R.id.radio_home:
+                        radioS = "Home";
+                        Toast.makeText(SelectLocationFromMap.this, radioS, Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.ratio_office:
+                        radioS = "Office";
+                        Toast.makeText(SelectLocationFromMap.this, radioS, Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.radio_shop:
+                        radioS = "Shop";
+                        Toast.makeText(SelectLocationFromMap.this, radioS, Toast.LENGTH_SHORT).show();
+                        break;
+                    case R.id.radio_outlet:
+                        radioS = "Outlet/Mall";
+                        Toast.makeText(SelectLocationFromMap.this, radioS, Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }
+        });
     }
 
     private BitmapDescriptor BitmapFromVector(Context context, int vectorResId) {
