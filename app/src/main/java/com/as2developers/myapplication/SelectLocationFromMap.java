@@ -328,8 +328,16 @@ public class SelectLocationFromMap extends AppCompatActivity {
                 }
             }
         });
-    }
 
+        next = (Button) sheetDialog.findViewById(R.id.nextBtn);
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(SelectLocationFromMap.this,SetDate.class);
+                startActivity(i);
+            }
+        });
+    }
     private BitmapDescriptor BitmapFromVector(Context context, int vectorResId) {
         // below line is use to generate a drawable.
         Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorResId);
