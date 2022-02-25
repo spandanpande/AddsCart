@@ -10,6 +10,7 @@
     <item name="Grey300" type="color">#E0E0E0</item>
     <item name="Grey50" type="color">#FAFAFA</item>
     <color name="white">#FFFFFFFF</color>
+
     <color name="colorgrey">#CFCFCF</color>
     <color name="colorPrimary">#29bb8a</color>
     <color name="colorPrimaryclick">#29bb8a</color>
@@ -20,4 +21,12 @@
     <color name="colorgrey1">#F4F3F3</color>
     <color name="colorred">#FF6F6F</color>
     <color name="tranfarnt">#00D32A1E</color>
+
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="light_blue_900">#FF01579B</color>
+    <color name="light_blue_A200">#FF40C4FF</color>
+    <color name="light_blue_A400">#FF00B0FF</color>
+    <color name="black_overlay">#66000000</color>
+
+    <color name="green">#29bb8a</color>
 </resources>
