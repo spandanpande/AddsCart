@@ -389,8 +389,7 @@
                     <ImageView
                         android:layout_width="90dp"
                         android:layout_height="70dp"
-                        android:src="@drawable/othersplastic"
-                         />
+                        android:src="@drawable/othersplastic" />
 
                     <TextView
                         android:id="@+id/ewaste"
@@ -449,8 +448,8 @@
                         android:id="@+id/ironprice"
                         android:layout_width="55dp"
                         android:layout_height="wrap_content"
-                        android:text="25/kg"
                         android:drawableLeft="@drawable/xml_rupee"
+                        android:text="25/kg"
                         android:textAlignment="center"
                         android:textColor="@color/black"
                         android:textSize="13sp" />
@@ -478,8 +477,7 @@
                         android:layout_width="90dp"
                         android:layout_height="70dp"
                         android:padding="4dp"
-                        android:src="@drawable/bottle"
-                         />
+                        android:src="@drawable/bottle" />
 
                     <TextView
                         android:id="@+id/otheritems"
@@ -494,8 +492,8 @@
                         android:id="@+id/otheritems_price"
                         android:layout_width="55dp"
                         android:layout_height="wrap_content"
-                        android:text="22/kg"
                         android:drawableLeft="@drawable/xml_rupee"
+                        android:text="22/kg"
                         android:textAlignment="center"
                         android:textColor="@color/black"
                         android:textSize="13sp" />
