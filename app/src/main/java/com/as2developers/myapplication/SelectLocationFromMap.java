@@ -22,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
@@ -75,8 +76,8 @@ public class SelectLocationFromMap extends AppCompatActivity {
     RadioGroup radioGroup;
     String radioValue;
     Button next;
-    String radioS;
-
+    String radioS,finalLocation,userLocality,UserAddressLine;
+    EditText uLocality,uAddressLine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -297,14 +298,20 @@ public class SelectLocationFromMap extends AppCompatActivity {
         String name = addresses.get(0).getAdminArea();
         String pin = addresses.get(0).getPostalCode();
         TextInputEditText editText = sheetDialog.findViewById(R.id.yourLocation);
-        editText.setText(locality+","+name+","+country+","+pin);
+
+        //to share data to an another activity
+        finalLocation = locality+","+name+","+country+","+pin;
+        editText.setText(finalLocation);
         sheetDialog.show();
         Toast.makeText(this,  "lat: "+latS+", lan: "+lonS+" LocationName: "+latLngGlobal, Toast.LENGTH_SHORT).show();
 
+        uLocality = (EditText) sheetDialog.findViewById(R.id.UserLocality);
+        uAddressLine = (EditText) sheetDialog.findViewById(R.id.addressLine);
 
         next = (Button) sheetDialog.findViewById(R.id.nextBtn);
         radioGroup = (RadioGroup) sheetDialog.findViewById(R.id.radio_Group);
         sheetDialog.show();
+        radioS ="";
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -334,7 +341,26 @@ public class SelectLocationFromMap extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(SelectLocationFromMap.this,SetDate.class);
-                startActivity(i);
+                //passing the value
+                //getting some value
+                userLocality = uLocality.getText().toString();
+                UserAddressLine = uAddressLine.getText().toString();
+                i.putExtra("LatLon",latGlobal);
+                i.putExtra("locationType",radioS);
+                finalLocation = editText.getText().toString();
+                i.putExtra("LocationDetails",finalLocation);
+                i.putExtra("pin",pin);
+                i.putExtra("locality",userLocality);
+                i.putExtra("AddressLine",UserAddressLine);
+
+                //now if location type selected then only go to next activity
+                if(radioS.length()==0){
+                    Toast.makeText(SelectLocationFromMap.this, "Please Select A location type.eg: home", Toast.LENGTH_SHORT).show();
+                }else{
+                    startActivity(i);
+                    Toast.makeText(SelectLocationFromMap.this, radioS, Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
     }

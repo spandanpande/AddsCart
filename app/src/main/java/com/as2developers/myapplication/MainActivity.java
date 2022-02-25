@@ -16,8 +16,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void open(View view) {
 
-        Intent intent = new Intent(MainActivity.this,SelectLocationFromMap.class);
-        startActivity(intent);
+//        Intent intent = new Intent(MainActivity.this,SelectLocationFromMap.class);
+//        startActivity(intent);
 
     }
 }
