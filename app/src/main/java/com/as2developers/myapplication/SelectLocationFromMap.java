@@ -340,7 +340,7 @@ public class SelectLocationFromMap extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(SelectLocationFromMap.this,SetDate.class);
+                Intent i = new Intent(SelectLocationFromMap.this,FormFillupActivity.class);
                 //passing the value
                 //getting some value
                 userLocality = uLocality.getText().toString();

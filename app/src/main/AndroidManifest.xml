@@ -14,34 +14,7 @@
         android:theme="@style/Theme.MyApplication">
 
         <activity
-            android:name=".FormFillupActivity"
-            android:exported="false" />
-        <activity android:name=".Login_Phone"
-            android:exported="false"/>
-        <activity android:name=".UserDetails"
-            android:exported="false"/>
-        <activity android:name=".Verify_Number"
-            android:exported="false"/>
-
-        <activity
-            android:name=".SetDate"
-            android:exported="false" />
-        <activity
-            android:name=".SelectLocationFromMap"
-            android:exported="false" />
-
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBCE8DVjURtaJp1rpbigQZD7Io-FZSmQIE" />
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-
-        <activity
-            android:name=".OnBoardingScreen"
-            android:exported="false" />
-        <activity
-            android:name=".ConfirmPickupActivity"
+            android:name=".SplashScreen"
             android:exported="true">
 
             <intent-filter>
@@ -51,12 +24,54 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".OnBoardingScreen"
+            android:exported="false" />
+
+        <activity android:name=".Login_Phone"
+            android:exported="false"/>
+        <activity android:name=".UserDetails"
+            android:exported="false"/>
+        <activity android:name=".Verify_Number"
+            android:exported="false"/>
+
+        <activity
+            android:name=".SelectLocationFromMap"
+            android:exported="false" />
+
+        <activity
+            android:name=".FormFillupActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".SetDate"
+            android:exported="false" />
+
+        <activity android:name=".ConfirmPickupActivity"
+            android:exported="false"/>
+
+        <activity android:name=".DonateOrGetActivity"
+            android:exported="false"/>
+
+        <activity android:name=".ProfilePage"
+            android:exported="false"/>
+        <activity android:name=".Impact"
+            android:exported="false"/>
+        <activity android:name=".confirmation"
+            android:exported="false"/>
+        <activity
             android:name=".MainActivity"
             android:exported="false"/>
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBCE8DVjURtaJp1rpbigQZD7Io-FZSmQIE" />
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
     </application>
 
 </manifest>

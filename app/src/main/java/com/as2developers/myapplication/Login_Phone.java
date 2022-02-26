@@ -42,7 +42,7 @@ public class Login_Phone extends AppCompatActivity {
         inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
 
         if (currentUser != null) {
-            Intent intent = new Intent(Login_Phone.this, MainActivity.class);
+            Intent intent = new Intent(Login_Phone.this, SelectLocationFromMap.class);
             startActivity(intent);
             finish();
         } else {
@@ -58,28 +58,31 @@ public class Login_Phone extends AppCompatActivity {
                         return;
                     }
 
-                    DatabaseReference databaseReference = fdata.getReference("Users").child("+91"+mobileNo);
-                    databaseReference.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            //Toast.makeText(Login_Phone.this, "inside OnClick", Toast.LENGTH_SHORT).show();
-                            if(!snapshot.exists()){
-                                Intent intent1 = new Intent(Login_Phone.this, UserDetails.class);
-                                intent1.putExtra("mobile", mobileNo);
-                                startActivity(intent1);
-                            }
-                            else{
-                                Intent intent = new Intent(Login_Phone.this, Verify_Number.class);
-                                intent.putExtra("mobile", mobileNo);
-                                startActivity(intent);
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                            Toast.makeText(Login_Phone.this, "Error:inside OnClick: "+error, Toast.LENGTH_SHORT).show();
-                        }
-                    });
+//                    DatabaseReference databaseReference = fdata.getReference("Users").child("+91"+mobileNo);
+//                    databaseReference.addValueEventListener(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                            //Toast.makeText(Login_Phone.this, "inside OnClick", Toast.LENGTH_SHORT).show();
+//                            if(!snapshot.exists()){
+//                                Intent intent = new Intent(Login_Phone.this, UserDetails.class);
+//                                intent.putExtra("mobile", mobileNo);
+//                                startActivity(intent);
+//                            }
+//                            else{
+//                                Intent intent = new Intent(Login_Phone.this, Verify_Number.class);
+//                                intent.putExtra("mobile", mobileNo);
+//                                startActivity(intent);
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(@NonNull DatabaseError error) {
+//                            Toast.makeText(Login_Phone.this, "Error:inside OnClick: "+error, Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
+                    Intent intent = new Intent(Login_Phone.this, SelectLocationFromMap.class);
+                    intent.putExtra("mobile", mobileNo);
+                    startActivity(intent);
                 }
             });
         }

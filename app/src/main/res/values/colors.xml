@@ -10,6 +10,7 @@
     <item name="Grey300" type="color">#E0E0E0</item>
     <item name="Grey50" type="color">#FAFAFA</item>
     <color name="white">#FFFFFFFF</color>
+    <color name="gray">#d3d3d3</color>
 
     <color name="colorgrey">#CFCFCF</color>
     <color name="colorPrimary">#29bb8a</color>

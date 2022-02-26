@@ -34,8 +34,8 @@
 
                     <ImageButton
                         android:id="@+id/btn_side_nav"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:background="?android:selectableItemBackgroundBorderless"
                         android:src="@drawable/xml_menu"
                         app:tint="@color/white" />
@@ -44,7 +44,7 @@
                     <LinearLayout
                         android:id="@+id/linearleyout_loacation"
                         android:layout_width="292dp"
-                        android:layout_height="40dp"
+                        android:layout_height="50dp"
                         android:layout_weight="1"
                         android:paddingLeft="15dp"
                         android:gravity="center|left"
@@ -69,12 +69,12 @@
                             android:textStyle="bold" />
                     </LinearLayout>
 
-                    <TextView
+                    <ImageView
                         android:id="@+id/addNewAddress"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_gravity="center"
-                        android:drawableRight="@drawable/ic_bottom"
+                        android:src="@drawable/ic_bottom"
                         android:gravity="center"
                         android:maxLength="40"
                         android:padding="2dp"
@@ -573,7 +573,7 @@
         android:padding="10dp">
 
 
-        <TextView
+        <Button
             android:id="@+id/btn_continue"
             android:layout_width="match_parent"
             android:layout_height="52dp"
