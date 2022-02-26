@@ -37,30 +37,10 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         app:layout_constraintVertical_bias="0" />
 
-<!--    <EditText-->
-<!--        android:id="@+id/enterOTP"-->
-<!--        android:layout_width="200dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:fontFamily="@font/montserrat_semibold"-->
-<!--        android:layout_marginTop="20dp"-->
-<!--        android:digits="0123456789"-->
-<!--        android:drawablePadding="10dp"-->
-<!--        android:hint="Enter OTP"-->
-<!--        android:textColorHint="@color/black"-->
-<!--        android:backgroundTint="@color/black"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:inputType="phone"-->
-<!--        android:maxLength="10"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.0"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@id/text1"-->
-<!--        app:layout_constraintVertical_bias="0" />-->
 
     <com.chaos.view.PinView
         android:id="@+id/enterOTP"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
         android:fontFamily="@font/montserrat_semibold"
         android:layout_marginTop="20dp"

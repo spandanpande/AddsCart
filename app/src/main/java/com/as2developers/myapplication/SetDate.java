@@ -3,6 +3,7 @@ package com.as2developers.myapplication;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,7 +15,7 @@ import java.util.Calendar;
 public class SetDate extends AppCompatActivity {
     TextView selectedDate;
     String SelectedDateS;
-    Button selectDate;
+    Button selectDate,continue_btn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +23,7 @@ public class SetDate extends AppCompatActivity {
         setContentView(R.layout.activity_set_date);
         selectedDate = (TextView) findViewById(R.id.selectedDate);
         selectDate = (Button) findViewById(R.id.selectDate);
+        continue_btn = findViewById(R.id.btn_continue);
 
         //initialize calender
         Calendar calendar = Calendar.getInstance();
@@ -51,6 +53,13 @@ public class SetDate extends AppCompatActivity {
                 datePicker.getDatePicker().setMinDate(System.currentTimeMillis()+24*60*60*1000);
                 datePicker.getDatePicker().setMaxDate(System.currentTimeMillis()+5*24*60*60*1000);
                 datePicker.show();
+            }
+        });
+
+        continue_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SetDate.this, ConfirmPickupActivity.class).putExtra("selectedDate",SelectedDateS));
             }
         });
     }

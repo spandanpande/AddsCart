@@ -62,7 +62,7 @@ public class UserDetails extends AppCompatActivity {
                 hashMap.put("Name", Name);
                 hashMap.put("Mobile","+91"+usernumber);
                 databaseReference.setValue(hashMap);
-                startActivity(new Intent(getApplicationContext(),Verify_Number.class));
+                startActivity(new Intent(UserDetails.this,Verify_Number.class));
             }
         });
 

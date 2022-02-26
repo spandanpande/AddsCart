@@ -23,10 +23,9 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:gravity="center"
+            android:layout_height="?android:actionBarSize"
             android:background="@drawable/top_bg"
-            >
+            android:gravity="center">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -38,21 +37,21 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="67dp"
-            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:orientation="horizontal">
 
             <SearchView
                 android:id="@+id/searchView"
                 style="none"
-                android:layout_width="320dp"
-                android:layout_height="45dp"
-                android:elevation="5dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
+                android:layout_weight="1"
                 android:autoSizeTextType="uniform"
                 android:background="@drawable/search_bg"
+                android:elevation="5dp"
                 android:iconifiedByDefault="false"
                 android:queryHint="Search your location.."
                 android:textSize="22sp"
@@ -60,12 +59,13 @@
 
             <ImageView
                 android:id="@+id/searchBtn"
-                android:padding="3dp"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="12dp"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
                 android:onClick="HomeLocation"
+                android:scaleType="fitXY"
                 android:src="@drawable/ic_my_location"
                 tools:ignore="OnClick" />
 
@@ -83,12 +83,14 @@
 
         <Button
             android:id="@+id/continueBtn"
-            android:layout_width="360dp"
-            android:layout_height="60dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:backgroundTint="#29bb8a"
             android:text="Continue"
-            android:textSize="17dp"
+            android:textSize="17sp"
+            android:layout_marginHorizontal="30dp"
+            android:padding="10dp"
             android:textAllCaps="false"
             android:onClick="Continue"
             tools:ignore="OnClick" />
