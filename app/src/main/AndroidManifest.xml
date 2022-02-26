@@ -12,9 +12,12 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
+
+        <activity
+            android:name=".FormFillupActivity"
+            android:exported="false" />
         <activity android:name=".Login_Phone"
             android:exported="false"/>
-
         <activity android:name=".UserDetails"
             android:exported="false"/>
         <activity android:name=".Verify_Number"
@@ -38,8 +41,9 @@
             android:name=".OnBoardingScreen"
             android:exported="false" />
         <activity
-            android:name=".SplashScreen"
+            android:name=".ConfirmPickupActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
