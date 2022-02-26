@@ -5,10 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ConfirmPickupActivity">
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="97dp"
+        android:layout_height="70dp"
         android:background="@color/white"
         android:theme="@style/AppTheme.AppBarOverlay"
         app:elevation="0dp"
@@ -17,17 +18,18 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="95dp"
+            android:layout_height="70dp"
             android:background="@drawable/round_actionbar"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="20dp"
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/layout_back_process"
                     android:layout_width="match_parent"
                     android:layout_height="42dp">
 
@@ -56,7 +58,7 @@
                             android:layout_height="wrap_content"
                             android:text="Sell Scrap"
                             android:textColor="@color/white"
-                            android:textSize="30dp"
+                            android:textSize="22dp"
                             android:textStyle="bold" />
 
                         <TextView
@@ -68,7 +70,7 @@
                             android:gravity="center"
                             android:text="Cancel"
                             android:textColor="@color/white"
-                            android:textSize="25dp"
+                            android:textSize="20dp"
                             android:textStyle="normal" />
 
                     </LinearLayout>
@@ -95,17 +97,20 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/txt_next1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="-5dp"
             android:gravity="center"
-            android:text="--------"
+            android:layout_marginBottom="6dp"
+            android:text="____"
             android:textColor="@color/black" />
 
         <TextView
+            android:id="@+id/text_itemPickup"
             android:layout_width="100dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="1dp"
             android:gravity="center"
             android:text="1 items for pickup"
             android:textColor="@color/black"
@@ -116,10 +121,12 @@
             android:layout_height="match_parent"
             android:layout_marginLeft="10dp"
             android:gravity="center"
-            android:text="--------"
+            android:text="_____"
+            android:layout_marginBottom="6dp"
             android:textColor="@color/black" />
 
         <TextView
+            android:id="@+id/txt_pickupDate"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="12dp"
@@ -132,12 +139,13 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-
+            android:layout_marginBottom="7dp"
             android:layout_marginLeft="10dp"
-            android:text="--------"
+            android:text="_____"
             android:textColor="@color/black" />
 
         <TextView
+            android:id="@+id/txt_confirm"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginLeft="5dp"
@@ -166,16 +174,64 @@
             android:padding="5dp"
             android:text="Pickhup confirmation"
             android:textColor="@color/black"
-            android:textSize="30sp"
+            android:textSize="26sp"
             android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/Scarp_item_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/thirdLayout"
+        android:orientation="vertical"
+        android:paddingTop="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/scarp_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Scrap item"
+                android:textSize="16dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/scarpitem_text"
+                android:layout_width="310dp"
+                android:layout_height="wrap_content"
+                android:paddingLeft="25dp"
+                android:text="Carton"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/change_scrapItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="7dp"
+                android:text="Change"
+                android:textColor="@color/green"
+                android:textSize="16dp" />
+        </LinearLayout>
+
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/homeAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/thirdLayout"
-        android:background="@drawable/box1"
+        android:layout_below="@id/Scarp_item_layout"
         android:orientation="vertical"
         android:paddingTop="20dp">
 
@@ -185,11 +241,12 @@
             android:orientation="horizontal">
 
             <TextView
+                android:id="@+id/txt_homeAddress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:text="Address - Home"
-                android:textSize="20dp" />
+                android:textSize="16dp" />
 
         </LinearLayout>
 
@@ -198,22 +255,23 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/ed_hoseno"
+            <TextView
+                android:id="@+id/txt_Address"
                 android:layout_width="310dp"
                 android:layout_height="wrap_content"
-                android:background="@null"
                 android:paddingLeft="25dp"
-                android:text="12/2 dhansha stand,\nNajafgarh 110075"
+                android:text="12/2 dhansha stand, Najafgarh \n110075"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="16dp" />
 
             <TextView
+                android:id="@+id/change_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:paddingLeft="7dp"
                 android:text="Change"
                 android:textColor="@color/green"
-                android:textSize="20dp" />
+                android:textSize="16dp" />
         </LinearLayout>
 
     </LinearLayout>
@@ -225,23 +283,27 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/homeAddress"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="5dp"
+        android:gravity="center">
 
         <fragment
-            android:id="@+id/map"
+            android:id="@+id/location_fragment"
             android:name="com.google.android.gms.maps.MapFragment"
             android:layout_width="355dp"
-            android:layout_height="199dp"
-            android:layout_marginLeft="30dp" />
+            android:layout_height="199dp" />
 
-
+       <!-- <ImageButton
+            android:layout_width="300dp"
+            android:layout_height="141dp"
+            android:src="@drawable/locationimage"></ImageButton>-->
     </RelativeLayout>
+
     <LinearLayout
         android:id="@+id/pickupAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/container"
-        android:background="@drawable/box1"
+
         android:orientation="vertical"
         android:paddingTop="20dp">
 
@@ -255,7 +317,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:text="Pickup"
-                android:textSize="20dp" />
+                android:textSize="16dp" />
         </LinearLayout>
 
         <LinearLayout
@@ -263,27 +325,30 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <EditText
-                android:id="@+id/ed_pichup"
-                android:layout_width="307dp"
-                android:layout_height="50dp"
-                android:background="@null"
-                android:paddingLeft="20dp"
-                android:text="Tomorrow ,26 febraury 2022\n10AM-6PM"
-                android:textColor="@color/black" />
             <TextView
+                android:id="@+id/txt_pichup_time"
+                android:layout_width="307dp"
+                android:layout_height="60dp"
+                android:paddingLeft="20dp"
+                android:text="Tomorrow ,26 march 2022\n10AM-6PM"
+                android:textColor="@color/black"
+                android:textSize="16dp" />
+
+            <TextView
+                android:id="@+id/change_pickup"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Change"
+                android:layout_marginLeft="7dp"
                 android:textColor="@color/green"
-                android:textSize="20dp" />
+                android:textSize="16dp" />
 
         </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/forthLayout"
+        android:id="@+id/fourthLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/pickupAddress"
@@ -303,32 +368,32 @@
             android:id="@+id/ed_note"
             android:layout_width="360dp"
             android:layout_height="60dp"
-            android:background="@null"
-            android:gravity="top"
             android:layout_marginLeft="25dp"
-            android:paddingLeft="10dp"
-            android:hint="Enter any additional information regarding you order"
+            android:gravity="top"
+            android:background="@drawable/box1"
+            android:hint="Enter any additional information regarding your order"
             android:maxLines="3"
+            android:paddingLeft="10dp"
             android:textColorHint="@color/colorgrey"
-            android:textSize="20dp" />
+            android:textSize="15dp" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/forthLayout"
-        android:layout_marginTop="35dp"
+        android:layout_below="@+id/fourthLayout"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
         android:orientation="vertical"
         android:padding="10dp">
 
 
         <TextView
             android:id="@+id/btn_proceed"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
+            android:layout_width="320dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
             android:background="@drawable/rounded_button"
             android:gravity="center"
             android:text="Continue"
