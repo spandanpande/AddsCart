@@ -67,19 +67,18 @@
     <Button
         android:id="@+id/LoginPhone"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:backgroundTint="#29bb8a"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:backgroundTint="@color/black"
         android:fontFamily="@font/montserrat_semibold"
+        android:paddingVertical="10dp"
+        android:layout_marginBottom="20dp"
         android:text="Continue"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="16sp"
-        android:textStyle="bold"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
