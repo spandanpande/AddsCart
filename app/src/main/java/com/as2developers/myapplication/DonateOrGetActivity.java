@@ -19,7 +19,6 @@ public class DonateOrGetActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donate_or_get);
 
-        profile = findViewById(R.id.profileButton);
         cash = findViewById(R.id.button);
         donate = findViewById(R.id.button2);
 
@@ -40,12 +39,5 @@ public class DonateOrGetActivity extends AppCompatActivity {
             }
         });
 
-        profile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(DonateOrGetActivity.this,ProfilePage.class);
-                startActivity(i);
-            }
-        });
     }
 }

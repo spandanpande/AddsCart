@@ -21,20 +21,40 @@
         android:layout_alignParentTop="true"
         android:orientation="vertical">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/CL1"
             android:layout_width="match_parent"
-            android:layout_height="?android:actionBarSize"
-            android:background="@drawable/top_bg"
-            android:gravity="center">
+            android:layout_height="95dp"
+            android:background="@drawable/round_actionbar"
+            android:elevation="10dp">
+
+
+            <ImageButton
+                android:id="@+id/Img"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginBottom="15dp"
+                android:background="?android:selectableItemBackground"
+                android:src="@drawable/xml_menu"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
+                android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Set your Location"
+                android:layout_marginStart="20dp"
+                android:layout_marginBottom="15dp"
+                android:paddingHorizontal="5dp"
+                android:paddingVertical="5dp"
+                android:text="Set Location"
                 android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+                android:textSize="28sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/Img" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -63,8 +83,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:layout_margin="10dp"
                 android:onClick="HomeLocation"
+                android:layout_margin="10dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_my_location"
                 tools:ignore="OnClick" />
@@ -78,19 +98,18 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:gravity="center"
+        android:layout_marginHorizontal="30dp"
         android:orientation="vertical"
-        android:layout_marginBottom="15dp">
+        android:layout_marginBottom="20dp">
 
         <Button
             android:id="@+id/continueBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:backgroundTint="#29bb8a"
+            android:backgroundTint="@color/black"
             android:text="Continue"
-            android:textSize="17sp"
-            android:layout_marginHorizontal="30dp"
-            android:padding="10dp"
+            android:textSize="18sp"
+            android:paddingVertical="10dp"
             android:textAllCaps="false"
             android:onClick="Continue"
             tools:ignore="OnClick" />

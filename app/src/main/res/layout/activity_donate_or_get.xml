@@ -1,118 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DonateOrGetActivity">
 
-    <RelativeLayout
-        android:id="@+id/rv1"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl3"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:background="@drawable/bg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:padding="5dp">
+        android:layout_height="95dp"
+        android:background="@drawable/round_actionbar"
+        android:elevation="10dp">
+
+        <ImageButton
+            android:id="@+id/img"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginBottom="15dp"
+            android:background="?android:selectableItemBackground"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="5dp"
             android:orientation="vertical"
             android:padding="5dp"
-            android:layout_alignParentLeft="true">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toRightOf="@+id/img">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Spandan Pande"
                 android:textColor="#FFFFFF"
-                android:textSize="20sp" />
+                android:textSize="24sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Nashik, Maharashtra"
                 android:textColor="#FFFFFF"
-                android:textSize="14sp" />
-
+                android:textSize="18sp" />
         </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="5dp"
-            android:layout_alignParentRight="true">
-
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="20dp"
-                android:src="@android:drawable/btn_star_big_on" />
-
-            <ImageButton
-                android:id="@+id/profileButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg2"
-                android:src="@drawable/ic_baseline_person_24" />
-        </LinearLayout>
-
-
-    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/relativeLayout2"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:layout_marginTop="10dp"
+        android:layout_below="@+id/cl3"
+        android:layout_centerHorizontal="true"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="80dp"
         android:layout_marginEnd="20dp"
-        android:background="@drawable/bg"
+        android:background="@drawable/donatepage"
         android:padding="5dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/totalAmount" />
+        app:layout_constraintStart_toStartOf="parent">
 
-    <TextView
-        android:id="@+id/totalAmount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="20dp"
-        android:text="Total Amount - $20"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="@+id/relativeLayout2"
-        app:layout_constraintTop_toBottomOf="@+id/rv1" />
+    </RelativeLayout>
 
     <Button
         android:id="@+id/button"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/bg1"
+        android:layout_below="@+id/relativeLayout2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="80dp"
+        android:backgroundTint="#29BB8A"
+        android:paddingVertical="10dp"
         android:text="Get Instant Cash"
-        app:layout_constraintEnd_toEndOf="@+id/relativeLayout2"
-        app:layout_constraintStart_toStartOf="@+id/relativeLayout2"
-        app:layout_constraintTop_toBottomOf="@+id/relativeLayout2" />
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginHorizontal="30dp"
         android:layout_marginTop="20dp"
-        app:backgroundTint="@null"
-        android:background="@drawable/bg3"
+        android:backgroundTint="@color/black"
+        android:paddingVertical="10dp"
         android:text="Donate to NGO"
-        app:layout_constraintEnd_toEndOf="@+id/relativeLayout2"
-        app:layout_constraintStart_toStartOf="@+id/relativeLayout2"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
+        android:textSize="18sp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>

@@ -6,91 +6,46 @@
     android:layout_height="match_parent"
     tools:context=".ConfirmPickupActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBarLayout"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/CL1"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:background="@color/white"
-        android:theme="@style/AppTheme.AppBarOverlay"
-        app:elevation="0dp"
-        tools:ignore="MissingConstraints">
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:background="@drawable/round_actionbar"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:id="@+id/layout_back_process"
-                    android:layout_width="match_parent"
-                    android:layout_height="42dp">
-
-                    <ImageButton
-                        android:id="@+id/back_process"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-                        android:background="?android:selectableItemBackgroundBorderless"
-                        android:src="@drawable/xml_back"
-                        app:tint="@color/white" />
+        android:layout_height="95dp"
+        android:background="@drawable/round_actionbar"
+        android:elevation="10dp">
 
 
-                    <LinearLayout
+        <ImageButton
+            android:id="@+id/Img"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginBottom="15dp"
+            android:background="?android:selectableItemBackground"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
-                        android:id="@+id/linerleyoutakshay"
-                        android:layout_width="315dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:paddingLeft="30dp">
-
-                        <TextView
-                            android:id="@+id/Sellscrap"
-                            android:layout_width="150dp"
-                            android:layout_height="wrap_content"
-                            android:text="Sell Scrap"
-                            android:textColor="@color/white"
-                            android:textSize="22dp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/txt_cancel"
-                            android:layout_width="match_parent"
-                            android:layout_height="30dp"
-                            android:layout_gravity="center"
-                            android:layout_marginLeft="50dp"
-                            android:gravity="center"
-                            android:text="Cancel"
-                            android:textColor="@color/white"
-                            android:textSize="20dp"
-                            android:textStyle="normal" />
-
-                    </LinearLayout>
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginBottom="15dp"
+            android:paddingHorizontal="5dp"
+            android:paddingVertical="5dp"
+            android:text="Sell Scrap"
+            android:textColor="@color/white"
+            android:textSize="28sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/Img" />
 
 
-                </LinearLayout>
-
-
-            </LinearLayout>
-
-
-        </androidx.appcompat.widget.Toolbar>
-
-
-    </com.google.android.material.appbar.AppBarLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/appBarLayout">
+        android:layout_below="@+id/CL1">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -102,7 +57,6 @@
                 android:id="@+id/secondlayout"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_below="@id/appBarLayout"
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
@@ -120,7 +74,7 @@
                     android:id="@+id/text_itemPickup"
                     android:layout_width="100dp"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="1dp"
+                    android:layout_marginLeft="5dp"
                     android:gravity="center"
                     android:text="1 items for pickup"
                     android:textColor="@color/black"
@@ -129,60 +83,62 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:gravity="center"
-                    android:text="_____"
+                    android:layout_marginLeft="0dp"
                     android:layout_marginBottom="6dp"
+                    android:gravity="center"
+                    android:text="____"
                     android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/txt_pickupDate"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="12dp"
+                    android:layout_marginLeft="10dp"
                     android:gravity="center"
-                    android:textColor="@color/black"
                     android:text="Pickup Date"
+                    android:textColor="@color/black"
                     android:textSize="17sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:layout_marginBottom="7dp"
                     android:layout_marginLeft="10dp"
-                    android:text="_____"
+                    android:layout_marginBottom="7dp"
+                    android:gravity="center"
+                    android:text="____"
                     android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/txt_confirm"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginLeft="10dp"
                     android:gravity="center"
                     android:text="Confirm"
                     android:textColor="@color/green"
                     android:textSize="17sp" />
             </LinearLayout>
+
             <LinearLayout
-                android:layout_width="wrap_content"
                 android:id="@+id/thirdLayout"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
                 android:layout_below="@+id/secondlayout"
+                android:layout_marginTop="1dp"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:paddingLeft="30dp">
+                android:paddingLeft="0dp">
+
                 <TextView
                     android:id="@+id/textpickup"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
+                    android:layout_marginStart="10dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginEnd="5dp"
                     android:layout_marginBottom="5dp"
                     android:padding="5dp"
-                    android:text="Pickhup confirmation"
+                    android:text="Pickup confirmation"
                     android:textColor="@color/black"
                     android:textSize="26sp"
                     android:textStyle="bold" />
@@ -205,9 +161,9 @@
                         android:id="@+id/scarp_item"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="15dp"
                         android:text="Scrap item"
-                        android:textSize="16dp" />
+                        android:textSize="18sp" />
 
                 </LinearLayout>
 
@@ -220,19 +176,11 @@
                         android:id="@+id/scarpitem_text"
                         android:layout_width="310dp"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="25dp"
+                        android:paddingLeft="15dp"
                         android:text="Carton"
                         android:textColor="@color/black"
                         android:textSize="18dp" />
 
-                    <TextView
-                        android:id="@+id/change_scrapItem"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="7dp"
-                        android:text="Change"
-                        android:textColor="@color/green"
-                        android:textSize="16dp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -254,9 +202,9 @@
                         android:id="@+id/txt_homeAddress"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="15dp"
                         android:text="Address - Home"
-                        android:textSize="16dp" />
+                        android:textSize="18sp" />
 
                 </LinearLayout>
 
@@ -269,19 +217,11 @@
                         android:id="@+id/txt_Address"
                         android:layout_width="310dp"
                         android:layout_height="wrap_content"
-                        android:paddingLeft="25dp"
+                        android:paddingLeft="15dp"
                         android:text="12/2 dhansha stand, Najafgarh \n110075"
                         android:textColor="@color/black"
                         android:textSize="16dp" />
 
-                    <TextView
-                        android:id="@+id/change_address"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingLeft="7dp"
-                        android:text="Change"
-                        android:textColor="@color/green"
-                        android:textSize="16dp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -325,9 +265,9 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="15dp"
                         android:text="Pickup"
-                        android:textSize="16dp" />
+                        android:textSize="18sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -339,53 +279,12 @@
                         android:id="@+id/txt_pichup_time"
                         android:layout_width="307dp"
                         android:layout_height="60dp"
-                        android:paddingLeft="20dp"
+                        android:paddingLeft="15dp"
                         android:text="Tomorrow ,26 march 2022\n10AM-6PM"
                         android:textColor="@color/black"
                         android:textSize="16dp" />
 
-                    <TextView
-                        android:id="@+id/change_pickup"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Change"
-                        android:layout_marginLeft="7dp"
-                        android:textColor="@color/green"
-                        android:textSize="16dp" />
-
                 </LinearLayout>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/fourthLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/pickupAddress"
-                android:paddingTop="15dp"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="2"
-                    android:paddingLeft="20dp"
-                    android:text="Additional Note"
-                    android:textColor="@color/black"
-                    android:textSize="17dp"
-                    android:textStyle="bold" />
-
-                <EditText
-                    android:id="@+id/ed_note"
-                    android:layout_width="360dp"
-                    android:layout_height="60dp"
-                    android:layout_marginLeft="25dp"
-                    android:gravity="top"
-                    android:background="@drawable/box1"
-                    android:hint="Enter any additional information regarding your order"
-                    android:maxLines="3"
-                    android:paddingLeft="10dp"
-                    android:textColorHint="@color/colorgrey"
-                    android:textSize="15dp" />
 
             </LinearLayout>
 
@@ -394,9 +293,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/fourthLayout"
                 android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="30dp"
                 android:gravity="center"
-                android:orientation="vertical"
-                android:padding="10dp">
+                android:orientation="vertical">
 
 
                 <Button
@@ -404,14 +303,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginHorizontal="30dp"
-                    android:background="@drawable/rounded_button"
+                    android:padding="10dp"
+                    android:backgroundTint="@color/black"
                     android:gravity="center"
                     android:text="Continue"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:textSize="18sp"/>
 
 
             </LinearLayout>

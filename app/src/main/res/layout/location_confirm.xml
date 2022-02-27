@@ -149,13 +149,16 @@
     <Button
         android:id="@+id/nextBtn"
         android:layout_marginTop="5dp"
-        android:layout_width="300dp"
-        android:layout_height="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:layout_marginHorizontal="30dp"
         android:text="Next"
+        android:textColor="@color/white"
+        android:paddingVertical="10dp"
         android:clickable="false"
         android:textAllCaps="false"
-        android:backgroundTint="@color/purple_700"
+        android:backgroundTint="@color/black"
         />
 
 </LinearLayout>
