@@ -26,23 +26,23 @@ public class ConfirmPickupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_pickup);
-        image_back_process = findViewById(R.id.back_process);
-        linearLayout_back_process = findViewById(R.id.layout_back_process);
+//        image_back_process = findViewById(R.id.back_process);
+//        linearLayout_back_process = findViewById(R.id.layout_back_process);
 
-        txt_Cancel = findViewById(R.id.txt_cancel);
+//        txt_Cancel = findViewById(R.id.txt_cancel);
         txt_itemPickup = findViewById(R.id.text_itemPickup);
         txt_pickUpdate = findViewById(R.id.txt_pickupDate);
         txt_confirm = findViewById(R.id.txt_confirm);
         scarpItem_txt = findViewById(R.id.scarpitem_text);
-        change_scrap = findViewById(R.id.change_scrapItem);
-        change_pickup = findViewById(R.id.change_pickup);
-        chane_Adddress = findViewById(R.id.change_address);
+//        change_scrap = findViewById(R.id.change_scrapItem);
+//        change_pickup = findViewById(R.id.change_pickup);
+//        chane_Adddress = findViewById(R.id.change_address);
         txt_homeAddress = findViewById(R.id.txt_homeAddress);
         txt_Address = findViewById(R.id.txt_Address);
         txt_pickupTime = findViewById(R.id.txt_pichup_time);
 
         fragment_location = findViewById(R.id.location_fragment);
-        ed_note = findViewById(R.id.ed_note);
+//        ed_note = findViewById(R.id.ed_note);
         continue_btn = findViewById(R.id.btn_proceed);
 
         continue_btn.setOnClickListener(new View.OnClickListener() {

@@ -36,7 +36,7 @@ public class FormFillupActivity extends AppCompatActivity {
         fifthLayout = findViewById(R.id.fifth_layout);
         sixthLayout = findViewById(R.id.sixth_layout);
 
-        btn_Layout = findViewById(R.id.btn_Layout);
+//        btn_Layout = findViewById(R.id.btn_Layout);
 
 
         // All ImageView
@@ -51,10 +51,10 @@ public class FormFillupActivity extends AppCompatActivity {
         // All TextView
         pickup_laction = findViewById(R.id.pickuplocation);
         homelocation = findViewById(R.id.home_location);
-        addNewAddress = findViewById(R.id.addNewAddress);
+//        addNewAddress = findViewById(R.id.addNewAddress);
         homeAddress_text = findViewById(R.id.homeAddress_text);
-        txt_goodmorning = findViewById(R.id.txt_goodmorinig);
-        txt_name = findViewById(R.id.textname);
+//        txt_goodmorning = findViewById(R.id.txt_goodmorinig);
+//        txt_name = findViewById(R.id.textname);
         paper = findViewById(R.id.paper);
         paper_price = findViewById(R.id.paper_price);
         plastic = findViewById(R.id.plastic);
