@@ -20,16 +20,14 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.PhoneAuthCredential;
-import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 
-import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class Verify_Number extends AppCompatActivity {
-    String mVerificationId;
-    PinView enterOTP;
-    FirebaseAuth mAuth;
+    private String mVerificationId;
+    private PinView enterOTP;
+    private FirebaseAuth mAuth;
     Button LoginPhone;
 
     @Override
@@ -47,38 +45,30 @@ public class Verify_Number extends AppCompatActivity {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
 
-        LoginPhone.setOnClickListener(v -> {
-            String code = Objects.requireNonNull(enterOTP.getText()).toString().trim();
-            if (code.isEmpty() || code.length() < 6) {
-                enterOTP.setError("Enter valid code");
-                enterOTP.requestFocus();
-                return;
+        LoginPhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String code = enterOTP.getText().toString().trim();
+                if (code.isEmpty() || code.length() < 6) {
+                    enterOTP.setError("Enter valid code");
+                    enterOTP.requestFocus();
+                    return;
+                }
+                verifyVerificationCode(code);
             }
-            verifyVerificationCode(code);
         });
 
     }
-
     private void sendVerificationCode(String mobile) {
 
-        PhoneAuthOptions options =
-                PhoneAuthOptions.newBuilder(mAuth)
-                        .setPhoneNumber("+91" + mobile)       // Phone number to verify
-                        .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
-                        .setActivity(this)                 // Activity (for callback binding)
-                        .setCallbacks(mCallbacks)          // OnVerificationStateChangedCallbacks
-                        .build();
-        PhoneAuthProvider.verifyPhoneNumber(options);
-
-//        PhoneAuthProvider.getInstance().verifyPhoneNumber(
-//                "+91"+mobile,        // Phone number to verify
-//                60,                 // Timeout duration
-//                TimeUnit.SECONDS,   // Unit of timeout
-//                this,               // Activity (for callback binding)
-//                mCallbacks);                     // OnVerificationStateChangedCallbacks
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                "+91"+mobile,
+                60,
+                TimeUnit.SECONDS,
+                this,
+                mCallbacks);
     }
-
-    private final PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks =
+    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks =
             new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                 @Override
                 public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
@@ -92,12 +82,10 @@ public class Verify_Number extends AppCompatActivity {
                 @Override
                 public void onVerificationFailed(FirebaseException e) {
                     Toast.makeText(Verify_Number.this, e.getMessage(), Toast.LENGTH_LONG).show();
-                    Log.e("TAG", e.getMessage());
+                    Log.e("TAG",e.getMessage() );
                 }
-
                 @Override
-                public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-                    super.onCodeSent(s,forceResendingToken);
+                public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
                     mVerificationId = s;
                 }
             };
@@ -108,20 +96,24 @@ public class Verify_Number extends AppCompatActivity {
     }
 
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
-        mAuth.signInWithCredential(credential).addOnCompleteListener(Verify_Number.this, task -> {
-            if (task.isSuccessful()) {
-                //verification successful we will start the profile activity
-                Intent intent = new Intent(Verify_Number.this, SelectLocationFromMap.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
+        mAuth.signInWithCredential(credential).addOnCompleteListener(Verify_Number.this, new OnCompleteListener<AuthResult>() {
 
-            } else {
-                String message = "Something is wrong, we will fix it soon...";
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    //verification successful we will start the profile activity
+                    Intent intent = new Intent(Verify_Number.this, MainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
 
-                if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
-                    message = "Invalid code entered...";
+                } else {
+                    String message = "Something is wrong, we will fix it soon...";
+
+                    if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                        message = "Invalid code entered...";
+                    }
+                    Toast.makeText(Verify_Number.this,message,Toast.LENGTH_SHORT).show();
                 }
-                Toast.makeText(Verify_Number.this, message, Toast.LENGTH_SHORT).show();
             }
         });
     }
