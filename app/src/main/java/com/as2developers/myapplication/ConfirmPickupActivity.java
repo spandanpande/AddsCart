@@ -19,13 +19,16 @@ public class ConfirmPickupActivity extends AppCompatActivity {
     TextView txt_Cancel, txt_itemPickup, txt_pickUpdate, txt_confirm, scarpItem_txt, change_scrap, chane_Adddress, change_pickup,
             txt_homeAddress, txt_Address, txt_pickupTime;
     View fragment_location;
-    ImageButton image_back_process;
+    ImageButton image_back_process,back;
     Button continue_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_pickup);
+        //for back
+        back = findViewById(R.id.back);
+
 //        image_back_process = findViewById(R.id.back_process);
 //        linearLayout_back_process = findViewById(R.id.layout_back_process);
 
@@ -49,6 +52,12 @@ public class ConfirmPickupActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(ConfirmPickupActivity.this,DonateOrGetActivity.class));
+            }
+        });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
 

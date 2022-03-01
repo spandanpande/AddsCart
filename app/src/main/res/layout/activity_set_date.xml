@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".SetDate"
     android:orientation="vertical"
-    android:id="@+id/drawer_layout"
-    tools:openDrawer="start">
+    android:id="@+id/drawer_layout">
 
     <com.google.android.material.navigation.NavigationView
         android:layout_width="match_parent"

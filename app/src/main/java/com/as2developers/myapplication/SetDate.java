@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
@@ -27,6 +28,7 @@ public class SetDate extends AppCompatActivity implements NavigationView.OnNavig
     Button selectDate,continue_btn;
     //for slide navigation bar
     DrawerLayout drawerLayout;
+    ImageView back;
     NavigationView navigationView;
     Toolbar toolbar;
     @Override
@@ -37,6 +39,7 @@ public class SetDate extends AppCompatActivity implements NavigationView.OnNavig
         selectedDate = (TextView) findViewById(R.id.selectedDate);
         selectDate = (Button) findViewById(R.id.selectDate);
         continue_btn = findViewById(R.id.btn_continue);
+        back = findViewById(R.id.back);
 
         //hooks for navigation bar
         drawerLayout =findViewById(R.id.drawer_layout);
@@ -88,6 +91,14 @@ public class SetDate extends AppCompatActivity implements NavigationView.OnNavig
                 else {
                     startActivity(new Intent(SetDate.this, ConfirmPickupActivity.class).putExtra("selectedDate", SelectedDateS));
                 }
+            }
+        });
+
+        //for back
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
     }
