@@ -2,9 +2,12 @@ package com.as2developers.myapplication;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -19,6 +22,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -28,6 +32,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.SearchView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -47,13 +52,14 @@ import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-public class SelectLocationFromMap extends AppCompatActivity {
+public class SelectLocationFromMap extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     //Initializing the variable
     SupportMapFragment supportMapFragment;
@@ -78,11 +84,26 @@ public class SelectLocationFromMap extends AppCompatActivity {
     Button next;
     String radioS,finalLocation,userLocality,UserAddressLine;
     EditText uLocality,uAddressLine;
+    ImageView ImgBtn;
+    //for slide navigation bar
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    Toolbar toolbar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_location_from_map);
+    //hooks for navigation bar
+        drawerLayout =findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
+        navigationView.bringToFront();
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,R.string.dummy_content,R.string.dummy_content);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        navigationView.setNavigationItemSelectedListener(this);
+        //end
 
         searchBtn = (ImageView)findViewById(R.id.searchBtn);
         searchView = (SearchView)findViewById(R.id.searchView);
@@ -152,6 +173,26 @@ public class SelectLocationFromMap extends AppCompatActivity {
             ActivityCompat.requestPermissions(SelectLocationFromMap.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},44);
         }
 
+
+        ImgBtn = findViewById(R.id.Img);
+        ImgBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+
+    }
+
+    //for drawable
+    @Override
+    public void onBackPressed() {
+        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }
+        else{
+            super.onBackPressed();
+        }
     }
 
     //for location
@@ -384,5 +425,36 @@ public class SelectLocationFromMap extends AppCompatActivity {
 
         // after generating our bitmap we are returning our bitmap.
         return BitmapDescriptorFactory.fromBitmap(bitmap);
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.profile:
+                Intent i = new Intent(getApplicationContext(),ProfilePage.class);
+                startActivity(i);
+                break;
+            case R.id.pickup:
+                Toast.makeText(this, "Opening to a new pickup..", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.howItWorks:
+                startActivity(new Intent(this,HowItWorks.class));
+                break;
+            case R.id.aboutUs:
+                startActivity(new Intent(this,AboutUs.class));
+                break;
+            case R.id.call_us:
+//                Intent callIntent = new Intent(Intent.ACTION_CALL);
+//                String s = "+918867825522";
+//                callIntent.setData(Uri.parse("tel:"+s));//change the number.
+//                startActivity(callIntent);
+                Toast.makeText(this, "This feature will coming soon!", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.home:
+                Toast.makeText(this, "You are at Home!", Toast.LENGTH_SHORT).show();
+                break;
+        }
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
     }
 }
