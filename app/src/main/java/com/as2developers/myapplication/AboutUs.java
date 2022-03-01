@@ -1,30 +1,28 @@
 package com.as2developers.myapplication;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
-import android.widget.Toolbar;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
 
-public class ProfilePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class AboutUs extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     //for slide navigation bar
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_page);
-
+        setContentView(R.layout.activity_about_us);
         //hooks for navigation bar
         drawerLayout =findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
@@ -44,21 +42,21 @@ public class ProfilePage extends AppCompatActivity implements NavigationView.OnN
             super.onBackPressed();
         }
     }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.profile:
-                Toast.makeText(this, "You are already in profile!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this,ProfilePage.class));
                 break;
             case R.id.pickup:
                 Toast.makeText(this, "Opening to a new pickup..", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.howItWorks:
-                startActivity(new Intent(this,HowItWorks.class));
+                startActivity(new Intent(this,HowItWorks.class));;
                 break;
             case R.id.aboutUs:
-                Intent i = new Intent(getApplicationContext(),AboutUs.class);
-                startActivity(i);
+                Toast.makeText(this, "You are in About US!", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.call_us:
 //                Intent callIntent = new Intent(Intent.ACTION_CALL);
@@ -66,10 +64,6 @@ public class ProfilePage extends AppCompatActivity implements NavigationView.OnN
 //                callIntent.setData(Uri.parse("tel:"+s));//change the number.
 //                startActivity(callIntent);
                 Toast.makeText(this, "This feature will coming soon!", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.home:
-                startActivity(new Intent(this, SelectLocationFromMap.class));
-                finish();
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
