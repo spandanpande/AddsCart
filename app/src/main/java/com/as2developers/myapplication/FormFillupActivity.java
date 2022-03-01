@@ -1,13 +1,18 @@
 package com.as2developers.myapplication;
 
+import static com.as2developers.myapplication.R.color.green;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,6 +39,7 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
+    Boolean PaperItem,PlasticItem,MetalItem,E_waste,IronItem,Others;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +49,7 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
         linearLayout_location = findViewById(R.id.linearleyout_loacation);
         linearLayoutAddress = findViewById(R.id.linerleyoutAddress);
         nameLayout = findViewById(R.id.nameLout);
-        fistLayout = findViewById(R.id.first_layout);
+        fistLayout = (LinearLayout) findViewById(R.id.first_layout);
         secondLayout = findViewById(R.id.second_layout);
         thirdLayout = findViewById(R.id.thirdLinear_layout);
         fourthLayout = findViewById(R.id.fourth_linear_layout);
@@ -101,10 +107,19 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
 
+        //to calculate how many item got selected
+        PaperItem = false;
+        PlasticItem = false;
+        MetalItem = false;
+        IronItem =false;
+        E_waste = false;
+        Others = false;
+
         btn_continue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(FormFillupActivity.this, SetDate.class));
+
             }
         });
 
@@ -115,6 +130,7 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
                 drawerLayout.openDrawer(GravityCompat.START);
             }
         });
+
     }
 
     //also for navigation bar
@@ -157,5 +173,83 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    public void PaperClick(View view) {
+        if(PaperItem==false){
+            PaperItem = true;
+            fistLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.item_bg));
+            Toast.makeText(this, "you select paper!", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            PaperItem = false;
+            fistLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.custom_background_white_10r_grey_border));
+            Toast.makeText(this, "you remove paper!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void PlasticClick(View view) {
+        if(PlasticItem==false){
+            PlasticItem = true;
+            secondLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.item_bg));
+            Toast.makeText(this, "you select Plastic!", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            PlasticItem = false;
+            secondLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.custom_background_white_10r_grey_border));
+            Toast.makeText(this, "you remove Plastic!", Toast.LENGTH_SHORT).show();
+        }
+    }
+    public void MetalsClick(View view) {
+        if(MetalItem==false){
+            MetalItem = true;
+            thirdLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.item_bg));
+            Toast.makeText(this, "you select Metals!", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            MetalItem = false;
+            thirdLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.custom_background_white_10r_grey_border));
+            Toast.makeText(this, "you remove Metals!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void E_Waste(View view) {
+        if(E_waste==false){
+            E_waste = true;
+            fourthLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.item_bg));
+            Toast.makeText(this, "you select E-Waste!", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            E_waste = false;
+            fourthLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.custom_background_white_10r_grey_border));
+            Toast.makeText(this, "you remove E-Waste!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void IronClick(View view) {
+        if(IronItem==false){
+            IronItem = true;
+            fifthLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.item_bg));
+            Toast.makeText(this, "you select Iron!", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            IronItem = false;
+            fifthLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.custom_background_white_10r_grey_border));
+            Toast.makeText(this, "you remove Iron!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void OthersClick(View view) {
+        if(Others==false){
+            Others = true;
+            sixthLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.item_bg));
+            Toast.makeText(this, "you select Others!", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Others = false;
+            sixthLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.custom_background_white_10r_grey_border));
+            Toast.makeText(this, "you remove Others!", Toast.LENGTH_SHORT).show();
+        }
     }
 }

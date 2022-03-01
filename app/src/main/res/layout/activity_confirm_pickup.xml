@@ -15,7 +15,7 @@
 
 
         <ImageButton
-            android:id="@+id/back"
+            android:id="@+id/Img"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginStart="15dp"
@@ -37,7 +37,7 @@
             android:textColor="@color/white"
             android:textSize="28sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/back" />
+            app:layout_constraintStart_toEndOf="@+id/Img" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -67,18 +67,18 @@
                     android:layout_marginLeft="-5dp"
                     android:gravity="center"
                     android:layout_marginBottom="6dp"
-                    android:text="____"
+                    android:text="__"
                     android:textColor="@color/black" />
 
                 <TextView
                     android:id="@+id/text_itemPickup"
-                    android:layout_width="100dp"
+                    android:layout_width="85dp"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:gravity="center"
                     android:text="1 items for pickup"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -86,7 +86,7 @@
                     android:layout_marginLeft="0dp"
                     android:layout_marginBottom="6dp"
                     android:gravity="center"
-                    android:text="____"
+                    android:text="__"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -97,7 +97,7 @@
                     android:gravity="center"
                     android:text="Pickup Date"
                     android:textColor="@color/black"
-                    android:textSize="17sp" />
+                    android:textSize="16sp" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -105,7 +105,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginBottom="7dp"
                     android:gravity="center"
-                    android:text="____"
+                    android:text="__"
                     android:textColor="@color/black" />
 
                 <TextView
@@ -116,7 +116,7 @@
                     android:gravity="center"
                     android:text="Confirm"
                     android:textColor="@color/green"
-                    android:textSize="17sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
 
             <LinearLayout

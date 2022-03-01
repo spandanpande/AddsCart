@@ -394,6 +394,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
                 i.putExtra("locality",userLocality);
                 i.putExtra("AddressLine",UserAddressLine);
 
+
                 //now if location type selected then only go to next activity
                 if(radioS.length()==0){
                     Toast.makeText(SelectLocationFromMap.this, "Please Select A location type.eg: home", Toast.LENGTH_SHORT).show();
