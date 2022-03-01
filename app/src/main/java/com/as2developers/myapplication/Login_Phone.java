@@ -1,5 +1,8 @@
 package com.as2developers.myapplication;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,10 +10,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -42,7 +41,7 @@ public class Login_Phone extends AppCompatActivity {
         inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
 
         if (currentUser != null) {
-            Intent intent = new Intent(Login_Phone.this, SelectLocationFromMap.class);
+            Intent intent = new Intent(Login_Phone.this, MainActivity.class);
             startActivity(intent);
             finish();
         } else {
@@ -52,37 +51,37 @@ public class Login_Phone extends AppCompatActivity {
 
                     String mobileNo = mPhoneNumber.getText().toString().trim();
 
-                    if (mobileNo.isEmpty() | mobileNo.length()!=10) {
+                    if (mobileNo.isEmpty()) {
+                        mPhoneNumber.setError("Phone Number is required");
+                        mPhoneNumber.requestFocus();
+                        return;
+                    }
+                    if (mobileNo.length()!=10) {
                         mPhoneNumber.setError("Enter a valid Phone Number");
                         mPhoneNumber.requestFocus();
                         return;
                     }
 
-//                    DatabaseReference databaseReference = fdata.getReference("Users").child("+91"+mobileNo);
-//                    databaseReference.addValueEventListener(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                            //Toast.makeText(Login_Phone.this, "inside OnClick", Toast.LENGTH_SHORT).show();
-//                            if(!snapshot.exists()){
-//                                Intent intent = new Intent(Login_Phone.this, UserDetails.class);
-//                                intent.putExtra("mobile", mobileNo);
-//                                startActivity(intent);
-//                            }
-//                            else{
-//                                Intent intent = new Intent(Login_Phone.this, Verify_Number.class);
-//                                intent.putExtra("mobile", mobileNo);
-//                                startActivity(intent);
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(@NonNull DatabaseError error) {
-//                            Toast.makeText(Login_Phone.this, "Error:inside OnClick: "+error, Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-                    Intent intent = new Intent(Login_Phone.this, SelectLocationFromMap.class);
-                    intent.putExtra("mobile", mobileNo);
-                    startActivity(intent);
+                    DatabaseReference databaseReference = fdata.getReference("Users").child("+91"+mobileNo);
+                    databaseReference.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if(!snapshot.exists()){
+                                Intent intent = new Intent(Login_Phone.this, UserDetails.class);
+                                intent.putExtra("mobile", mobileNo);
+                                startActivity(intent);
+                            }
+                            else{
+                                Intent intent = new Intent(Login_Phone.this, Verify_Number.class);
+                                intent.putExtra("mobile", mobileNo);
+                                startActivity(intent);
+                            }
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                 }
             });
         }

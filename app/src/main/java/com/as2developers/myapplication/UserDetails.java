@@ -1,5 +1,7 @@
 package com.as2developers.myapplication;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,8 +10,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -62,7 +62,7 @@ public class UserDetails extends AppCompatActivity {
                 hashMap.put("Name", Name);
                 hashMap.put("Mobile","+91"+usernumber);
                 databaseReference.setValue(hashMap);
-                startActivity(new Intent(UserDetails.this,Verify_Number.class));
+                startActivity(new Intent(getApplicationContext(),Verify_Number.class));
             }
         });
 
