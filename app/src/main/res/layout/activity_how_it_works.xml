@@ -50,11 +50,10 @@
 
             <TextView
                 android:id="@+id/cancel"
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="95dp"
                 android:layout_marginTop="15dp"
-                android:text="Cancel"
                 android:textColor="@color/white"
                 android:textSize="17sp" />
 

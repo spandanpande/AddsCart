@@ -114,12 +114,28 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
         IronItem =false;
         E_waste = false;
         Others = false;
-
+        Intent getI = getIntent();
+        homeAddress_text.setText(getI.getStringExtra("LocationDetails"));
         btn_continue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(FormFillupActivity.this, SetDate.class));
 
+                //adding items to values
+                String s="";
+                if(PaperItem) s+="Paper,";
+                if(PlasticItem) s+="Plastic,";
+                if(MetalItem) s+="Metal,";
+                if(IronItem) s+="Iron,";
+                if(E_waste) s+="E-Waste,";
+                if(Others) s+="Others.";
+
+                if(s==""){
+                    Toast.makeText(FormFillupActivity.this, "Please Selected At least one item!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    startActivity(new Intent(FormFillupActivity.this, SetDate.class).putExtra("items", s));
+                    Toast.makeText(FormFillupActivity.this, s, Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

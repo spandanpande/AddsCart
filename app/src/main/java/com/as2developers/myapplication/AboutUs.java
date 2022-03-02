@@ -77,6 +77,9 @@ public class AboutUs extends AppCompatActivity implements NavigationView.OnNavig
 //                startActivity(callIntent);
                 Toast.makeText(this, "This feature will coming soon!", Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.home:
+                startActivity(new Intent(this,SelectLocationFromMap.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                finish();
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;

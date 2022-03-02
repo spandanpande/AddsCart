@@ -20,6 +20,8 @@ import android.widget.Toolbar;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class SetDate extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -60,7 +62,8 @@ public class SetDate extends AppCompatActivity implements NavigationView.OnNavig
         int month = calendar.get(Calendar.MONTH);
         //get day
         int day = calendar.get(Calendar.DAY_OF_MONTH);
-        SelectedDateS ="";
+        DateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
+        NextDate();
         selectDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,7 +92,9 @@ public class SetDate extends AppCompatActivity implements NavigationView.OnNavig
                     Toast.makeText(SetDate.this, "Please Select a Date!", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    startActivity(new Intent(SetDate.this, ConfirmPickupActivity.class).putExtra("selectedDate", SelectedDateS));
+                    Intent it = getIntent();
+                    String pv = it.getStringExtra("items");
+                    startActivity(new Intent(SetDate.this, ConfirmPickupActivity.class).putExtra("selectedDate", SelectedDateS).putExtra("date",SelectedDateS).putExtra("items",pv));
                 }
             }
         });
@@ -102,6 +107,22 @@ public class SetDate extends AppCompatActivity implements NavigationView.OnNavig
             }
         });
     }
+    public void NextDate() {
+
+        final Calendar c = Calendar.getInstance();
+        int mYear = c.get(Calendar.YEAR);
+        int mMonth = c.get(Calendar.MONTH);
+        int mDay = c.get(Calendar.DAY_OF_MONTH);
+
+        // set current date into textview
+//        selectedDate.setText(new StringBuilder()
+//                // Month is 0 based, just add 1
+//                .append(mDay + 1).append("-").append(mMonth + 1).append("-")
+//                .append(mYear).append(" "));
+        SelectedDateS = (mDay + 1) + "-" + (mMonth) + "-" + (mYear);
+    }
+
+
     //also for navigation bar
     @Override
     public void onBackPressed() {

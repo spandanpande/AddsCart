@@ -30,9 +30,16 @@ public class confirmation extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(confirmation.this, "Back to Home Page", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(confirmation.this,SelectLocationFromMap.class));
+                startActivity(new Intent(confirmation.this,SelectLocationFromMap.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 finish();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(confirmation.this, "Back to Home Page", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(confirmation.this,SelectLocationFromMap.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+        finish();
     }
 }

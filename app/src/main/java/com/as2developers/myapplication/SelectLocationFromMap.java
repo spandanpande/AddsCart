@@ -21,16 +21,20 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
@@ -111,7 +115,8 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 //                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-
+        searchView.clearFocus();
+        searchView.setFocusable(false);
         //noe assigning the variable
         supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
 
@@ -352,7 +357,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
         next = (Button) sheetDialog.findViewById(R.id.nextBtn);
         radioGroup = (RadioGroup) sheetDialog.findViewById(R.id.radio_Group);
         sheetDialog.show();
-        radioS ="";
+        radioS ="Home";
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -376,7 +381,40 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
                 }
             }
         });
-
+        //for keyboard shifting
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        showKeyboard(uLocality);
+        showKeyboard(uAddressLine);
+        uLocality.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                //Get Value form edittext
+                userLocality = uLocality.getText().toString();
+                //check condition
+                if(i== EditorInfo.IME_ACTION_DONE){
+                    //when action is equal to action done
+                    //hide keyboard
+                    hideKeyBoard(uLocality);
+                    return true;
+                }
+            return false;
+            }
+        });
+        uAddressLine.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                //Get Value form edittext
+                UserAddressLine = uAddressLine.getText().toString();
+                //check condition
+                if(i== EditorInfo.IME_ACTION_DONE){
+                    //when action is equal to action done
+                    //hide keyboard
+                    hideKeyBoard(uAddressLine);
+                }
+                return false;
+            }
+        });
+        //after clicking next button
         next = (Button) sheetDialog.findViewById(R.id.nextBtn);
         next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -406,6 +444,23 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
             }
         });
     }
+
+    private void hideKeyBoard(EditText editText) {
+        InputMethodManager manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        manager.hideSoftInputFromWindow(editText.getApplicationWindowToken(),0);
+    }
+
+    private void showKeyboard(EditText editText) {
+        //Initialize input manager
+        InputMethodManager manager = (InputMethodManager) getSystemService(
+                Context.INPUT_METHOD_SERVICE
+        );
+        //show soft keyboard
+        manager.showSoftInput(editText.getRootView(),InputMethodManager.SHOW_IMPLICIT);
+        //Focus on EditText
+        editText.requestFocus();
+    }
+
     private BitmapDescriptor BitmapFromVector(Context context, int vectorResId) {
         // below line is use to generate a drawable.
         Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorResId);
