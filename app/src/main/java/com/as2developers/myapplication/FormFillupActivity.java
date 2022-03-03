@@ -195,7 +195,7 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
     public void PaperClick(View view) {
         if(PaperItem==false){
             PaperItem = true;
-            fistLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.item_bg));
+            fistLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.selected_bg));
             Toast.makeText(this, "you select paper!", Toast.LENGTH_SHORT).show();
         }
         else{
@@ -208,7 +208,7 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
     public void PlasticClick(View view) {
         if(PlasticItem==false){
             PlasticItem = true;
-            secondLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.item_bg));
+            secondLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.selected_bg));
             Toast.makeText(this, "you select Plastic!", Toast.LENGTH_SHORT).show();
         }
         else{
@@ -220,7 +220,7 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
     public void MetalsClick(View view) {
         if(MetalItem==false){
             MetalItem = true;
-            thirdLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.item_bg));
+            thirdLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.selected_bg));
             Toast.makeText(this, "you select Metals!", Toast.LENGTH_SHORT).show();
         }
         else{
@@ -233,7 +233,7 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
     public void E_Waste(View view) {
         if(E_waste==false){
             E_waste = true;
-            fourthLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.item_bg));
+            fourthLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.selected_bg));
             Toast.makeText(this, "you select E-Waste!", Toast.LENGTH_SHORT).show();
         }
         else{
@@ -246,7 +246,7 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
     public void IronClick(View view) {
         if(IronItem==false){
             IronItem = true;
-            fifthLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.item_bg));
+            fifthLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.selected_bg));
             Toast.makeText(this, "you select Iron!", Toast.LENGTH_SHORT).show();
         }
         else{
@@ -259,7 +259,7 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
     public void OthersClick(View view) {
         if(Others==false){
             Others = true;
-            sixthLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.item_bg));
+            sixthLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.selected_bg));
             Toast.makeText(this, "you select Others!", Toast.LENGTH_SHORT).show();
         }
         else{
