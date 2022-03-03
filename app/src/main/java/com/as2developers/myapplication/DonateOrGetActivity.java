@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class DonateOrGetActivity extends AppCompatActivity {
 
-    ImageButton profile;
+    ImageButton back;
     Button cash,donate;
 
     @Override
@@ -19,6 +19,7 @@ public class DonateOrGetActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_donate_or_get);
 
+        back = findViewById(R.id.img);
         cash = findViewById(R.id.button);
         donate = findViewById(R.id.button2);
 
@@ -36,6 +37,12 @@ public class DonateOrGetActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(DonateOrGetActivity.this, Impact.class);
                 startActivity(i);
+            }
+        });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
             }
         });
 

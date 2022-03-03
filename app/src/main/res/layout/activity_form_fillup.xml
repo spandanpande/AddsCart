@@ -157,7 +157,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                >
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/card1"
@@ -166,14 +167,16 @@
                     android:layout_margin="8dp"
                     android:foreground="?android:selectableItemBackground"
                     app:cardCornerRadius="10dp"
-                    app:cardElevation="0dp">
+                    app:cardElevation="0dp"
+                    android:onClick="PaperClick"
+                    >
 
                     <LinearLayout
                         android:id="@+id/first_layout"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@drawable/custom_background_white_10r_grey_border"
                         android:gravity="center"
+                        android:background="@drawable/custom_background_white_10r_grey_border"
                         android:orientation="vertical">
 
                         <ImageView
@@ -213,7 +216,9 @@
                     android:layout_margin="8dp"
                     android:foreground="?android:selectableItemBackground"
                     app:cardCornerRadius="10dp"
-                    app:cardElevation="0dp">
+                    app:cardElevation="0dp"
+                    android:onClick="PlasticClick"
+                    >
 
                     <LinearLayout
                         android:id="@+id/second_layout"
@@ -255,6 +260,7 @@
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/card3"
+                    android:onClick="MetalsClick"
                     android:layout_width="120dp"
                     android:layout_height="115dp"
                     android:layout_margin="8dp"
@@ -358,7 +364,8 @@
                     android:layout_margin="8dp"
                     android:foreground="?android:selectableItemBackground"
                     app:cardCornerRadius="10dp"
-                    app:cardElevation="0dp">
+                    app:cardElevation="0dp"
+                    android:onClick="E_Waste">
 
                     <LinearLayout
                         android:id="@+id/fourth_linear_layout"
@@ -403,7 +410,8 @@
                     android:layout_margin="8dp"
                     android:foreground="?android:selectableItemBackground"
                     app:cardCornerRadius="10dp"
-                    app:cardElevation="0dp">
+                    app:cardElevation="0dp"
+                    android:onClick="IronClick">
 
                     <LinearLayout
                         android:id="@+id/fifth_layout"
@@ -449,7 +457,8 @@
                     android:layout_margin="8dp"
                     android:foreground="?android:selectableItemBackground"
                     app:cardCornerRadius="10dp"
-                    app:cardElevation="0dp">
+                    app:cardElevation="0dp"
+                    android:onClick="OthersClick">
 
                     <LinearLayout
                         android:id="@+id/sixth_layout"

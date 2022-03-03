@@ -13,6 +13,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -21,21 +22,31 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.LocationSettingsStatusCodes;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -45,6 +56,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
@@ -90,6 +102,10 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
     NavigationView navigationView;
     Toolbar toolbar;
 
+    //for turing on location
+    private LocationRequest locationRequest;
+    public static  final int REQUEST_CHECK_SETTING = 1001;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +128,11 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
 //                WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 
+        //if location is turn off the turn it on
+
+
+        searchView.clearFocus();
+        searchView.setFocusable(false);
         //noe assigning the variable
         supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
 
@@ -198,18 +219,18 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
     //for location
     private void getCurrentLocation() {
         //initialize task location
-//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-//                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
-//                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//            // TODO: Consider calling
-//            //    ActivityCompat#requestPermissions
-//            // here to request the missing permissions, and then overriding
-//            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-//            //                                          int[] grantResults)
-//            // to handle the case where the user grants the permission. See the documentation
-//            // for ActivityCompat#requestPermissions for more details.
-//            return;
-//        }
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
         @SuppressLint("MissingPermission") Task<Location> task = client.getLastLocation();
         task.addOnSuccessListener(new OnSuccessListener<Location>() {
             @Override
@@ -352,7 +373,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
         next = (Button) sheetDialog.findViewById(R.id.nextBtn);
         radioGroup = (RadioGroup) sheetDialog.findViewById(R.id.radio_Group);
         sheetDialog.show();
-        radioS ="";
+        radioS ="Home";
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
@@ -376,7 +397,40 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
                 }
             }
         });
-
+        //for keyboard shifting
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+        showKeyboard(uLocality);
+        showKeyboard(uAddressLine);
+        uLocality.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                //Get Value form edittext
+                userLocality = uLocality.getText().toString();
+                //check condition
+                if(i== EditorInfo.IME_ACTION_DONE){
+                    //when action is equal to action done
+                    //hide keyboard
+                    hideKeyBoard(uLocality);
+                    return true;
+                }
+            return false;
+            }
+        });
+        uAddressLine.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+                //Get Value form edittext
+                UserAddressLine = uAddressLine.getText().toString();
+                //check condition
+                if(i== EditorInfo.IME_ACTION_DONE){
+                    //when action is equal to action done
+                    //hide keyboard
+                    hideKeyBoard(uAddressLine);
+                }
+                return false;
+            }
+        });
+        //after clicking next button
         next = (Button) sheetDialog.findViewById(R.id.nextBtn);
         next.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -394,6 +448,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
                 i.putExtra("locality",userLocality);
                 i.putExtra("AddressLine",UserAddressLine);
 
+
                 //now if location type selected then only go to next activity
                 if(radioS.length()==0){
                     Toast.makeText(SelectLocationFromMap.this, "Please Select A location type.eg: home", Toast.LENGTH_SHORT).show();
@@ -405,6 +460,23 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
             }
         });
     }
+
+    private void hideKeyBoard(EditText editText) {
+        InputMethodManager manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        manager.hideSoftInputFromWindow(editText.getApplicationWindowToken(),0);
+    }
+
+    private void showKeyboard(EditText editText) {
+        //Initialize input manager
+        InputMethodManager manager = (InputMethodManager) getSystemService(
+                Context.INPUT_METHOD_SERVICE
+        );
+        //show soft keyboard
+        manager.showSoftInput(editText.getRootView(),InputMethodManager.SHOW_IMPLICIT);
+        //Focus on EditText
+        editText.requestFocus();
+    }
+
     private BitmapDescriptor BitmapFromVector(Context context, int vectorResId) {
         // below line is use to generate a drawable.
         Drawable vectorDrawable = ContextCompat.getDrawable(context, vectorResId);

@@ -54,6 +54,7 @@
 
             <RadioButton
                 android:id="@+id/radio_home"
+                android:checked="true"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginRight="15dp"
@@ -113,6 +114,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/UserLocality"
+                android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"
@@ -122,6 +124,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="70dp"
+            app:counterTextColor="@color/black"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:hint="Address line"
             >
@@ -129,6 +132,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:textSize="20dp"
+                android:textColor="@color/black"
                 android:layout_height="wrap_content"
                 android:id="@+id/addressLine"
                 />
