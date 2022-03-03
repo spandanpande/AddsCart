@@ -13,12 +13,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent intent = new Intent(MainActivity.this,SelectLocationFromMap.class);
+        startActivity(intent);
     }
 
     public void open(View view) {
 
-//        Intent intent = new Intent(MainActivity.this,SelectLocationFromMap.class);
-//        startActivity(intent);
+      /*Intent intent = new Intent(MainActivity.this,SelectLocationFromMap.class);
+      startActivity(intent);*/
 
     }
 }
