@@ -27,6 +27,8 @@ import com.google.android.gms.location.SleepClassifyEvent;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.navigation.NavigationView;
 
+import java.util.HashMap;
+
 public class FormFillupActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     LinearLayout linearLayout_location, linearLayoutAddress, nameLayout, fistLayout, secondLayout, thirdLayout,
             fourthLayout, fifthLayout, sixthLayout, btn_Layout;
@@ -40,6 +42,9 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
     NavigationView navigationView;
     Toolbar toolbar;
     Boolean PaperItem,PlasticItem,MetalItem,E_waste,IronItem,Others;
+    String[] items = {"Paper","Plastic","Metal","E-waste","Iron","Others"};
+    HashMap<String,Boolean> map_item;
+    String locationType,AddressLine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +106,12 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
         //hooks for navigation bar
         drawerLayout =findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
+
+        locationType = getIntent().getStringExtra("locationType");
+        AddressLine = getIntent().getStringExtra("AddressLine");
+        homelocation.setText(locationType);
+        homeAddress_text.setText(AddressLine);
+
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,R.string.dummy_content,R.string.dummy_content);
         drawerLayout.addDrawerListener(toggle);
@@ -108,12 +119,17 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
         navigationView.setNavigationItemSelectedListener(this);
 
         //to calculate how many item got selected
-        PaperItem = false;
-        PlasticItem = false;
-        MetalItem = false;
-        IronItem =false;
-        E_waste = false;
-        Others = false;
+        items = new String[]{"Paper","Plastic","Metal","E-waste","Iron","Others"};
+        map_item = new HashMap<String,Boolean>();
+        for (int i = 0; i < 6; i++) {
+            map_item.put(items[i],false);
+        }
+        //        PaperItem = false;
+//        PlasticItem = false;
+//        MetalItem = false;
+//        IronItem =false;
+//        E_waste = false;
+//        Others = false;
         Intent getI = getIntent();
         homeAddress_text.setText(getI.getStringExtra("LocationDetails"));
         btn_continue.setOnClickListener(new View.OnClickListener() {
@@ -122,18 +138,26 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
 
                 //adding items to values
                 String s="";
-                if(PaperItem) s+="Paper,";
-                if(PlasticItem) s+="Plastic,";
-                if(MetalItem) s+="Metal,";
-                if(IronItem) s+="Iron,";
-                if(E_waste) s+="E-Waste,";
-                if(Others) s+="Others.";
+                int itemcount =0;
+                for (int i = 0; i < 6; i++) {
+                    if(map_item.get(items[i])){
+                        s+=items[i];
+                        itemcount++;
+                    }
+                }
+
+//                if(PaperItem) s+="Paper,";
+//                if(PlasticItem) s+="Plastic,";
+//                if(MetalItem) s+="Metal,";
+//                if(IronItem) s+="Iron,";
+//                if(E_waste) s+="E-Waste,";
+//                if(Others) s+="Others.";
 
                 if(s==""){
                     Toast.makeText(FormFillupActivity.this, "Please Selected At least one item!", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    startActivity(new Intent(FormFillupActivity.this, SetDate.class).putExtra("items", s));
+                    startActivity(new Intent(FormFillupActivity.this, SetDate.class).putExtra("items", s).putExtra("itemCount",itemcount).putExtra("AddressLine",AddressLine).putExtra("LocationType",locationType));
                     Toast.makeText(FormFillupActivity.this, s, Toast.LENGTH_SHORT).show();
                 }
             }

@@ -25,7 +25,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class SetDate extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    TextView selectedDate;
+    TextView selectedDate,textItemPickup,textPickupDate;
     String SelectedDateS;
     Button selectDate,continue_btn;
     //for slide navigation bar
@@ -41,7 +41,12 @@ public class SetDate extends AppCompatActivity implements NavigationView.OnNavig
         selectedDate = (TextView) findViewById(R.id.selectedDate);
         selectDate = (Button) findViewById(R.id.selectDate);
         continue_btn = findViewById(R.id.btn_continue);
+        textItemPickup = findViewById(R.id.text_itemPickup);
+        textPickupDate = findViewById(R.id.txt_pickupDate);
         back = findViewById(R.id.back);
+
+        //set no. of items text
+        textItemPickup.setText(String.format("%s items for pickup", getIntent().getStringExtra("itemCount")));
 
         //hooks for navigation bar
         drawerLayout =findViewById(R.id.drawer_layout);
@@ -74,6 +79,7 @@ public class SetDate extends AppCompatActivity implements NavigationView.OnNavig
                         i1+=1;
                         SelectedDateS = i2 +"/" + i1 + "/" +i;
                         selectedDate.setText(SelectedDateS);
+
                     }
                 },year,month,day
                 );
@@ -92,9 +98,12 @@ public class SetDate extends AppCompatActivity implements NavigationView.OnNavig
                     Toast.makeText(SetDate.this, "Please Select a Date!", Toast.LENGTH_SHORT).show();
                 }
                 else {
+                    textPickupDate.setText(SelectedDateS);
                     Intent it = getIntent();
                     String pv = it.getStringExtra("items");
-                    startActivity(new Intent(SetDate.this, ConfirmPickupActivity.class).putExtra("selectedDate", SelectedDateS).putExtra("date",SelectedDateS).putExtra("items",pv));
+                    String address = it.getStringExtra("AddressLine");
+                    String locationType = it.getStringExtra("LocationType");
+                    startActivity(new Intent(SetDate.this, ConfirmPickupActivity.class).putExtra("date",SelectedDateS).putExtra("items",pv).putExtra("AddressLine",address).putExtra("LocationType",locationType));
                 }
             }
         });

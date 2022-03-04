@@ -23,11 +23,18 @@ public class DonateOrGetActivity extends AppCompatActivity {
         cash = findViewById(R.id.button);
         donate = findViewById(R.id.button2);
 
+        Intent intent = getIntent();
+        String AddressLine = intent.getStringExtra("AddressLine");
+        String ScrapItem = intent.getStringExtra("items");
+        String date = intent.getStringExtra("date");
         cash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(DonateOrGetActivity.this,confirmation.class);
                 i.putExtra("mode","cash");
+                i.putExtra("AddressLine",AddressLine);
+                i.putExtra("items",ScrapItem);
+                i.putExtra("date",date);
                 startActivity(i);
             }
         });
@@ -36,6 +43,10 @@ public class DonateOrGetActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(DonateOrGetActivity.this, Impact.class);
+                i.putExtra("mode","NGO");
+                i.putExtra("AddressLine",AddressLine);
+                i.putExtra("items",ScrapItem);
+                i.putExtra("date",date);
                 startActivity(i);
             }
         });

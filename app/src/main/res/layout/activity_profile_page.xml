@@ -34,6 +34,8 @@
                 android:layout_marginStart="15dp"
                 android:layout_marginBottom="15dp"
                 android:background="?android:selectableItemBackground"
+                android:minWidth="48dp"
+                android:minHeight="48dp"
                 android:src="@drawable/ic_baseline_arrow_back_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -258,11 +260,11 @@
                 android:id="@+id/paymentMode1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/img2"
-                android:layout_toLeftOf="@+id/ManagePaymentMode"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
-                android:text="No Payment Method Selected."
-                android:layout_centerVertical="true"/>
+                android:layout_toLeftOf="@+id/ManagePaymentMode"
+                android:layout_toRightOf="@id/img2"
+                android:text="No Payment Method Selected." />
 
             <Button
                 android:id="@+id/ManagePaymentMode"
