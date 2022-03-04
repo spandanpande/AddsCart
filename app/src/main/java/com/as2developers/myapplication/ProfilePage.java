@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
@@ -15,6 +16,10 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import org.w3c.dom.Text;
 
 public class ProfilePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     //for slide navigation bar
@@ -22,6 +27,10 @@ public class ProfilePage extends AppCompatActivity implements NavigationView.OnN
     NavigationView navigationView;
     Toolbar toolbar;
     ImageButton imageButton;
+    TextView Name, MobileNo,Email,address;
+
+    FirebaseDatabase database;
+    DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +46,15 @@ public class ProfilePage extends AppCompatActivity implements NavigationView.OnN
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         imageButton = findViewById(R.id.img);
+        Name = findViewById(R.id.Name);
+        address = findViewById(R.id.PickUpAddress);
+        Email = findViewById(R.id.EmailAddress);
+        MobileNo = findViewById(R.id.MobileNumber);
+
+        database = FirebaseDatabase.getInstance();
+        reference = database.getReference("Users");
+
+        SetUserDataFromFirebase();
 
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,6 +63,21 @@ public class ProfilePage extends AppCompatActivity implements NavigationView.OnN
             }
         });
     }
+
+    private void SetUserDataFromFirebase() {
+        String userName , userEmail , userAddress , userMobile;
+
+        userName = reference.child("Name").toString();
+        userAddress = reference.child("Address").toString();
+        userEmail = reference.child("Email").toString();
+        userMobile = reference.child("Mobile").toString();
+
+        Name.setText(userName);
+        Email.setText(userEmail);
+        address.setText(userAddress);
+        MobileNo.setText(userMobile);
+    }
+
     //also for navigation bar
     @Override
     public void onBackPressed() {

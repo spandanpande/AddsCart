@@ -440,9 +440,9 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
                 //getting some value
                 userLocality = uLocality.getText().toString();
                 UserAddressLine = uAddressLine.getText().toString();
+                finalLocation = editText.getText().toString();
                 i.putExtra("LatLon",latGlobal);
                 i.putExtra("locationType",radioS);
-                finalLocation = editText.getText().toString();
                 i.putExtra("LocationDetails",finalLocation);
                 i.putExtra("pin",pin);
                 i.putExtra("locality",userLocality);

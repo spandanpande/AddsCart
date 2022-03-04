@@ -95,7 +95,7 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="center"
                 android:text="Pickup Date"
-                android:textColor="@color/black"
+                android:textColor="@color/green"
                 android:textSize="16sp" />
 
             <TextView
@@ -114,7 +114,6 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="center"
                 android:text="Confirm"
-                android:textColor="@color/green"
                 android:textSize="16sp" />
         </LinearLayout>
 

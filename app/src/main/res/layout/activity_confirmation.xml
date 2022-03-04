@@ -84,6 +84,7 @@
                 android:text="Expected Pickup" />
 
             <TextView
+                android:id="@+id/expected_pickup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
@@ -114,6 +115,7 @@
                 android:textAlignment="center"/>
 
             <TextView
+                android:id="@+id/Request_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="2dp"
@@ -215,6 +217,7 @@
                 android:layout_height="wrap_content"
                 android:text="Address - Home"/>
             <TextView
+                android:id="@+id/addressLine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Punarvasu, mhasarul, Nashik - 4"
