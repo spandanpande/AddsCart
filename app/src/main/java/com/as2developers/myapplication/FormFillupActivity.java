@@ -217,77 +217,77 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
 
 
     public void PaperClick(View view) {
-        if(PaperItem==false){
-            PaperItem = true;
+        if(!map_item.get("Paper")){
+            map_item.put("Paper",true);
             fistLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.selected_bg));
             Toast.makeText(this, "you select paper!", Toast.LENGTH_SHORT).show();
         }
         else{
-            PaperItem = false;
+            map_item.put("Paper",false);
             fistLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.custom_background_white_10r_grey_border));
             Toast.makeText(this, "you remove paper!", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void PlasticClick(View view) {
-        if(PlasticItem==false){
-            PlasticItem = true;
+        if(!map_item.get("Plastic")){
+            map_item.put("Plastic",true);
             secondLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.selected_bg));
             Toast.makeText(this, "you select Plastic!", Toast.LENGTH_SHORT).show();
         }
         else{
-            PlasticItem = false;
+            map_item.put("Plastic",false);
             secondLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.custom_background_white_10r_grey_border));
             Toast.makeText(this, "you remove Plastic!", Toast.LENGTH_SHORT).show();
         }
     }
     public void MetalsClick(View view) {
-        if(MetalItem==false){
-            MetalItem = true;
+        if(!map_item.get("Metal")){
+            map_item.put("Metal",true);
             thirdLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.selected_bg));
             Toast.makeText(this, "you select Metals!", Toast.LENGTH_SHORT).show();
         }
         else{
-            MetalItem = false;
+            map_item.put("Metal",false);
             thirdLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.custom_background_white_10r_grey_border));
             Toast.makeText(this, "you remove Metals!", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void E_Waste(View view) {
-        if(E_waste==false){
-            E_waste = true;
+        if(!map_item.get("E-waste")){
+            map_item.put("E-waste",true);
             fourthLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.selected_bg));
             Toast.makeText(this, "you select E-Waste!", Toast.LENGTH_SHORT).show();
         }
         else{
-            E_waste = false;
+            map_item.put("E-waste",false);
             fourthLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.custom_background_white_10r_grey_border));
             Toast.makeText(this, "you remove E-Waste!", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void IronClick(View view) {
-        if(IronItem==false){
-            IronItem = true;
+        if(!map_item.get("Iron")){
+            map_item.put("Iron",true);
             fifthLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.selected_bg));
             Toast.makeText(this, "you select Iron!", Toast.LENGTH_SHORT).show();
         }
         else{
-            IronItem = false;
+            map_item.put("Iron",false);
             fifthLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.custom_background_white_10r_grey_border));
             Toast.makeText(this, "you remove Iron!", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void OthersClick(View view) {
-        if(Others==false){
-            Others = true;
+        if(!map_item.get("Others")){
+            map_item.put("Others",true);
             sixthLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.selected_bg));
             Toast.makeText(this, "you select Others!", Toast.LENGTH_SHORT).show();
         }
         else{
-            Others = false;
+            map_item.put("Others",false);
             sixthLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.custom_background_white_10r_grey_border));
             Toast.makeText(this, "you remove Others!", Toast.LENGTH_SHORT).show();
         }
