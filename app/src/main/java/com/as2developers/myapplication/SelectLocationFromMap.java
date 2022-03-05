@@ -66,6 +66,9 @@ import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -101,6 +104,12 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
+    TextView WelcomeUser;
+
+
+    FirebaseAuth mAuth;
+    FirebaseDatabase database;
+    DatabaseReference ref;
 
     //for turing on location
     private LocationRequest locationRequest;
@@ -114,6 +123,8 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
     //hooks for navigation bar
         drawerLayout =findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
+        WelcomeUser = findViewById(R.id.Welcome_Note);
+
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,R.string.dummy_content,R.string.dummy_content);
         drawerLayout.addDrawerListener(toggle);
@@ -121,8 +132,17 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
         navigationView.setNavigationItemSelectedListener(this);
         //end
 
+        database = FirebaseDatabase.getInstance();
+        mAuth = FirebaseAuth.getInstance();
+        ref = database.getReference("Users").child(mAuth.getCurrentUser().toString());
+
+        WelcomeUser.setText(String.format("Welcome %s", ref.child("Name").toString()));
+
         searchBtn = (ImageView)findViewById(R.id.searchBtn);
         searchView = (SearchView)findViewById(R.id.searchView);
+        ImgBtn = findViewById(R.id.Img);
+
+        uAddressLine = findViewById(R.id.yourLocation);
         //for fullscreen mode
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 //                WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -195,7 +215,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
         }
 
 
-        ImgBtn = findViewById(R.id.Img);
+
         ImgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

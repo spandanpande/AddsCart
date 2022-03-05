@@ -46,7 +46,8 @@ public class SetDate extends AppCompatActivity implements NavigationView.OnNavig
         back = findViewById(R.id.back);
 
         //set no. of items text
-        textItemPickup.setText(String.format("%s items for pickup", getIntent().getStringExtra("itemCount")));
+        String itemCount = getIntent().getStringExtra("itemCount");
+        textItemPickup.setText(String.format("%s items for pickup", itemCount));
 
         //hooks for navigation bar
         drawerLayout =findViewById(R.id.drawer_layout);
@@ -103,7 +104,7 @@ public class SetDate extends AppCompatActivity implements NavigationView.OnNavig
                     String pv = it.getStringExtra("items");
                     String address = it.getStringExtra("AddressLine");
                     String locationType = it.getStringExtra("LocationType");
-                    startActivity(new Intent(SetDate.this, ConfirmPickupActivity.class).putExtra("date",SelectedDateS).putExtra("items",pv).putExtra("AddressLine",address).putExtra("LocationType",locationType));
+                    startActivity(new Intent(SetDate.this, ConfirmPickupActivity.class).putExtra("date",SelectedDateS).putExtra("items",pv).putExtra("AddressLine",address).putExtra("LocationType",locationType).putExtra("itemCount",itemCount));
                 }
             }
         });

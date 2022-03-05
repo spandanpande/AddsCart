@@ -27,7 +27,7 @@ import com.google.android.material.navigation.NavigationView;
 public class ConfirmPickupActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     TextView txt_itemPickup, txt_pickUpdate, txt_confirm, scarpItem_txt, change_scrap, chane_Adddress, change_pickup,
-            txt_homeAddress, txt_Address, txt_pickupTime;
+            txt_homeAddress, txt_Address, txt_pickupTime,txt_AddressType;
     View fragment_location;
     ImageButton back;
     Button continue_btn;
@@ -54,9 +54,8 @@ public class ConfirmPickupActivity extends AppCompatActivity implements Navigati
         txt_confirm = findViewById(R.id.txt_confirm);
         scarpItem_txt = findViewById(R.id.scarpitem_text);
         txt_homeAddress = findViewById(R.id.txt_homeAddress);
-        txt_Address = findViewById(R.id.txt_Address);
         txt_pickupTime = findViewById(R.id.pickUp_time);
-
+        txt_AddressType = findViewById(R.id.txt_Addresstype);
         fragment_location = findViewById(R.id.location_fragment);
 
         continue_btn = findViewById(R.id.btn_proceed);
@@ -64,9 +63,13 @@ public class ConfirmPickupActivity extends AppCompatActivity implements Navigati
         //to set date also selected items
         Intent gIntent = getIntent();
         String temp = gIntent.getStringExtra("date");
+        String LocationType = gIntent.getStringExtra("LocationType");
+        String ItemCount = String.format("%s items for pickup", getIntent().getStringExtra("itemCount"));
+
+        txt_AddressType.setText(LocationType);
         txt_pickupTime.setText(temp +"\n10AM-6PM");
         scarpItem_txt.setText(getIntent().getStringExtra("items"));
-
+        txt_itemPickup.setText(ItemCount);
         txt_Address.setText(getIntent().getStringExtra("AddressLine"));
 
         continue_btn.setOnClickListener(new View.OnClickListener() {
