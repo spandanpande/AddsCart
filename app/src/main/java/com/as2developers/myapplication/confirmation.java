@@ -45,7 +45,7 @@ public class confirmation extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
-        reference = database.getReference("Users").child(user.getPhoneNumber()).child("Orders");
+        reference = database.getReference("Orders");
 
 
         setOrderDataToFirebase();

@@ -58,12 +58,8 @@ public class UserDetails extends AppCompatActivity {
                 }
 
                 DatabaseReference databaseReference = fdata.getReference("Users").child("+91"+usernumber);
-//                HashMap<Object, String> hashMap = new HashMap<>();
-//                hashMap.put("Email", Email);
-//                hashMap.put("Name", Name);
-//                hashMap.put("Mobile","+91"+usernumber);
 
-                UserModal user = new UserModal(Name,"Null",Email,"+91"+usernumber);
+                UserModal user = new UserModal(Name,Email,"+91"+usernumber);
                 databaseReference.setValue(user);
                 startActivity(new Intent(getApplicationContext(),Verify_Number.class));
             }

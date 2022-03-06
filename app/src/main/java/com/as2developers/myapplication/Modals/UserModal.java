@@ -11,6 +11,12 @@ public class UserModal {
         MobileNo = mobileNo;
     }
 
+    public UserModal(String name, String email, String mobileNo) {
+        Name = name;
+        Email = email;
+        MobileNo = mobileNo;
+    }
+
     public UserModal() {
 
     }
