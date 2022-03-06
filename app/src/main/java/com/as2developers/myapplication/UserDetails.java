@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.as2developers.myapplication.Modals.UserModal;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -57,11 +58,13 @@ public class UserDetails extends AppCompatActivity {
                 }
 
                 DatabaseReference databaseReference = fdata.getReference("Users").child("+91"+usernumber);
-                HashMap<Object, String> hashMap = new HashMap<>();
-                hashMap.put("Email", Email);
-                hashMap.put("Name", Name);
-                hashMap.put("Mobile","+91"+usernumber);
-                databaseReference.setValue(hashMap);
+//                HashMap<Object, String> hashMap = new HashMap<>();
+//                hashMap.put("Email", Email);
+//                hashMap.put("Name", Name);
+//                hashMap.put("Mobile","+91"+usernumber);
+
+                UserModal user = new UserModal(Name,"Null",Email,"+91"+usernumber);
+                databaseReference.setValue(user);
                 startActivity(new Intent(getApplicationContext(),Verify_Number.class));
             }
         });
