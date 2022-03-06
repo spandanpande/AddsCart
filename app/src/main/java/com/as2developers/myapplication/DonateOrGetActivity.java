@@ -36,14 +36,6 @@ public class DonateOrGetActivity extends AppCompatActivity {
         userName = findViewById(R.id.userName);
         userAddress = findViewById(R.id.userAddress);
 
-        database = FirebaseDatabase.getInstance();
-
-        mAuth = FirebaseAuth.getInstance();
-        ref = database.getReference("Users").child(mAuth.getCurrentUser().toString());
-
-        Name = ref.child("Name").toString();
-        userName.setText(Name);
-
         Intent intent = getIntent();
         String AddressLine = intent.getStringExtra("AddressLine");
         String ScrapItem = intent.getStringExtra("items");

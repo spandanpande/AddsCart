@@ -39,6 +39,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.as2developers.myapplication.Modals.UserModal;
 import com.as2developers.myapplication.databinding.MenuHeaderBinding;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
@@ -141,22 +142,15 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
         ref = database.getReference("Users");
-
-        WelcomeUser.setText(String.format("Welcome %s",user.getDisplayName().toString()));
+        //to be done...
 
         searchBtn = (ImageView)findViewById(R.id.searchBtn);
         searchView = (SearchView)findViewById(R.id.searchView);
         ImgBtn = findViewById(R.id.Img);
 
         uAddressLine = findViewById(R.id.yourLocation);
-        //for fullscreen mode
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-//                WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
 
         //if location is turn off the turn it on
-
-
         searchView.clearFocus();
         searchView.setFocusable(false);
         //noe assigning the variable
@@ -213,7 +207,6 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
                     return false;
                 }
             });
-            //  supportMapFragment.getMapAsync((OnMapReadyCallback) MainActivity.this);
         }else{
             //when  permission denied
             //again asking for permission
@@ -542,10 +535,6 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
                 startActivity(new Intent(this,AboutUs.class));
                 break;
             case R.id.call_us:
-//                Intent callIntent = new Intent(Intent.ACTION_CALL);
-//                String s = "+918867825522";
-//                callIntent.setData(Uri.parse("tel:"+s));//change the number.
-//                startActivity(callIntent);
                 Toast.makeText(this, "This feature will coming soon!", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.home:

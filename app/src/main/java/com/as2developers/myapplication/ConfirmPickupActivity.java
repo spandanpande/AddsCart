@@ -55,6 +55,7 @@ public class ConfirmPickupActivity extends AppCompatActivity implements Navigati
         scarpItem_txt = findViewById(R.id.scarpitem_text);
         txt_homeAddress = findViewById(R.id.txt_homeAddress);
         txt_pickupTime = findViewById(R.id.pickUp_time);
+        txt_Address = findViewById(R.id.txt_Address);
         txt_AddressType = findViewById(R.id.txt_Addresstype);
         fragment_location = findViewById(R.id.location_fragment);
 
@@ -70,7 +71,7 @@ public class ConfirmPickupActivity extends AppCompatActivity implements Navigati
         txt_pickupTime.setText(temp +"\n10AM-6PM");
         scarpItem_txt.setText(getIntent().getStringExtra("items"));
         txt_itemPickup.setText(ItemCount);
-        txt_Address.setText(getIntent().getStringExtra("AddressLine"));
+        txt_Address.setText(getIntent().getStringExtra("AddressLine"));  //Error
 
         continue_btn.setOnClickListener(new View.OnClickListener() {
             @Override
