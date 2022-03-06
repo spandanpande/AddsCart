@@ -2,15 +2,13 @@ package com.as2developers.myapplication.Modals;
 
 public class OrderModal {
 
-    String items, Date,PaymentMode;
+    String items, Address , Date,PaymentMode;
 
-    public OrderModal(String items, String date, String paymentMode) {
+    public OrderModal(String items, String address, String date, String paymentMode) {
         this.items = items;
+        Address = address;
         Date = date;
         PaymentMode = paymentMode;
-    }
-
-    public OrderModal() {
     }
 
     public String getItems() {
@@ -19,6 +17,14 @@ public class OrderModal {
 
     public void setItems(String items) {
         this.items = items;
+    }
+
+    public String getAddress() {
+        return Address;
+    }
+
+    public void setAddress(String address) {
+        Address = address;
     }
 
     public String getDate() {
