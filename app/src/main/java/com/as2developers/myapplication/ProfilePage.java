@@ -17,10 +17,17 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.as2developers.myapplication.Modals.UserModal;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
+
+import java.util.Objects;
 
 public class ProfilePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     //for slide navigation bar
@@ -31,6 +38,10 @@ public class ProfilePage extends AppCompatActivity implements NavigationView.OnN
 
     FirebaseDatabase database;
     DatabaseReference reference;
+    FirebaseAuth mAuth;
+    FirebaseUser user;
+
+    String userName , userEmail , userAddress , userMobile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,9 +63,14 @@ public class ProfilePage extends AppCompatActivity implements NavigationView.OnN
         MobileNo = findViewById(R.id.MobileNumber);
 
         database = FirebaseDatabase.getInstance();
-        reference = database.getReference("Users");
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+        if (user!=null){
+            reference = database.getReference("Users").child(Objects.requireNonNull(user.getPhoneNumber()));
+        }
 
-        //SetUserDataFromFirebase();
+
+        SetUserDataFromFirebase();
 
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,17 +81,29 @@ public class ProfilePage extends AppCompatActivity implements NavigationView.OnN
     }
 
     private void SetUserDataFromFirebase() {
-        String userName , userEmail , userAddress , userMobile;
 
-        userName = reference.child("Name").toString();
-        userAddress = reference.child("Address").toString();
-        userEmail = reference.child("Email").toString();
-        userMobile = reference.child("Mobile").toString();
 
-        Name.setText(userName);
-        Email.setText(userEmail);
-        address.setText(userAddress);
-        MobileNo.setText(userMobile);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                UserModal user01 = snapshot.getValue(UserModal.class);
+                userName= user01.getName();
+                userEmail = user01.getEmail();
+                userAddress = user01.getAddress();
+                userMobile = user01.getMobileNo();
+
+
+                Name.setText(userName);
+                Email.setText(userEmail);
+                address.setText(userAddress);
+                MobileNo.setText(userMobile);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     //also for navigation bar
