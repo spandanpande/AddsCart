@@ -50,7 +50,6 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
         setContentView(R.layout.activity_form_fillup);
         // All LinearLayout
         linearLayout_location = findViewById(R.id.linearleyout_loacation);
-        linearLayoutAddress = findViewById(R.id.linerleyoutAddress);
         nameLayout = findViewById(R.id.nameLout);
         fistLayout = (LinearLayout) findViewById(R.id.first_layout);
         secondLayout = findViewById(R.id.second_layout);

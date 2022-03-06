@@ -95,7 +95,7 @@ public class confirmation extends AppCompatActivity {
         date = intent.getStringExtra("date");
         mode = intent.getStringExtra("mode");
 
-        OrderModal order = new OrderModal(Items,date,mode,AddressLine);
+        OrderModal order = new OrderModal(Items,AddressLine,date,mode);
         reference.setValue(order);
 
     }

@@ -11,6 +11,9 @@ public class OrderModal {
         PaymentMode = paymentMode;
     }
 
+    public OrderModal() {
+    }
+
     public String getItems() {
         return items;
     }

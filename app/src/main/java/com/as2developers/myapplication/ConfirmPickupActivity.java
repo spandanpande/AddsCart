@@ -57,7 +57,6 @@ public class ConfirmPickupActivity extends AppCompatActivity implements Navigati
         txt_pickupTime = findViewById(R.id.pickUp_time);
         txt_Address = findViewById(R.id.txt_Address);
         txt_AddressType = findViewById(R.id.txt_Addresstype);
-        fragment_location = findViewById(R.id.location_fragment);
 
         continue_btn = findViewById(R.id.btn_proceed);
 

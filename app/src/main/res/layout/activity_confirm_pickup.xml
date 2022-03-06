@@ -257,12 +257,6 @@
                     android:layout_marginTop="5dp"
                     android:gravity="center">
 
-                    <fragment
-                        android:id="@+id/location_fragment"
-                        android:name="com.google.android.gms.maps.MapFragment"
-                        android:layout_width="355dp"
-                        android:layout_height="199dp" />
-
                 </RelativeLayout>
 
                 <LinearLayout

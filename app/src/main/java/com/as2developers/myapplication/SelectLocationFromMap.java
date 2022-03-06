@@ -146,8 +146,6 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
             ref = database.getReference("Users").child(user.getPhoneNumber());
         }
 
-
-
         //to be done...
 
         searchBtn = (ImageView)findViewById(R.id.searchBtn);
@@ -406,9 +404,8 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
         finalLocation = locality+","+name+","+country+","+pin;
         editText.setText(finalLocation);
 
-        addAddressToFirebase(finalLocation);
-
         sheetDialog.show();
+        addAddressToFirebase(finalLocation);
         Toast.makeText(this,  "lat: "+latS+", lan: "+lonS+" LocationName: "+latLngGlobal, Toast.LENGTH_SHORT).show();
 
         uLocality = (EditText) sheetDialog.findViewById(R.id.UserLocality);
