@@ -31,6 +31,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
@@ -105,7 +106,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
     Button next;
     String radioS,finalLocation,userLocality,UserAddressLine;
     EditText uLocality,uAddressLine;
-    ImageView ImgBtn;
+    ImageButton ImgBtn;
     //for slide navigation bar
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -129,7 +130,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
     //hooks for navigation bar
         drawerLayout =findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
-        WelcomeUser = navigationView.findViewById(R.id.Welcome_Note);
+
 
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,R.string.dummy_content,R.string.dummy_content);
@@ -141,7 +142,12 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
-        ref = database.getReference("Users");
+        if (user!=null){
+            ref = database.getReference("Users").child(user.getPhoneNumber());
+        }
+
+
+
         //to be done...
 
         searchBtn = (ImageView)findViewById(R.id.searchBtn);
@@ -218,7 +224,23 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
         ImgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                WelcomeUser = navigationView.findViewById(R.id.Welcome_Note);
+                ref.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        UserModal user01 = snapshot.getValue(UserModal.class);
+                        String userName = user01.getName();
+                        WelcomeUser.setText(String.format("Welcome %s", userName));
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
                 drawerLayout.openDrawer(GravityCompat.START);
+
             }
         });
 
@@ -383,6 +405,9 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
         //to share data to an another activity
         finalLocation = locality+","+name+","+country+","+pin;
         editText.setText(finalLocation);
+
+        addAddressToFirebase(finalLocation);
+
         sheetDialog.show();
         Toast.makeText(this,  "lat: "+latS+", lan: "+lonS+" LocationName: "+latLngGlobal, Toast.LENGTH_SHORT).show();
 
@@ -478,6 +503,11 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
 
             }
         });
+    }
+
+    private void addAddressToFirebase(String finalLocation) {
+
+        ref.child("address").setValue(finalLocation);
     }
 
     private void hideKeyBoard(EditText editText) {
