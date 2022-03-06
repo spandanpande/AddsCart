@@ -39,6 +39,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.as2developers.myapplication.databinding.MenuHeaderBinding;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -67,8 +68,12 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -123,7 +128,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
     //hooks for navigation bar
         drawerLayout =findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
-        WelcomeUser = findViewById(R.id.Welcome_Note);
+        WelcomeUser = navigationView.findViewById(R.id.Welcome_Note);
 
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,R.string.dummy_content,R.string.dummy_content);
@@ -134,9 +139,10 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
 
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
-        ref = database.getReference("Users").child(mAuth.getCurrentUser().toString());
+        FirebaseUser user = mAuth.getCurrentUser();
+        ref = database.getReference("Users");
 
-        WelcomeUser.setText(String.format("Welcome %s", ref.child("Name").toString()));
+        WelcomeUser.setText(String.format("Welcome %s",user.getDisplayName().toString()));
 
         searchBtn = (ImageView)findViewById(R.id.searchBtn);
         searchView = (SearchView)findViewById(R.id.searchView);
