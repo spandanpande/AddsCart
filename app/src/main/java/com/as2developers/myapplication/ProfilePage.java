@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.as2developers.myapplication.Modals.UserModal;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -25,7 +26,6 @@ public class ProfilePage extends AppCompatActivity implements NavigationView.OnN
     //for slide navigation bar
     DrawerLayout drawerLayout;
     NavigationView navigationView;
-    Toolbar toolbar;
     ImageButton imageButton;
     TextView Name, MobileNo,Email,address;
 
@@ -54,7 +54,7 @@ public class ProfilePage extends AppCompatActivity implements NavigationView.OnN
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("Users");
 
-        SetUserDataFromFirebase();
+        //SetUserDataFromFirebase();
 
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,10 +105,6 @@ public class ProfilePage extends AppCompatActivity implements NavigationView.OnN
                 startActivity(i);
                 break;
             case R.id.call_us:
-//                Intent callIntent = new Intent(Intent.ACTION_CALL);
-//                String s = "+918867825522";
-//                callIntent.setData(Uri.parse("tel:"+s));//change the number.
-//                startActivity(callIntent);
                 Toast.makeText(this, "This feature will coming soon!", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.home:

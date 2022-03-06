@@ -92,7 +92,7 @@ public class SetDate extends AppCompatActivity implements NavigationView.OnNavig
             }
         });
 
-        continue_btn.setOnClickListener(new View.OnClickListener() {
+        continue_btn.setOnClickListener(new View.OnClickListener() {   //Error : Crash
             @Override
             public void onClick(View v) {
                 if(SelectedDateS.isEmpty()){
@@ -125,10 +125,6 @@ public class SetDate extends AppCompatActivity implements NavigationView.OnNavig
         int mDay = c.get(Calendar.DAY_OF_MONTH);
 
         // set current date into textview
-//        selectedDate.setText(new StringBuilder()
-//                // Month is 0 based, just add 1
-//                .append(mDay + 1).append("-").append(mMonth + 1).append("-")
-//                .append(mYear).append(" "));
         SelectedDateS = (mDay + 1) + "-" + (mMonth) + "-" + (mYear);
     }
 

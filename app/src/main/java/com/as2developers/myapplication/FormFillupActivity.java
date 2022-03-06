@@ -40,8 +40,6 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
     ImageView paperImage, plastic_image, metal_image, eWaste_image, iron_image, otherItem_image, addNewAddress;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
-    Toolbar toolbar;
-    Boolean PaperItem,PlasticItem,MetalItem,E_waste,IronItem,Others;
     String[] items = {"Paper","Plastic","Metal","E-waste","Iron","Others"};
     HashMap<String,Boolean> map_item;
     String locationType,AddressLine;
@@ -61,7 +59,6 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
         fifthLayout = findViewById(R.id.fifth_layout);
         sixthLayout = findViewById(R.id.sixth_layout);
         ImgBtn = findViewById(R.id.btn_side_nav);
-//        btn_Layout = findViewById(R.id.btn_Layout);
 
 
         // All ImageView
@@ -76,10 +73,7 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
         // All TextView
         pickup_laction = findViewById(R.id.pickuplocation);
         homelocation = findViewById(R.id.home_location);
-//        addNewAddress = findViewById(R.id.addNewAddress);
         homeAddress_text = findViewById(R.id.homeAddress_text);
-//        txt_goodmorning = findViewById(R.id.txt_goodmorinig);
-//        txt_name = findViewById(R.id.textname);
         paper = findViewById(R.id.paper);
         paper_price = findViewById(R.id.paper_price);
         plastic = findViewById(R.id.plastic);
@@ -108,7 +102,7 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
         navigationView = findViewById(R.id.nav_view);
 
         locationType = getIntent().getStringExtra("locationType");
-        AddressLine = getIntent().getStringExtra("AddressLine");
+        AddressLine = getIntent().getStringExtra("LocationDetails");
         homelocation.setText(locationType);
         homeAddress_text.setText(AddressLine);
 
@@ -124,14 +118,6 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
         for (int i = 0; i < 6; i++) {
             map_item.put(items[i],false);
         }
-        //        PaperItem = false;
-//        PlasticItem = false;
-//        MetalItem = false;
-//        IronItem =false;
-//        E_waste = false;
-//        Others = false;
-        Intent getI = getIntent();
-        homeAddress_text.setText(getI.getStringExtra("LocationDetails"));
         btn_continue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,17 +127,10 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
                 int itemcount =0;
                 for (int i = 0; i < 6; i++) {
                     if(map_item.get(items[i])){
-                        s+=items[i];
+                        s+=items[i]+" ";
                         itemcount++;
                     }
                 }
-
-//                if(PaperItem) s+="Paper,";
-//                if(PlasticItem) s+="Plastic,";
-//                if(MetalItem) s+="Metal,";
-//                if(IronItem) s+="Iron,";
-//                if(E_waste) s+="E-Waste,";
-//                if(Others) s+="Others.";
 
                 if(s==""){
                     Toast.makeText(FormFillupActivity.this, "Please Selected At least one item!", Toast.LENGTH_SHORT).show();
@@ -200,10 +179,6 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
                 startActivity(new Intent(this,AboutUs.class));
                 break;
             case R.id.call_us:
-//                Intent callIntent = new Intent(Intent.ACTION_CALL);
-//                String s = "+918867825522";
-//                callIntent.setData(Uri.parse("tel:"+s));//change the number.
-//                startActivity(callIntent);
                 Toast.makeText(this, "This feature will coming soon!", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.home:

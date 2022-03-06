@@ -2,11 +2,10 @@ package com.as2developers.myapplication.Modals;
 
 public class OrderModal {
 
-    String items,OrderId , Date,PaymentMode;
+    String items, Date,PaymentMode;
 
-    public OrderModal(String items, String orderId, String date, String paymentMode) {
+    public OrderModal(String items, String date, String paymentMode) {
         this.items = items;
-        OrderId = orderId;
         Date = date;
         PaymentMode = paymentMode;
     }
@@ -20,14 +19,6 @@ public class OrderModal {
 
     public void setItems(String items) {
         this.items = items;
-    }
-
-    public String getOrderId() {
-        return OrderId;
-    }
-
-    public void setOrderId(String orderId) {
-        OrderId = orderId;
     }
 
     public String getDate() {
