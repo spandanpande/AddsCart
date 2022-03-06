@@ -49,7 +49,7 @@ public class SplashScreen extends AppCompatActivity {
                 logoname.setVisibility(View.INVISIBLE);
 
             }
-        },3000);
+        },2700);
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -60,7 +60,7 @@ public class SplashScreen extends AppCompatActivity {
                     SharedPreferences.Editor editor = onboardingScreen.edit();
                     editor.putBoolean("FirstTime",false);
                     editor.commit();
-                    startActivity(new Intent(SplashScreen.this, Login_Phone.class));
+                    startActivity(new Intent(SplashScreen.this, OnBoardingScreen.class));
                     finish();
                 }
                 else{

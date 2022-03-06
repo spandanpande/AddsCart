@@ -6,10 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".DonateOrGetActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/cl3"
         android:layout_width="match_parent"
         android:layout_height="95dp"
+        android:orientation="horizontal"
         android:background="@drawable/round_actionbar"
         android:elevation="10dp">
 
@@ -17,19 +18,19 @@
             android:id="@+id/img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
             android:layout_marginStart="15dp"
             android:layout_marginBottom="15dp"
             android:background="?android:selectableItemBackground"
-            android:src="@drawable/ic_baseline_arrow_back_24"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:src="@drawable/ic_baseline_arrow_back_24" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="20dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginTop="20dp"
             android:orientation="vertical"
             android:padding="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -49,9 +50,10 @@
                 android:layout_height="wrap_content"
                 android:text="Nashik, Maharashtra"
                 android:textColor="#FFFFFF"
+                android:padding="5dp"
                 android:textSize="18sp" />
         </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 
     <RelativeLayout
