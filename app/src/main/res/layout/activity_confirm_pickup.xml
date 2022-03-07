@@ -89,7 +89,7 @@
                         android:layout_height="match_parent"
                         android:layout_marginLeft="5dp"
                         android:gravity="center"
-                        android:text="1 items for pickup"
+                        android:text="0 items for pickup"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
@@ -189,10 +189,10 @@
                             android:id="@+id/scarpitem_text"
                             android:layout_width="310dp"
                             android:layout_height="wrap_content"
-                            android:paddingLeft="15dp"
-                            android:text="Carton"
+                            android:paddingStart="15dp"
                             android:textColor="@color/black"
-                            android:textSize="18dp" />
+                            android:textSize="18sp"
+                            tools:ignore="RtlSymmetry" />
 
                     </LinearLayout>
 
@@ -202,7 +202,6 @@
                     android:id="@+id/homeAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/Scarp_item_layout"
                     android:orientation="vertical"
                     android:paddingTop="20dp">
 
@@ -215,7 +214,7 @@
                             android:id="@+id/txt_homeAddress"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="15dp"
+                            android:layout_marginStart="15dp"
                             android:text="Address - "
                             android:textSize="18sp" />
 
@@ -223,8 +222,7 @@
                             android:id="@+id/txt_Addresstype"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="15dp"
-                            android:text="Home"
+                            android:layout_marginStart="15dp"
                             android:textSize="18sp" />
 
                     </LinearLayout>
@@ -238,10 +236,9 @@
                             android:id="@+id/txt_Address"
                             android:layout_width="310dp"
                             android:layout_height="wrap_content"
-                            android:paddingLeft="15dp"
-                            android:text="12/2 dhansha stand, Najafgarh \n110075"
+                            android:paddingStart="15dp"
                             android:textColor="@color/black"
-                            android:textSize="16dp" />
+                            android:textSize="16sp" />
 
                     </LinearLayout>
 
@@ -252,8 +249,6 @@
                     android:id="@+id/container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/homeAddress"
-                    android:layout_centerHorizontal="true"
                     android:layout_marginTop="5dp"
                     android:gravity="center">
 
@@ -263,7 +258,6 @@
                     android:id="@+id/pickupAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/container"
 
                     android:orientation="vertical"
                     android:paddingTop="20dp">
@@ -276,7 +270,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="15dp"
+                            android:layout_marginStart="15dp"
                             android:text="Pickup"
                             android:textSize="18sp" />
                     </LinearLayout>
@@ -290,8 +284,7 @@
                             android:id="@+id/pickUp_time"
                             android:layout_width="307dp"
                             android:layout_height="60dp"
-                            android:paddingLeft="15dp"
-                            android:text="Tomorrow ,26 march 2022\n10AM-6PM"
+                            android:paddingStart="15dp"
                             android:textColor="@color/black"
                             android:textSize="16dp" />
 
@@ -302,7 +295,6 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/fourthLayout"
                     android:layout_marginTop="20dp"
                     android:layout_marginHorizontal="30dp"
                     android:gravity="center"

@@ -62,14 +62,23 @@ public class Verify_Number extends AppCompatActivity {
     }
     private void sendVerificationCode(String mobile) {
 
-        PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                "+91"+mobile,
-                60,
-                TimeUnit.SECONDS,
-                this,
-                mCallbacks);
+        PhoneAuthOptions options =
+                PhoneAuthOptions.newBuilder(mAuth)
+                        .setPhoneNumber("+91"+mobile)       // Phone number to verify
+                        .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
+                        .setActivity(this)                 // Activity (for callback binding)
+                        .setCallbacks(mCallbacks)          // OnVerificationStateChangedCallbacks
+                        .build();
+        PhoneAuthProvider.verifyPhoneNumber(options);
+
+//        PhoneAuthProvider.getInstance().verifyPhoneNumber(
+//                "+91"+mobile,
+//                60,
+//                TimeUnit.SECONDS,
+//                this,
+//                mCallbacks);
     }
-    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks =
+    private final PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks =
             new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
                 @Override
                 public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
@@ -103,7 +112,7 @@ public class Verify_Number extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     //verification successful we will start the profile activity
-                    Intent intent = new Intent(Verify_Number.this, MainActivity.class);
+                    Intent intent = new Intent(Verify_Number.this, SelectLocationFromMap.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
 
