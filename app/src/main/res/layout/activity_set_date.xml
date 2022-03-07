@@ -75,7 +75,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
                 android:gravity="center"
-                android:text="1 items for pickup"
+                android:text="0 items for pickup"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 

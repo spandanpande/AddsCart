@@ -49,7 +49,7 @@ public class SplashScreen extends AppCompatActivity {
                 logoname.setVisibility(View.INVISIBLE);
 
             }
-        },2700);
+        },2500);
 
         new Handler().postDelayed(new Runnable() {
             @Override

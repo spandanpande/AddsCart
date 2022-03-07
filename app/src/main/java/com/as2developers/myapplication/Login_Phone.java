@@ -41,7 +41,7 @@ public class Login_Phone extends AppCompatActivity {
         inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
 
         if (currentUser != null) {
-            Intent intent = new Intent(Login_Phone.this, MainActivity.class);
+            Intent intent = new Intent(Login_Phone.this, SelectLocationFromMap.class);
             startActivity(intent);
             finish();
         } else {
