@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
 import com.as2developers.myapplication.Modals.OrderModal;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -22,15 +23,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
+import java.util.UUID;
 
 public class confirmation extends AppCompatActivity {
 
     TextView paymentMode,addressLine,items,expectedDate;
     Button button;
     FirebaseDatabase database;
-    DatabaseReference reference;
+    DatabaseReference reference,refId;
     FirebaseAuth mAuth;
-    String AddressLine,Items,date,mode;
+    TextView reqId;
+    String AddressLine,Items,date,mode,uniqueID,reqID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,13 +44,32 @@ public class confirmation extends AppCompatActivity {
         addressLine = findViewById(R.id.addressLine);
         items = findViewById(R.id.list);
         expectedDate = findViewById(R.id.expected_pickup);
+        reqId = findViewById(R.id.Request_id);
 
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
-        reference = database.getReference("Orders");
+        uniqueID = UUID.randomUUID().toString();
+
+        //refId = database.getReference("orderId");
+        reference = database.getReference("Orders").child(uniqueID);
 
 
+//        refId.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                reqID = snapshot.getValue().toString();
+//                int reqestID = Integer.parseInt(reqID);
+//                reqestID++;
+//                reqID = Integer.toString(reqestID);
+//            }
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
+
+        //reference = database.getReference("Orders").child(reqID);
         setOrderDataToFirebase();
 
         showOrderDataFromFirebase();
@@ -78,6 +100,7 @@ public class confirmation extends AppCompatActivity {
                 paymentMode.setText(mode);
                 expectedDate.setText(date);
                 items.setText(Items);
+                reqId.setText(uniqueID);
             }
 
             @Override
