@@ -497,7 +497,8 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
                 userLocality = uLocality.getText().toString();
                 UserAddressLine = uAddressLine.getText().toString();
                 finalLocation = editText.getText().toString();
-                i.putExtra("LatLon",latGlobal);
+                i.putExtra("Latitude",Double.toString(latGlobal));
+                i.putExtra("Longitude",Double.toString(lonGlobal));
                 i.putExtra("locationType",radioS);
                 i.putExtra("LocationDetails",finalLocation);
                 i.putExtra("pin",pin);
@@ -585,6 +586,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
             case R.id.logOut:
                 Toast.makeText(this, "Logging out..", Toast.LENGTH_SHORT).show();
                 //Toast.makeText(SelectLocationFromMap.this, "Back to Home Page", Toast.LENGTH_SHORT).show();
+                FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(SelectLocationFromMap.this,Login_Phone.class));
                 finish();
                 break;

@@ -71,12 +71,6 @@ public class Verify_Number extends AppCompatActivity {
                         .build();
         PhoneAuthProvider.verifyPhoneNumber(options);
 
-//        PhoneAuthProvider.getInstance().verifyPhoneNumber(
-//                "+91"+mobile,
-//                60,
-//                TimeUnit.SECONDS,
-//                this,
-//                mCallbacks);
     }
     private final PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks =
             new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {

@@ -46,7 +46,7 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
     NavigationView navigationView;
     String[] items = {"Paper","Plastic","Metal","E-waste","Iron","Others"};
     HashMap<String,Boolean> map_item;
-    String locationType,AddressLine;
+    String locationType,AddressLine,Lat,Lon;
     private static final int REQUEST_CALL =1;
 
     @Override
@@ -107,6 +107,8 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
 
         locationType = getIntent().getStringExtra("locationType");
         AddressLine = getIntent().getStringExtra("LocationDetails");
+        Lat = getIntent().getStringExtra("Latitude");
+        Lon = getIntent().getStringExtra("Longitude");
         homelocation.setText(locationType);
         homeAddress_text.setText(AddressLine);
 
@@ -140,7 +142,7 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
                     Toast.makeText(FormFillupActivity.this, "Please Selected At least one item!", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    startActivity(new Intent(FormFillupActivity.this, SetDate.class).putExtra("items", s).putExtra("itemCount",Integer.toString(itemcount)).putExtra("AddressLine",AddressLine).putExtra("LocationType",locationType));
+                    startActivity(new Intent(FormFillupActivity.this, SetDate.class).putExtra("items", s).putExtra("itemCount",Integer.toString(itemcount)).putExtra("AddressLine",AddressLine).putExtra("LocationType",locationType).putExtra("Latitude",Lat).putExtra("Longitude",Lon));
                     Toast.makeText(FormFillupActivity.this, s, Toast.LENGTH_SHORT).show();
                 }
             }

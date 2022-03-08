@@ -54,6 +54,7 @@ public class SetDate extends AppCompatActivity implements NavigationView.OnNavig
 
         //set no. of items text
         String itemCount = getIntent().getStringExtra("itemCount");
+
         textItemPickup.setText(String.format("%s items for pickup", itemCount));
 
         //hooks for navigation bar
@@ -116,7 +117,11 @@ public class SetDate extends AppCompatActivity implements NavigationView.OnNavig
                     String pv = it.getStringExtra("items");
                     String address = it.getStringExtra("AddressLine");
                     String locationType = it.getStringExtra("LocationType");
-                    startActivity(new Intent(SetDate.this, ConfirmPickupActivity.class).putExtra("date",SelectedDateS).putExtra("items",pv).putExtra("AddressLine",address).putExtra("LocationType",locationType).putExtra("itemCount",itemCount));
+                    String Lat = it.getStringExtra("Latitude");
+                    String Lon = it.getStringExtra("Longitude");
+                    startActivity(new Intent(SetDate.this, ConfirmPickupActivity.class).putExtra("date",SelectedDateS).putExtra("items",pv).putExtra("AddressLine",address).putExtra("LocationType",locationType).putExtra("itemCount",itemCount)
+                                    .putExtra("Longitude",Lon).putExtra("Latitude",Lat)
+                    );
                 }
             }
         });

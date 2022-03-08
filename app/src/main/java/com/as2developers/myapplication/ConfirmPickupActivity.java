@@ -85,6 +85,8 @@ public class ConfirmPickupActivity extends AppCompatActivity implements Navigati
                 i.putExtra("AddressLine",getIntent().getStringExtra("AddressLine"));
                 i.putExtra("items",getIntent().getStringExtra("items"));
                 i.putExtra("date",getIntent().getStringExtra("date"));
+                i.putExtra("Latitude",getIntent().getStringExtra("Latitude"));
+                i.putExtra("Longitude",getIntent().getStringExtra("Longitude"));
                 startActivity(i);
             }
         });

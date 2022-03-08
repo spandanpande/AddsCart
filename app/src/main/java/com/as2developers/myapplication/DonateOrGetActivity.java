@@ -76,6 +76,8 @@ public class DonateOrGetActivity extends AppCompatActivity {
                 i.putExtra("AddressLine",AddressLine);
                 i.putExtra("items",ScrapItem);
                 i.putExtra("date",date);
+                i.putExtra("Latitude",getIntent().getStringExtra("Latitude"));
+                i.putExtra("Longitude",getIntent().getStringExtra("Longitude"));
                 startActivity(i);
             }
         });
@@ -88,6 +90,8 @@ public class DonateOrGetActivity extends AppCompatActivity {
                 i.putExtra("AddressLine",AddressLine);
                 i.putExtra("items",ScrapItem);
                 i.putExtra("date",date);
+                i.putExtra("Latitude",getIntent().getStringExtra("Latitude"));
+                i.putExtra("Longitude",getIntent().getStringExtra("Longitude"));
                 startActivity(i);
             }
         });

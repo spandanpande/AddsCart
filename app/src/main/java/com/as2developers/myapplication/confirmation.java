@@ -33,7 +33,7 @@ public class confirmation extends AppCompatActivity {
     DatabaseReference reference,refId;
     FirebaseAuth mAuth;
     TextView reqId;
-    String AddressLine,Items,date,mode,uniqueID,reqID;
+    String AddressLine,Items,date,mode,Lon,Lat,uniqueID,reqID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,8 +58,11 @@ public class confirmation extends AppCompatActivity {
 //        refId.addListenerForSingleValueEvent(new ValueEventListener() {
 //            @Override
 //            public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                reqID = snapshot.getValue().toString();
-//                int reqestID = Integer.parseInt(reqID);
+//                reqID = snapshot.getValue(String.class);
+//                int reqestID = 0;
+//                if (reqID != null) {
+//                    reqestID = Integer.parseInt(reqID);
+//                }
 //                reqestID++;
 //                reqID = Integer.toString(reqestID);
 //            }
@@ -117,8 +120,10 @@ public class confirmation extends AppCompatActivity {
         Items = intent.getStringExtra("items");
         date = intent.getStringExtra("date");
         mode = intent.getStringExtra("mode");
+        Lon = intent.getStringExtra("Longitude");
+        Lat = intent.getStringExtra("Latitude");
 
-        OrderModal order = new OrderModal(Items,AddressLine,date,mode);
+        OrderModal order = new OrderModal(Items,AddressLine,date,mode,Lat,Lon);
         reference.setValue(order);
 
     }
