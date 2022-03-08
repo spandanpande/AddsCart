@@ -21,6 +21,7 @@ import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -41,7 +42,7 @@ import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.as2developers.myapplication.Modals.UserModal;
-import com.as2developers.myapplication.databinding.MenuHeaderBinding;
+//import com.as2developers.myapplication.databinding.MenuHeaderBinding;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -112,6 +113,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
     NavigationView navigationView;
     Toolbar toolbar;
     TextView WelcomeUser;
+    private static final int REQUEST_CALL =1;
 
 
     FirebaseAuth mAuth;
@@ -130,7 +132,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
     //hooks for navigation bar
         drawerLayout =findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
-
+        TurnOnLocation();
 
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,R.string.dummy_content,R.string.dummy_content);
@@ -242,6 +244,9 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
             }
         });
 
+    }
+
+    private void TurnOnLocation() {
     }
 
     //for drawable
@@ -361,6 +366,16 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
             if(grantResults.length > 0  && grantResults[0]==PackageManager.PERMISSION_GRANTED){
                 //when permission granted call method
                 getCurrentLocation();
+            }else{
+                Toast.makeText(this, "Location Permission DENIED", Toast.LENGTH_SHORT).show();
+            }
+        }
+        if(requestCode==REQUEST_CALL){
+            if(grantResults.length > 0  && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                //when permission granted call method
+                makePhoneCall();
+            }else{
+                Toast.makeText(this, "Call Permission DENIED", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -562,13 +577,31 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
                 startActivity(new Intent(this,AboutUs.class));
                 break;
             case R.id.call_us:
-                Toast.makeText(this, "This feature will coming soon!", Toast.LENGTH_SHORT).show();
+                makePhoneCall();
                 break;
             case R.id.home:
                 Toast.makeText(this, "You are at Home!", Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.logOut:
+                Toast.makeText(this, "Logging out..", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(SelectLocationFromMap.this, "Back to Home Page", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(SelectLocationFromMap.this,Login_Phone.class));
+                finish();
+                break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+    private void makePhoneCall(){
+
+        if(ContextCompat.checkSelfPermission(this,Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.CALL_PHONE}, REQUEST_CALL);
+        }
+        else{
+            String phoneNo = "tel:"+"8867825522";
+            Intent intent = new Intent(Intent.ACTION_CALL);
+            intent.setData(Uri.parse(phoneNo));
+            startActivity(intent);
+        }
     }
 }
