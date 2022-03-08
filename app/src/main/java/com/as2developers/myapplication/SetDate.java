@@ -3,11 +3,17 @@ package com.as2developers.myapplication;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,6 +39,7 @@ public class SetDate extends AppCompatActivity implements NavigationView.OnNavig
     ImageView back;
     NavigationView navigationView;
     Toolbar toolbar;
+    private static final int REQUEST_CALL =1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +86,11 @@ public class SetDate extends AppCompatActivity implements NavigationView.OnNavig
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
                         i1+=1;
                         SelectedDateS = i2 +"/" + i1 + "/" +i;
+//                        String[] days = new String[] {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday","Sunday"};
+//                        int x =i2+1;
+//                        String day = days[calendar.get(x)-1];
+//                        calendar.getT
+                        SelectedDateS = (i2) + "-" + (i1) + "-" + (i);
                         selectedDate.setText(SelectedDateS);
 
                     }
@@ -125,7 +137,10 @@ public class SetDate extends AppCompatActivity implements NavigationView.OnNavig
         int mDay = c.get(Calendar.DAY_OF_MONTH);
 
         // set current date into textview
-        SelectedDateS = (mDay + 1) + "-" + (mMonth) + "-" + (mYear);
+//        String[] days = new String[] {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday","Sunday"};
+//
+//        String day = days[c.get(Calendar.DAY_OF_WEEK)-1];
+       SelectedDateS = (mDay + 1) + "-" + (mMonth) + "-" + (mYear);
     }
 
 
@@ -158,8 +173,41 @@ public class SetDate extends AppCompatActivity implements NavigationView.OnNavig
             case R.id.aboutUs:
                 startActivity(new Intent(this,AboutUs.class));
                 break;
+            case R.id.call_us:
+                makePhoneCall();
+                break;
+            case R.id.logOut:
+                Toast.makeText(this, "Logging out..", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this,Login_Phone.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                finish();
+                break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+    private void makePhoneCall(){
+
+        if(ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.CALL_PHONE}, REQUEST_CALL);
+        }
+        else{
+            String phoneNo = "tel:"+"8867825522";
+            Intent intent = new Intent(Intent.ACTION_CALL);
+            intent.setData(Uri.parse(phoneNo));
+            startActivity(intent);
+        }
+    }
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if(requestCode==REQUEST_CALL){
+            if(grantResults.length > 0  && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                //when permission granted call method
+                makePhoneCall();
+            }else{
+                Toast.makeText(this, "Call Permission DENIED", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }

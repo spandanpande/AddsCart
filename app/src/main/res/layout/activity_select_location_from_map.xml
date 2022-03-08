@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".SelectLocationFromMap"
     android:id="@+id/drawer_layout"
-    tools:openDrawer="start"
     android:orientation="vertical">
 
     <com.google.android.material.navigation.NavigationView
@@ -83,7 +82,6 @@
             <SearchView
                 android:id="@+id/searchView"
                 style="none"
-                android:windowSoftInputMode="stateAlwaysHidden"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -94,6 +92,7 @@
                 android:iconifiedByDefault="false"
                 android:queryHint="Search your location.."
                 android:textSize="22sp"
+                android:windowSoftInputMode="stateAlwaysHidden"
                 tools:ignore="Suspicious0dp" />
         </LinearLayout>
     </LinearLayout>
