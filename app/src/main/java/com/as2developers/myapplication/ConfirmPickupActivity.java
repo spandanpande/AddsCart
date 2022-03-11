@@ -76,7 +76,7 @@ public class ConfirmPickupActivity extends AppCompatActivity implements Navigati
         txt_pickupTime.setText(temp +"\n10AM-6PM");
         scarpItem_txt.setText(getIntent().getStringExtra("items"));
         txt_itemPickup.setText(ItemCount);
-        txt_Address.setText(getIntent().getStringExtra("AddressLine"));  //Error
+        txt_Address.setText(String.format("%s\n%s\n%s", getIntent().getStringExtra("AddressLine"), getIntent().getStringExtra("locality"), getIntent().getStringExtra("longAddress")));  //Error
 
         continue_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,6 +87,8 @@ public class ConfirmPickupActivity extends AppCompatActivity implements Navigati
                 i.putExtra("date",getIntent().getStringExtra("date"));
                 i.putExtra("Latitude",getIntent().getStringExtra("Latitude"));
                 i.putExtra("Longitude",getIntent().getStringExtra("Longitude"));
+                i.putExtra("locality",getIntent().getStringExtra("locality"));
+                i.putExtra("longAddress",getIntent().getStringExtra("longAddress"));
                 startActivity(i);
             }
         });
@@ -104,9 +106,6 @@ public class ConfirmPickupActivity extends AppCompatActivity implements Navigati
         switch (item.getItemId()){
             case R.id.profile:
                 startActivity(new Intent(this,ProfilePage.class));
-                break;
-            case R.id.pickup:
-                Toast.makeText(this, "Opening to a new pickup..", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.howItWorks:
                 startActivity(new Intent(this,HowItWorks.class));;

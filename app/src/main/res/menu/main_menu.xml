@@ -3,7 +3,7 @@
     <group android:checkableBehavior="single" android:enabled="true">
         <item android:id="@+id/home" android:title="Home" android:icon="@drawable/ic_home"/>
         <item android:id="@+id/profile" android:icon="@drawable/ic_profile"  android:title="Profile"/>
-        <item android:id="@+id/pickup" android:icon="@drawable/ic_pickup_req" android:title="Pickup request"/>
+<!--        <item android:id="@+id/pickup" android:icon="@drawable/ic_pickup_req" android:title="Pickup request"/>-->
         <item android:id="@+id/howItWorks" android:icon="@drawable/ic_information" android:title="How it works"/>
         <item android:id="@+id/aboutUs" android:icon="@drawable/ic_us" android:title="About Us"/>
     </group>

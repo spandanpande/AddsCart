@@ -2,24 +2,24 @@
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfilePage"
-    android:id="@+id/drawer_layout"
-    >
+    tools:context=".ProfilePage">
+
     <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:id="@+id/nav_view"
         app:headerLayout="@layout/menu_header"
         app:itemTextColor="@color/green"
-        app:menu="@menu/main_menu"
-        />
+        app:menu="@menu/main_menu" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl1"
             android:layout_width="match_parent"
@@ -73,7 +73,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="15dp"
                 android:src="@drawable/man"
-                app:srcCompat="@drawable/man"/>
+                app:srcCompat="@drawable/man" />
 
             <TextView
                 android:id="@+id/Name"
@@ -148,15 +148,15 @@
 
             </LinearLayout>
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:background="?android:selectableItemBackground"
-                android:text="change"
-                android:textColor="#29BB8A" />
+            <!--            <Button-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_alignParentRight="true"-->
+            <!--                android:layout_centerVertical="true"-->
+            <!--                android:layout_marginRight="10dp"-->
+            <!--                android:background="?android:selectableItemBackground"-->
+            <!--                android:text="change"-->
+            <!--                android:textColor="#29BB8A" />-->
 
         </RelativeLayout>
 
@@ -167,8 +167,8 @@
             android:layout_below="@+id/rv4"
             android:layout_alignParentLeft="true"
             android:background="@color/gray"
-            android:paddingLeft="15dp"
             android:paddingVertical="5dp"
+            android:paddingLeft="15dp"
             android:text="Pickup address" />
 
         <RelativeLayout
@@ -191,9 +191,8 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/img1"
                 android:layout_marginLeft="5dp"
-                android:layout_toLeftOf="@+id/changePickUpAddress"
+                android:layout_toRightOf="@id/img1"
                 android:orientation="vertical">
 
                 <TextView
@@ -211,16 +210,16 @@
 
             </LinearLayout>
 
-            <Button
-                android:id="@+id/changePickUpAddress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:background="?android:selectableItemBackground"
-                android:text="change"
-                android:textColor="#29BB8A" />
+            <!--            <Button-->
+            <!--                android:id="@+id/changePickUpAddress"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_alignParentRight="true"-->
+            <!--                android:layout_centerVertical="true"-->
+            <!--                android:layout_marginRight="10dp"-->
+            <!--                android:background="?android:selectableItemBackground"-->
+            <!--                android:text="change"-->
+            <!--                android:textColor="#29BB8A" />-->
 
         </RelativeLayout>
 
@@ -231,8 +230,8 @@
             android:layout_below="@+id/rv5"
             android:layout_alignParentLeft="true"
             android:background="@color/gray"
-            android:paddingLeft="15dp"
             android:paddingVertical="5dp"
+            android:paddingLeft="15dp"
             android:text="Money acceptance mode" />
 
         <RelativeLayout
@@ -257,26 +256,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:layout_toLeftOf="@+id/ManagePaymentMode"
-                android:layout_toRightOf="@id/img2"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@id/img2"
                 android:text="No Payment Method Selected." />
+            <!--                android:layout_toLeftOf="@+id/ManagePaymentMode"-->
 
-            <Button
-                android:id="@+id/ManagePaymentMode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:background="?android:selectableItemBackground"
-                android:text="Manage"
-                android:textColor="#29BB8A" />
+            <!--            <Button-->
+            <!--                android:id="@+id/ManagePaymentMode"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_alignParentRight="true"-->
+            <!--                android:layout_centerVertical="true"-->
+            <!--                android:layout_marginRight="10dp"-->
+            <!--                android:background="?android:selectableItemBackground"-->
+            <!--                android:text="Manage"-->
+            <!--                android:textColor="#29BB8A" />-->
 
         </RelativeLayout>
 
     </RelativeLayout>
-
 
 
 </androidx.drawerlayout.widget.DrawerLayout>

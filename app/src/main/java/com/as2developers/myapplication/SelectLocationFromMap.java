@@ -106,7 +106,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
     String radioValue;
     Button next;
     String radioS,finalLocation,userLocality,UserAddressLine;
-    EditText uLocality,uAddressLine;
+    TextInputEditText uLocality,uAddressLine;
     ImageButton ImgBtn;
     //for slide navigation bar
     DrawerLayout drawerLayout;
@@ -153,8 +153,6 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
         searchBtn = (ImageView)findViewById(R.id.searchBtn);
         searchView = (SearchView)findViewById(R.id.searchView);
         ImgBtn = findViewById(R.id.Img);
-
-        uAddressLine = findViewById(R.id.yourLocation);
 
         //if location is turn off the turn it on
         searchView.clearFocus();
@@ -423,8 +421,8 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
         addAddressToFirebase(finalLocation);
         Toast.makeText(this,  "lat: "+latS+", lan: "+lonS+" LocationName: "+latLngGlobal, Toast.LENGTH_SHORT).show();
 
-        uLocality = (EditText) sheetDialog.findViewById(R.id.UserLocality);
-        uAddressLine = (EditText) sheetDialog.findViewById(R.id.addressLine);
+        uLocality = (TextInputEditText) sheetDialog.findViewById(R.id.UserLocality);
+        uAddressLine = (TextInputEditText) sheetDialog.findViewById(R.id.edtxt_addressLine);
 
         next = (Button) sheetDialog.findViewById(R.id.nextBtn);
         radioGroup = (RadioGroup) sheetDialog.findViewById(R.id.radio_Group);
@@ -454,38 +452,41 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
             }
         });
         //for keyboard shifting
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
-        showKeyboard(uLocality);
-        showKeyboard(uAddressLine);
-        uLocality.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                //Get Value form edittext
-                userLocality = uLocality.getText().toString();
-                //check condition
-                if(i== EditorInfo.IME_ACTION_DONE){
-                    //when action is equal to action done
-                    //hide keyboard
-                    hideKeyBoard(uLocality);
-                    return true;
-                }
-            return false;
-            }
-        });
-        uAddressLine.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                //Get Value form edittext
-                UserAddressLine = uAddressLine.getText().toString();
-                //check condition
-                if(i== EditorInfo.IME_ACTION_DONE){
-                    //when action is equal to action done
-                    //hide keyboard
-                    hideKeyBoard(uAddressLine);
-                }
-                return false;
-            }
-        });
+//        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+//        showKeyboard(uLocality);
+//        showKeyboard(uAddressLine);
+//        uLocality.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+//                //Get Value form edittext
+//                userLocality = uLocality.getText().toString();
+//                //check condition
+//                if(i== EditorInfo.IME_ACTION_DONE){
+//                    //when action is equal to action done
+//                    //hide keyboard
+//                    hideKeyBoard(uLocality);
+//                    return true;
+//                }
+//            return false;
+//            }
+//        });
+        userLocality = uLocality.getText().toString();
+        UserAddressLine = uAddressLine.getText().toString();
+
+//        uAddressLine.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+//                //Get Value form edittext
+//                UserAddressLine = uAddressLine.getText().toString();
+//                //check condition
+//                if(i== EditorInfo.IME_ACTION_DONE){
+//                    //when action is equal to action done
+//                    //hide keyboard
+//                    hideKeyBoard(uAddressLine);
+//                }
+//                return false;
+//            }
+//        });
         //after clicking next button
         next = (Button) sheetDialog.findViewById(R.id.nextBtn);
         next.setOnClickListener(new View.OnClickListener() {
@@ -503,7 +504,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
                 i.putExtra("LocationDetails",finalLocation);
                 i.putExtra("pin",pin);
                 i.putExtra("locality",userLocality);
-                i.putExtra("AddressLine",UserAddressLine);
+                i.putExtra("longAddress",UserAddressLine);
 
 
                 //now if location type selected then only go to next activity
@@ -528,16 +529,16 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
         manager.hideSoftInputFromWindow(editText.getApplicationWindowToken(),0);
     }
 
-    private void showKeyboard(EditText editText) {
-        //Initialize input manager
-        InputMethodManager manager = (InputMethodManager) getSystemService(
-                Context.INPUT_METHOD_SERVICE
-        );
-        //show soft keyboard
-        manager.showSoftInput(editText.getRootView(),InputMethodManager.SHOW_IMPLICIT);
-        //Focus on EditText
-        editText.requestFocus();
-    }
+//    private void showKeyboard(EditText editText) {
+//        //Initialize input manager
+//        InputMethodManager manager = (InputMethodManager) getSystemService(
+//                Context.INPUT_METHOD_SERVICE
+//        );
+//        //show soft keyboard
+//        manager.showSoftInput(editText.getRootView(),InputMethodManager.SHOW_IMPLICIT);
+//        //Focus on EditText
+//        editText.requestFocus();
+//    }
 
     private BitmapDescriptor BitmapFromVector(Context context, int vectorResId) {
         // below line is use to generate a drawable.
@@ -567,9 +568,6 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
             case R.id.profile:
                 Intent i = new Intent(getApplicationContext(),ProfilePage.class);
                 startActivity(i);
-                break;
-            case R.id.pickup:
-                Toast.makeText(this, "Opening to a new pickup..", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.howItWorks:
                 startActivity(new Intent(this,HowItWorks.class));

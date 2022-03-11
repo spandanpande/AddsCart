@@ -119,8 +119,10 @@ public class SetDate extends AppCompatActivity implements NavigationView.OnNavig
                     String locationType = it.getStringExtra("LocationType");
                     String Lat = it.getStringExtra("Latitude");
                     String Lon = it.getStringExtra("Longitude");
+                    String locality = it.getStringExtra("locality");
+                    String longAddress = it.getStringExtra("longAddress");
                     startActivity(new Intent(SetDate.this, ConfirmPickupActivity.class).putExtra("date",SelectedDateS).putExtra("items",pv).putExtra("AddressLine",address).putExtra("LocationType",locationType).putExtra("itemCount",itemCount)
-                                    .putExtra("Longitude",Lon).putExtra("Latitude",Lat)
+                                    .putExtra("Longitude",Lon).putExtra("Latitude",Lat).putExtra("locality",locality).putExtra("longAddress",longAddress)
                     );
                 }
             }
@@ -164,9 +166,6 @@ public class SetDate extends AppCompatActivity implements NavigationView.OnNavig
         switch (item.getItemId()){
             case R.id.profile:
                 startActivity(new Intent(this,ProfilePage.class));
-                break;
-            case R.id.pickup:
-                Toast.makeText(this, "Opening to a new pickup..", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.howItWorks:
                 startActivity(new Intent(this,HowItWorks.class));

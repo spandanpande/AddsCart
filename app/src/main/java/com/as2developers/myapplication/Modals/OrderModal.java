@@ -2,15 +2,17 @@ package com.as2developers.myapplication.Modals;
 
 public class OrderModal {
 
-    String items, Address , Date,PaymentMode,Latitude,Longitude;
+    String items, Address , Date,PaymentMode,Latitude,Longitude,locality,longAddress;
 
-    public OrderModal(String items, String address, String date, String paymentMode, String latitude, String longitude) {
+    public OrderModal(String items, String address, String date, String paymentMode, String latitude, String longitude, String locality, String longAddress) {
         this.items = items;
         Address = address;
         Date = date;
         PaymentMode = paymentMode;
         Latitude = latitude;
         Longitude = longitude;
+        this.locality = locality;
+        this.longAddress = longAddress;
     }
 
     public OrderModal() {
@@ -62,5 +64,21 @@ public class OrderModal {
 
     public void setLongitude(String longitude) {
         Longitude = longitude;
+    }
+
+    public String getLocality() {
+        return locality;
+    }
+
+    public void setLocality(String locality) {
+        this.locality = locality;
+    }
+
+    public String getLongAddress() {
+        return longAddress;
+    }
+
+    public void setLongAddress(String longAddress) {
+        this.longAddress = longAddress;
     }
 }
