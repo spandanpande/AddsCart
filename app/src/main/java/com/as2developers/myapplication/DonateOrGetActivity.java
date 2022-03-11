@@ -78,6 +78,8 @@ public class DonateOrGetActivity extends AppCompatActivity {
                 i.putExtra("date",date);
                 i.putExtra("Latitude",getIntent().getStringExtra("Latitude"));
                 i.putExtra("Longitude",getIntent().getStringExtra("Longitude"));
+                i.putExtra("locality",getIntent().getStringExtra("locality"));
+                i.putExtra("longAddress",getIntent().getStringExtra("longAddress"));
                 startActivity(i);
             }
         });
@@ -92,6 +94,8 @@ public class DonateOrGetActivity extends AppCompatActivity {
                 i.putExtra("date",date);
                 i.putExtra("Latitude",getIntent().getStringExtra("Latitude"));
                 i.putExtra("Longitude",getIntent().getStringExtra("Longitude"));
+                i.putExtra("locality",getIntent().getStringExtra("locality"));
+                i.putExtra("longAddress",getIntent().getStringExtra("longAddress"));
                 startActivity(i);
             }
         });

@@ -33,7 +33,7 @@ public class confirmation extends AppCompatActivity {
     DatabaseReference reference,refId;
     FirebaseAuth mAuth;
     TextView reqId;
-    String AddressLine,Items,date,mode,Lon,Lat,uniqueID,reqID;
+    String AddressLine,Items,date,mode,Lon,Lat,locality,longAddress,uniqueID,reqID;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,8 +98,10 @@ public class confirmation extends AppCompatActivity {
                 Items = orderModal.getItems();
                 date = orderModal.getDate();
                 mode = orderModal.getPaymentMode();
+                locality = orderModal.getLocality();
+                longAddress = orderModal.getLongAddress();
 
-                addressLine.setText(AddressLine);
+                addressLine.setText(String.format("%s\n%s\n%s", AddressLine, locality, longAddress));
                 paymentMode.setText(mode);
                 expectedDate.setText(date);
                 items.setText(Items);
@@ -122,8 +124,10 @@ public class confirmation extends AppCompatActivity {
         mode = intent.getStringExtra("mode");
         Lon = intent.getStringExtra("Longitude");
         Lat = intent.getStringExtra("Latitude");
+        locality = intent.getStringExtra("locality");
+        longAddress = intent.getStringExtra("longAddress");
 
-        OrderModal order = new OrderModal(Items,AddressLine,date,mode,Lat,Lon);
+        OrderModal order = new OrderModal(Items,AddressLine,date,mode,Lat,Lon,locality,longAddress);
         reference.setValue(order);
 
     }

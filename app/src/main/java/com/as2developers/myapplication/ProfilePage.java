@@ -129,9 +129,6 @@ public class ProfilePage extends AppCompatActivity implements NavigationView.OnN
             case R.id.profile:
                 Toast.makeText(this, "You are already in profile!", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.pickup:
-                Toast.makeText(this, "Opening to a new pickup..", Toast.LENGTH_SHORT).show();
-                break;
             case R.id.howItWorks:
                 startActivity(new Intent(this,HowItWorks.class));
                 break;

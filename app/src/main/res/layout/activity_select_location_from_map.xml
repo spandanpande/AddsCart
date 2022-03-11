@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".SelectLocationFromMap"
     android:id="@+id/drawer_layout"
+    tools:openDrawer="start"
     android:orientation="vertical">
 
     <com.google.android.material.navigation.NavigationView
