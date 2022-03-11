@@ -67,9 +67,6 @@ public class HowItWorks extends AppCompatActivity implements NavigationView.OnNa
                 Intent i = new Intent(getApplicationContext(),ProfilePage.class);
                 startActivity(i);
                 break;
-            case R.id.pickup:
-                Toast.makeText(this, "Opening to a new pickup..", Toast.LENGTH_SHORT).show();
-                break;
             case R.id.howItWorks:
                 Toast.makeText(this, "You are already in!", Toast.LENGTH_SHORT).show();
                 break;

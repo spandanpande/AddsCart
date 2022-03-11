@@ -68,9 +68,6 @@ public class AboutUs extends AppCompatActivity implements NavigationView.OnNavig
             case R.id.profile:
                 startActivity(new Intent(this,ProfilePage.class));
                 break;
-            case R.id.pickup:
-                Toast.makeText(this, "Opening to a new pickup..", Toast.LENGTH_SHORT).show();
-                break;
             case R.id.howItWorks:
                 startActivity(new Intent(this,HowItWorks.class));;
                 break;

@@ -46,7 +46,7 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
     NavigationView navigationView;
     String[] items = {"Paper","Plastic","Metal","E-waste","Iron","Others"};
     HashMap<String,Boolean> map_item;
-    String locationType,AddressLine,Lat,Lon;
+    String locationType,AddressLine,Lat,Lon,longAddress,locality;
     private static final int REQUEST_CALL =1;
 
     @Override
@@ -107,6 +107,8 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
 
         locationType = getIntent().getStringExtra("locationType");
         AddressLine = getIntent().getStringExtra("LocationDetails");
+        longAddress = getIntent().getStringExtra("longAddress");
+        locality = getIntent().getStringExtra("locality");
         Lat = getIntent().getStringExtra("Latitude");
         Lon = getIntent().getStringExtra("Longitude");
         homelocation.setText(locationType);
@@ -142,7 +144,7 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
                     Toast.makeText(FormFillupActivity.this, "Please Selected At least one item!", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    startActivity(new Intent(FormFillupActivity.this, SetDate.class).putExtra("items", s).putExtra("itemCount",Integer.toString(itemcount)).putExtra("AddressLine",AddressLine).putExtra("LocationType",locationType).putExtra("Latitude",Lat).putExtra("Longitude",Lon));
+                    startActivity(new Intent(FormFillupActivity.this, SetDate.class).putExtra("items", s).putExtra("itemCount",Integer.toString(itemcount)).putExtra("AddressLine",AddressLine).putExtra("LocationType",locationType).putExtra("Latitude",Lat).putExtra("Longitude",Lon).putExtra("locality",locality).putExtra("longAddress",longAddress));
                     Toast.makeText(FormFillupActivity.this, s, Toast.LENGTH_SHORT).show();
                 }
             }
@@ -174,9 +176,6 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
         switch (item.getItemId()){
             case R.id.profile:
                 startActivity(new Intent(this,ProfilePage.class));
-                break;
-            case R.id.pickup:
-                Toast.makeText(this, "Opening to a new pickup..", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.howItWorks:
                 startActivity(new Intent(this,HowItWorks.class));;
@@ -220,12 +219,10 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
         if(!map_item.get("Paper")){
             map_item.put("Paper",true);
             fistLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.selected_bg));
-            Toast.makeText(this, "you select paper!", Toast.LENGTH_SHORT).show();
         }
         else{
             map_item.put("Paper",false);
             fistLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.custom_background_white_10r_grey_border));
-            Toast.makeText(this, "you remove paper!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -233,24 +230,20 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
         if(!map_item.get("Plastic")){
             map_item.put("Plastic",true);
             secondLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.selected_bg));
-            Toast.makeText(this, "you select Plastic!", Toast.LENGTH_SHORT).show();
         }
         else{
             map_item.put("Plastic",false);
             secondLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.custom_background_white_10r_grey_border));
-            Toast.makeText(this, "you remove Plastic!", Toast.LENGTH_SHORT).show();
         }
     }
     public void MetalsClick(View view) {
         if(!map_item.get("Metal")){
             map_item.put("Metal",true);
             thirdLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.selected_bg));
-            Toast.makeText(this, "you select Metals!", Toast.LENGTH_SHORT).show();
         }
         else{
             map_item.put("Metal",false);
             thirdLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.custom_background_white_10r_grey_border));
-            Toast.makeText(this, "you remove Metals!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -258,12 +251,10 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
         if(!map_item.get("E-waste")){
             map_item.put("E-waste",true);
             fourthLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.selected_bg));
-            Toast.makeText(this, "you select E-Waste!", Toast.LENGTH_SHORT).show();
         }
         else{
             map_item.put("E-waste",false);
             fourthLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.custom_background_white_10r_grey_border));
-            Toast.makeText(this, "you remove E-Waste!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -271,12 +262,10 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
         if(!map_item.get("Iron")){
             map_item.put("Iron",true);
             fifthLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.selected_bg));
-            Toast.makeText(this, "you select Iron!", Toast.LENGTH_SHORT).show();
         }
         else{
             map_item.put("Iron",false);
             fifthLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.custom_background_white_10r_grey_border));
-            Toast.makeText(this, "you remove Iron!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -284,12 +273,10 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
         if(!map_item.get("Others")){
             map_item.put("Others",true);
             sixthLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.selected_bg));
-            Toast.makeText(this, "you select Others!", Toast.LENGTH_SHORT).show();
         }
         else{
             map_item.put("Others",false);
             sixthLayout.setBackground(ContextCompat.getDrawable(this,R.drawable.custom_background_white_10r_grey_border));
-            Toast.makeText(this, "you remove Others!", Toast.LENGTH_SHORT).show();
         }
     }
 

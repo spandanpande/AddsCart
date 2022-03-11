@@ -47,7 +47,6 @@
         <activity
             android:name=".SelectLocationFromMap"
             android:exported="false"
-            android:windowSoftInputMode="stateAlwaysHidden"
             />
         <activity
             android:name=".FormFillupActivity"
