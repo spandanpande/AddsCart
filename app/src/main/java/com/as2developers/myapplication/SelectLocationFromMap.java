@@ -131,7 +131,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
     //hooks for navigation bar
         drawerLayout =findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
-        TurnOnLocation();
+        //TurnOnLocation();
 
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,R.string.dummy_content,R.string.dummy_content);
@@ -162,11 +162,15 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
         //initialize the fused location
         client = LocationServices.getFusedLocationProviderClient(this);
 
-        //asking the user to turn on the location
-        TurnOnLocation();
 
+//asking the user to turn on the location
+        TurnOnLocation();
+        TurnOnLocation();
         //checking the permissions
         if (ActivityCompat.checkSelfPermission(SelectLocationFromMap.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+
+
+
             //if perm. is granted
             //now calling the method
             getCurrentLocation();
@@ -377,6 +381,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
             switch (resultCode){
                 case Activity.RESULT_OK:
                     Toast.makeText(this, "GPS is turing on..", Toast.LENGTH_SHORT).show();
+                    getCurrentLocation();
                     startActivity(new Intent(this,SelectLocationFromMap.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     finish();
                     break;
