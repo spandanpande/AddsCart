@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,6 +30,7 @@ public class Verify_Number extends AppCompatActivity {
     private String mVerificationId;
     private PinView enterOTP;
     private FirebaseAuth mAuth;
+    TextView mnumberdisplay, medit;
     Button LoginPhone;
 
     @Override
@@ -38,9 +40,21 @@ public class Verify_Number extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         enterOTP = findViewById(R.id.enterOTP);
         LoginPhone = findViewById(R.id.LoginPhone);
+        mnumberdisplay = findViewById(R.id.numberdisplay);
+        medit = findViewById(R.id.edit);
         Intent intent = getIntent();
         String mobile = intent.getStringExtra("mobile");
         sendVerificationCode(mobile);
+
+        mnumberdisplay.setText("+91"+mobile);
+        medit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), Login_Phone.class));
+                finish();
+            }
+        });
+
 
         enterOTP.requestFocus();
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
