@@ -19,17 +19,27 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 
 public class DonateOrGetActivity extends AppCompatActivity {
 
     ImageButton back;
     Button cash,donate;
-    String Name , Address;
+    String Name , Address, AddressLine1,Items,date1,mode,Lon,Lat,locality,longAddress;
     TextView userName,userAddress;
 
-    FirebaseDatabase database;
+    FirebaseDatabase database,fdata;
     DatabaseReference ref;
-    FirebaseAuth mAuth;
+    FirebaseAuth mAuth,fAuth;
+
+//    ArrayList for storing data
+    ArrayList<String> ItemType = new ArrayList<String>();
+    ArrayList<String> FullAddress = new ArrayList<String>();
+    ArrayList<String> Date = new ArrayList<String>();
+    ArrayList<String> PhoneNumber = new ArrayList<String>();
+    ArrayList<String> Latitude = new ArrayList<String>();
+    ArrayList<String> Longitude = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +52,9 @@ public class DonateOrGetActivity extends AppCompatActivity {
         userName = findViewById(R.id.userName);
         userAddress = findViewById(R.id.userAddress);
 
+
+        fAuth = FirebaseAuth.getInstance();
+        fdata = FirebaseDatabase.getInstance();
         database=FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
@@ -53,6 +66,102 @@ public class DonateOrGetActivity extends AppCompatActivity {
                 UserModal user01 = snapshot.getValue(UserModal.class);
                 String username = user01.getName();
                 userName.setText(username);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        DatabaseReference refitems = fdata.getReference("OrderId").child("Items");
+        refitems.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    String data = dataSnapshot.getValue(String.class);
+                    ItemType.add(data);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        DatabaseReference refdate = fdata.getReference("OrderId").child("Date");
+        refdate.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    String data = dataSnapshot.getValue(String.class);
+                    Date.add(data);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        DatabaseReference refnumber = fdata.getReference("OrderId").child("Phone Number");
+        refnumber.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    String data = dataSnapshot.getValue(String.class);
+                    PhoneNumber.add(data);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        DatabaseReference reflat = fdata.getReference("OrderId").child("Latitude");
+        reflat.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    String data = dataSnapshot.getValue(String.class);
+                    Latitude.add(data);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        DatabaseReference reflong = fdata.getReference("OrderId").child("Longitude");
+        reflong.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    String data = dataSnapshot.getValue(String.class);
+                    Longitude.add(data);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        DatabaseReference refadd = fdata.getReference("OrderId").child("Address");
+        refadd.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    String data = dataSnapshot.getValue(String.class);
+                    FullAddress.add(data);
+                }
             }
 
             @Override
@@ -80,7 +189,45 @@ public class DonateOrGetActivity extends AppCompatActivity {
                 i.putExtra("Longitude",getIntent().getStringExtra("Longitude"));
                 i.putExtra("locality",getIntent().getStringExtra("locality"));
                 i.putExtra("longAddress",getIntent().getStringExtra("longAddress"));
-                startActivity(i);
+
+                Intent intent = getIntent();
+                AddressLine1 = intent.getStringExtra("AddressLine");
+                Items = intent.getStringExtra("items");
+                date1 = intent.getStringExtra("date");
+                mode = intent.getStringExtra("mode");
+                Lon = intent.getStringExtra("Longitude");
+                Lat = intent.getStringExtra("Latitude");
+                locality = intent.getStringExtra("locality");
+                longAddress = intent.getStringExtra("longAddress");
+
+                ItemType.add(Items);
+                DatabaseReference refitems2 = fdata.getReference("OrderId").child("Items");
+                refitems2.setValue(ItemType);
+
+                Date.add(date1);
+                DatabaseReference refdate2 = fdata.getReference("OrderId").child("Date");
+                refdate2.setValue(Date);
+
+                FirebaseUser user = mAuth.getCurrentUser();
+                PhoneNumber.add(user.getPhoneNumber());
+                DatabaseReference refnumber2 = fdata.getReference("OrderId").child("Phone Number");
+                refnumber2.setValue(PhoneNumber);
+
+                Latitude.add(Lat);
+                DatabaseReference reflat2 = fdata.getReference("OrderId").child("Latitude");
+                reflat2.setValue(Latitude);
+
+                Longitude.add(Lon);
+                DatabaseReference reflong2 = fdata.getReference("OrderId").child("Longitude");
+                reflong2.setValue(Longitude);
+
+                FullAddress.add(locality+", "+AddressLine1);
+                DatabaseReference refadd2 = fdata.getReference("OrderId").child("Address");
+                refadd2.setValue(FullAddress);
+
+
+                startActivity(i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                finish();
             }
         });
 
@@ -96,7 +243,44 @@ public class DonateOrGetActivity extends AppCompatActivity {
                 i.putExtra("Longitude",getIntent().getStringExtra("Longitude"));
                 i.putExtra("locality",getIntent().getStringExtra("locality"));
                 i.putExtra("longAddress",getIntent().getStringExtra("longAddress"));
-                startActivity(i);
+
+                Intent intent = getIntent();
+                AddressLine1 = intent.getStringExtra("AddressLine");
+                Items = intent.getStringExtra("items");
+                date1 = intent.getStringExtra("date");
+                mode = intent.getStringExtra("mode");
+                Lon = intent.getStringExtra("Longitude");
+                Lat = intent.getStringExtra("Latitude");
+                locality = intent.getStringExtra("locality");
+                longAddress = intent.getStringExtra("longAddress");
+
+                ItemType.add(Items);
+                DatabaseReference refitems2 = fdata.getReference("OrderId").child("Items");
+                refitems2.setValue(ItemType);
+
+                Date.add(date1);
+                DatabaseReference refdate2 = fdata.getReference("OrderId").child("Date");
+                refdate2.setValue(Date);
+
+                FirebaseUser user = mAuth.getCurrentUser();
+                PhoneNumber.add(user.getPhoneNumber());
+                DatabaseReference refnumber2 = fdata.getReference("OrderId").child("Phone Number");
+                refnumber2.setValue(PhoneNumber);
+
+                Latitude.add(Lat);
+                DatabaseReference reflat2 = fdata.getReference("OrderId").child("Latitude");
+                reflat2.setValue(Latitude);
+
+                Longitude.add(Lon);
+                DatabaseReference reflong2 = fdata.getReference("OrderId").child("Longitude");
+                reflong2.setValue(Longitude);
+
+                FullAddress.add(locality+", "+AddressLine1);
+                DatabaseReference refadd2 = fdata.getReference("OrderId").child("Address");
+                refadd2.setValue(FullAddress);
+
+                startActivity(i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                finish();
             }
         });
         back.setOnClickListener(new View.OnClickListener() {
