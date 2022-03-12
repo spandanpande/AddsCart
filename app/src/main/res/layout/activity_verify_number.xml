@@ -8,61 +8,112 @@
     android:padding="26dp"
     tools:context=".Verify_Number">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.025"
-        app:srcCompat="@drawable/logoimg" />
-
-    <TextView
-        android:id="@+id/text1"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        android:fontFamily="@font/montserrat_semibold"
-        android:text="Type your OTP"
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0" />
-
-
-    <com.chaos.view.PinView
-        android:id="@+id/enterOTP"
-        style="@style/PinWidget.PinView"
-        android:layout_width="wrap_content"
-        android:layout_height="45dp"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="@color/black"
-        android:digits="0123456789"
-        android:fontFamily="@font/montserrat_semibold"
-        android:gravity="center_horizontal"
-        android:inputType="phone"
-        android:itemBackground="@color/white"
-        android:textColor="@color/black"
-        app:itemCount="6"
-        app:itemHeight="45dp"
-        app:itemRadius="4.5dp"
-        app:itemSpacing="4.5dp"
-        app:itemWidth="45dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text1"
-        app:layout_constraintVertical_bias="0"
-        app:lineColor="@color/black"
-        app:viewType="rectangle" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:srcCompat="@drawable/logoimg" />
+
+        <TextView
+            android:id="@+id/text1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:text="Type your OTP"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+
+        <com.chaos.view.PinView
+            android:id="@+id/enterOTP"
+            style="@style/PinWidget.PinView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="20dp"
+            android:fitsSystemWindows="true"
+            android:backgroundTint="@color/black"
+            android:digits="0123456789"
+            android:fontFamily="@font/montserrat_semibold"
+            android:inputType="phone"
+            android:itemBackground="@color/white"
+            android:textColor="@color/black"
+            app:itemCount="6"
+            app:itemHeight="50dp"
+            app:itemRadius="5dp"
+            app:itemSpacing="5dp"
+            app:itemWidth="50dp"
+            app:lineColor="@color/black"
+            app:viewType="rectangle" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/text2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif-thin"
+            android:text="OTP has been sent to "
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold|italic" />
+
+        <TextView
+            android:id="@+id/numberdisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif-thin"
+            android:text="Phone Number"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:textStyle="bold|italic" />
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/text3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-thin"
+                android:text="Do you want to change the number? "
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="sans-serif-thin"
+                android:text=" Edit Number"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold|italic" />
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+
 
     <Button
         android:id="@+id/LoginPhone"
