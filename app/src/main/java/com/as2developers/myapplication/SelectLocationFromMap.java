@@ -11,6 +11,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
@@ -114,8 +115,6 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
     Toolbar toolbar;
     TextView WelcomeUser;
     private static final int REQUEST_CALL =1;
-
-
     FirebaseAuth mAuth;
     FirebaseDatabase database;
     DatabaseReference ref;
@@ -162,6 +161,9 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
 
         //initialize the fused location
         client = LocationServices.getFusedLocationProviderClient(this);
+
+        //asking the user to turn on the location
+        TurnOnLocation();
 
         //checking the permissions
         if (ActivityCompat.checkSelfPermission(SelectLocationFromMap.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
@@ -245,6 +247,38 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
     }
 
     private void TurnOnLocation() {
+        locationRequest = LocationRequest.create();
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setInterval(5000);
+        locationRequest.setFastestInterval(2000);
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder().addLocationRequest(locationRequest);
+        builder.setAlwaysShow(true);
+
+        Task<LocationSettingsResponse> result = LocationServices.getSettingsClient(getApplicationContext()).checkLocationSettings(builder.build());
+
+        result.addOnCompleteListener(new OnCompleteListener<LocationSettingsResponse>() {
+            @Override
+            public void onComplete(@NonNull Task<LocationSettingsResponse> task) {
+                try {
+                    LocationSettingsResponse response = task.getResult(ApiException.class);
+                    Toast.makeText(SelectLocationFromMap.this, "Gps is On in your device!", Toast.LENGTH_SHORT).show();
+                } catch (ApiException e) {
+                    switch (e.getStatusCode()){
+                        case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+
+                            try {
+                                ResolvableApiException resolvableApiException = (ResolvableApiException) e;
+                                resolvableApiException.startResolutionForResult(SelectLocationFromMap.this,REQUEST_CHECK_SETTING);
+                            } catch (IntentSender.SendIntentException sendIntentException) {
+                                sendIntentException.printStackTrace();
+                            }
+                            break;
+                        case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+                            break;
+                    }
+                }
+            }
+        });
     }
 
     //for drawable
@@ -339,6 +373,19 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_CHECK_SETTING){
+            switch (resultCode){
+                case Activity.RESULT_OK:
+                    Toast.makeText(this, "GPS is turing on..", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(this,SelectLocationFromMap.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    finish();
+                    break;
+                case Activity.RESULT_CANCELED:
+                    Toast.makeText(this, "GPS have to be turn on..", Toast.LENGTH_SHORT).show();
+                    break;
+            }
+        }
+
         switch (requestCode)
         {
             case place_piker_req_code:
