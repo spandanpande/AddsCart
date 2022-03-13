@@ -93,6 +93,7 @@ public class SetDate extends AppCompatActivity implements NavigationView.OnNavig
 //                        calendar.getT
                         SelectedDateS = (i2) + "-" + (i1) + "-" + (i);
                         selectedDate.setText(SelectedDateS);
+                        System.out.println(SelectedDateS);
 
                     }
                 },year,month,day
@@ -121,8 +122,10 @@ public class SetDate extends AppCompatActivity implements NavigationView.OnNavig
                     String Lon = it.getStringExtra("Longitude");
                     String locality = it.getStringExtra("locality");
                     String longAddress = it.getStringExtra("longAddress");
+                    Intent intent = getIntent();
+                    String mobile = intent.getStringExtra("mobile");
                     startActivity(new Intent(SetDate.this, ConfirmPickupActivity.class).putExtra("date",SelectedDateS).putExtra("items",pv).putExtra("AddressLine",address).putExtra("LocationType",locationType).putExtra("itemCount",itemCount)
-                                    .putExtra("Longitude",Lon).putExtra("Latitude",Lat).putExtra("locality",locality).putExtra("longAddress",longAddress)
+                                    .putExtra("Longitude",Lon).putExtra("Latitude",Lat).putExtra("locality",locality).putExtra("longAddress",longAddress).putExtra("mobile",mobile)
                     );
                 }
             }
@@ -147,7 +150,7 @@ public class SetDate extends AppCompatActivity implements NavigationView.OnNavig
 //        String[] days = new String[] {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday","Sunday"};
 //
 //        String day = days[c.get(Calendar.DAY_OF_WEEK)-1];
-       SelectedDateS = (mDay + 1) + "-" + (mMonth) + "-" + (mYear);
+       SelectedDateS = (mDay + 1) + "-" + (mMonth+1) + "-" + (mYear);
     }
 
 
