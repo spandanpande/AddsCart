@@ -1,25 +1,26 @@
 package com.as2developers.myapplication;
 
-import static com.as2developers.myapplication.R.color.green;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -28,6 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.SleepClassifyEvent;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -38,12 +40,17 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
             fourthLayout, fifthLayout, sixthLayout, btn_Layout;
     TextView pickup_laction, homelocation, homeAddress_text, txt_goodmorning, txt_name,
             paper, paper_price, metal, metal_price, plastic, plastic_price, eWaste, eWsate_price, iron, iron_price, otherItems, otherItems_price;
-    Button btn_continue;
+    Button btn_continue,edt_address;
     MaterialCardView card1, card2, card3, card4, card5, card6;
-    ImageButton ImgBtn;
+    ImageButton ImgBtn,dropdown;
     ImageView paperImage, plastic_image, metal_image, eWaste_image, iron_image, otherItem_image, addNewAddress;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
+    BottomSheetDialog sheetDialog;
+
+
+
+
     String[] items = {"Paper","Plastic","Metal","E-waste","Iron","Others"};
     HashMap<String,Boolean> map_item;
     String locationType,AddressLine,Lat,Lon,longAddress,locality;
@@ -65,6 +72,40 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
         ImgBtn = findViewById(R.id.btn_side_nav);
 
 
+        // editAddress and drop down
+        edt_address=findViewById(R.id.btn_edit_address);
+        dropdown=findViewById(R.id.dropDrown);
+        dropdown.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sheetDialog = new BottomSheetDialog(FormFillupActivity.this,R.style.BottomSheetStyle1);
+
+                view=getLayoutInflater().inflate(R.layout.activity_add_new_address,(LinearLayout)findViewById(R.id.sheet1));
+                LinearLayout LL_homeAddress=sheetDialog.findViewById(R.id.homeAddress);
+                Button addNewAddress=sheetDialog.findViewById(R.id.Add_New_Address);
+                TextView textAddress_type=sheetDialog.findViewById(R.id.txt_Addresstype);
+                TextView textAddress=sheetDialog.findViewById(R.id.txt_Address);
+
+                sheetDialog.setContentView(view);
+                sheetDialog.show();
+
+            }
+        });
+        edt_address.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                sheetDialog = new BottomSheetDialog(FormFillupActivity.this,R.style.BottomSheetStyle1);
+                view=getLayoutInflater().inflate(R.layout.activity_add_new_address,(LinearLayout)findViewById(R.id.sheet1));
+                LinearLayout LL_homeAddress=sheetDialog.findViewById(R.id.homeAddress);
+                Button addNewAddress=sheetDialog.findViewById(R.id.Add_New_Address);
+                TextView textAddress_type=sheetDialog.findViewById(R.id.txt_Addresstype);
+                TextView textAddress=sheetDialog.findViewById(R.id.txt_Address);
+                sheetDialog.setContentView(view);
+                sheetDialog.show();
+
+            }
+        });
+
         // All ImageView
         paperImage = findViewById(R.id.paper_image);
         plastic_image = findViewById(R.id.plastic_image);
@@ -72,6 +113,7 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
         eWaste_image = findViewById(R.id.eWaste_image);
         iron_image = findViewById(R.id.iron_image);
         otherItem_image = findViewById(R.id.otheritems_image);
+
 
 
         // All TextView
@@ -113,6 +155,9 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
         Lon = getIntent().getStringExtra("Longitude");
         homelocation.setText(locationType);
         homeAddress_text.setText(AddressLine);
+
+
+
 
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,R.string.dummy_content,R.string.dummy_content);
@@ -158,7 +203,10 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
             }
         });
 
+
+
     }
+
 
     //also for navigation bar
     @Override

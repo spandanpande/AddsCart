@@ -84,6 +84,7 @@ import java.util.List;
 
 public class SelectLocationFromMap extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+
     //Initializing the variable
     SupportMapFragment supportMapFragment;
     FusedLocationProviderClient client;
@@ -394,7 +395,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
 
     public void Continue(View view) {
         //when someone clicked on the Continue button
-//calling bottomSheetLayout
+        //calling bottomSheetLayout
         sheetDialog = new BottomSheetDialog(SelectLocationFromMap.this,R.style.BottomSheetStyle);
 
         View v = LayoutInflater.from(SelectLocationFromMap.this).inflate(R.layout.location_confirm,(LinearLayout)findViewById(R.id.sheet));
