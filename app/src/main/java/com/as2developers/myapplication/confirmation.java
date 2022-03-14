@@ -54,7 +54,6 @@ public class confirmation extends AppCompatActivity {
         //refId = database.getReference("orderId");
         reference = database.getReference("Orders").child(uniqueID);
 
-
 //        refId.addListenerForSingleValueEvent(new ValueEventListener() {
 //            @Override
 //            public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -73,7 +72,7 @@ public class confirmation extends AppCompatActivity {
 //        });
 
         //reference = database.getReference("Orders").child(reqID);
-        setOrderDataToFirebase();
+//        setOrderDataToFirebase();
 
         showOrderDataFromFirebase();
 
@@ -89,33 +88,6 @@ public class confirmation extends AppCompatActivity {
 
     private void showOrderDataFromFirebase() {
 
-
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                OrderModal orderModal = snapshot.getValue(OrderModal.class);
-                AddressLine = orderModal.getAddress();
-                Items = orderModal.getItems();
-                date = orderModal.getDate();
-                mode = orderModal.getPaymentMode();
-                locality = orderModal.getLocality();
-                longAddress = orderModal.getLongAddress();
-
-                addressLine.setText(String.format("%s\n%s\n%s", AddressLine, locality, longAddress));
-                paymentMode.setText(mode);
-                expectedDate.setText(date);
-                items.setText(Items);
-                reqId.setText(uniqueID);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
-    private void setOrderDataToFirebase() {
         Intent intent = getIntent();
 
         AddressLine = intent.getStringExtra("AddressLine");
@@ -127,10 +99,54 @@ public class confirmation extends AppCompatActivity {
         locality = intent.getStringExtra("locality");
         longAddress = intent.getStringExtra("longAddress");
 
-        OrderModal order = new OrderModal(Items,AddressLine,date,mode,Lat,Lon,locality,longAddress);
-        reference.setValue(order);
 
+        addressLine.setText(String.format("%s\n%s\n%s", AddressLine, locality, longAddress));
+        paymentMode.setText(mode);
+        expectedDate.setText(date);
+        items.setText(Items);
+        reqId.setText(uniqueID);
+
+//        reference.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                OrderModal orderModal = snapshot.getValue(OrderModal.class);
+//                AddressLine = orderModal.getAddress();
+//                Items = orderModal.getItems();
+//                date = orderModal.getDate();
+//                mode = orderModal.getPaymentMode();
+//                locality = orderModal.getLocality();
+//                longAddress = orderModal.getLongAddress();
+//
+//                addressLine.setText(String.format("%s\n%s\n%s", AddressLine, locality, longAddress));
+//                paymentMode.setText(mode);
+//                expectedDate.setText(date);
+//                items.setText(Items);
+//                reqId.setText(uniqueID);
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
     }
+
+//    private void setOrderDataToFirebase() {
+//        Intent intent = getIntent();
+//
+//        AddressLine = intent.getStringExtra("AddressLine");
+//        Items = intent.getStringExtra("items");
+//        date = intent.getStringExtra("date");
+//        mode = intent.getStringExtra("mode");
+//        Lon = intent.getStringExtra("Longitude");
+//        Lat = intent.getStringExtra("Latitude");
+//        locality = intent.getStringExtra("locality");
+//        longAddress = intent.getStringExtra("longAddress");
+//
+//        OrderModal order = new OrderModal(Items,AddressLine,date,mode,Lat,Lon,locality,longAddress);
+//        reference.setValue(order);
+//
+//    }
 
     @Override
     public void onBackPressed() {

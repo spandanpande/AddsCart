@@ -37,10 +37,9 @@
         <com.chaos.view.PinView
             android:id="@+id/enterOTP"
             style="@style/PinWidget.PinView"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:fitsSystemWindows="true"
             android:backgroundTint="@color/black"
             android:digits="0123456789"
             android:fontFamily="@font/montserrat_semibold"
@@ -48,10 +47,8 @@
             android:itemBackground="@color/white"
             android:textColor="@color/black"
             app:itemCount="6"
-            app:itemHeight="50dp"
+            app:itemWidth="45dp"
             app:itemRadius="5dp"
-            app:itemSpacing="5dp"
-            app:itemWidth="50dp"
             app:lineColor="@color/black"
             app:viewType="rectangle" />
 
