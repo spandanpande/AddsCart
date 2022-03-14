@@ -91,7 +91,16 @@ public class SetDate extends AppCompatActivity implements NavigationView.OnNavig
 //                        int x =i2+1;
 //                        String day = days[calendar.get(x)-1];
 //                        calendar.getT
-                        SelectedDateS = (i2) + "-" + (i1) + "-" + (i);
+                        String sd,sm,sy;
+                        sd= String.valueOf(i2);
+                        sm=String.valueOf(i1);
+                        if(i2+1<10){
+                            sd="0"+(i2);
+                        }
+                        if(i1+1<10){
+                            sm="0"+(i1);
+                        }
+                        SelectedDateS = sd + "-" + sm + "-" + (i);
                         selectedDate.setText(SelectedDateS);
                         System.out.println(SelectedDateS);
 
@@ -150,7 +159,16 @@ public class SetDate extends AppCompatActivity implements NavigationView.OnNavig
 //        String[] days = new String[] {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday","Sunday"};
 //
 //        String day = days[c.get(Calendar.DAY_OF_WEEK)-1];
-       SelectedDateS = (mDay + 1) + "-" + (mMonth+1) + "-" + (mYear);
+        String sd,sm,sy;
+        sd= String.valueOf(mDay+1);
+        sm=String.valueOf(mMonth+1);
+        if(mDay+1<10){
+            sd="0"+(mDay+1);
+        }
+        if(mMonth+1<10){
+            sm="0"+(mMonth+1);
+        }
+        SelectedDateS = sd + "-" + sm + "-" + (mYear);
     }
 
 
