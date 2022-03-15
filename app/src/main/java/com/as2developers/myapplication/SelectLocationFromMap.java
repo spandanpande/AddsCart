@@ -22,8 +22,10 @@ import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -118,6 +120,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
     FirebaseAuth mAuth;
     FirebaseDatabase database;
     DatabaseReference ref;
+    private static final int REQUEST_ENABLE_GPS = 516;
 
     //for turing on location
     private LocationRequest locationRequest;
@@ -165,7 +168,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
 
 //asking the user to turn on the location
         TurnOnLocation();
-        TurnOnLocation();
+        //TurnOnLocation();
         //checking the permissions
         if (ActivityCompat.checkSelfPermission(SelectLocationFromMap.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
 
@@ -251,6 +254,12 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
     }
 
     private void TurnOnLocation() {
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        boolean isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        if (!isGpsEnabled) {
+            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+            startActivityForResult(intent, REQUEST_ENABLE_GPS);
+        }
         locationRequest = LocationRequest.create();
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         locationRequest.setInterval(5000);
