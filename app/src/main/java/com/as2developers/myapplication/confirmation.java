@@ -1,7 +1,9 @@
 package com.as2developers.myapplication;
 
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -11,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.android.volley.Request;
 import com.as2developers.myapplication.Modals.OrderModal;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,6 +37,7 @@ public class confirmation extends AppCompatActivity {
     FirebaseAuth mAuth;
     TextView reqId;
     String AddressLine,Items,date,mode,Lon,Lat,locality,longAddress,uniqueID,reqID;
+    LottieAnimationView lottieAnimationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +49,7 @@ public class confirmation extends AppCompatActivity {
         items = findViewById(R.id.list);
         expectedDate = findViewById(R.id.expected_pickup);
         reqId = findViewById(R.id.Request_id);
-
+        lottieAnimationView = (LottieAnimationView) findViewById(R.id.confirmationAnim);
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
@@ -53,6 +57,19 @@ public class confirmation extends AppCompatActivity {
 
         //refId = database.getReference("orderId");
         reference = database.getReference("Orders").child(uniqueID);
+
+
+        //animation code
+        lottieAnimationView.animate().translationX(2000).setDuration(2000).setStartDelay(2900);
+        final MediaPlayer mp = MediaPlayer.create(this, R.raw.confirm_sound);
+        mp.start();
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//
+//            }
+//        },3000);
+
 
 //        refId.addListenerForSingleValueEvent(new ValueEventListener() {
 //            @Override
@@ -84,6 +101,7 @@ public class confirmation extends AppCompatActivity {
                 finish();
             }
         });
+
     }
 
     private void showOrderDataFromFirebase() {
