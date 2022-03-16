@@ -87,6 +87,7 @@ import java.util.List;
 
 public class SelectLocationFromMap extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+
     //Initializing the variable
     SupportMapFragment supportMapFragment;
     FusedLocationProviderClient client;
@@ -166,7 +167,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
         client = LocationServices.getFusedLocationProviderClient(this);
 
 
-//asking the user to turn on the location
+        //asking the user to turn on the location
         TurnOnLocation();
         //TurnOnLocation();
         //checking the permissions
@@ -455,7 +456,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
 
     public void Continue(View view) {
         //when someone clicked on the Continue button
-//calling bottomSheetLayout
+        //calling bottomSheetLayout
         sheetDialog = new BottomSheetDialog(SelectLocationFromMap.this,R.style.BottomSheetStyle);
 
         View v = LayoutInflater.from(SelectLocationFromMap.this).inflate(R.layout.location_confirm,(LinearLayout)findViewById(R.id.sheet));
@@ -478,7 +479,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
         finalLocation = locality+","+name+","+country+","+pin;
         editText.setText(finalLocation);
 
-        sheetDialog.show();
+        //sheetDialog.show();
         addAddressToFirebase(finalLocation);
         Toast.makeText(this,  "lat: "+latS+", lan: "+lonS+" LocationName: "+latLngGlobal, Toast.LENGTH_SHORT).show();
 

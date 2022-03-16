@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".SelectLocationFromMap"
     android:id="@+id/drawer_layout"
-    tools:openDrawer="start"
     android:orientation="vertical">
 
     <com.google.android.material.navigation.NavigationView
@@ -82,19 +81,14 @@
 
             <SearchView
                 android:id="@+id/searchView"
-                style="none"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="1"
-                android:autoSizeTextType="uniform"
                 android:background="@drawable/search_bg"
                 android:elevation="5dp"
                 android:iconifiedByDefault="false"
                 android:queryHint="Search your location.."
-                android:textSize="22sp"
-                android:windowSoftInputMode="stateAlwaysHidden"
-                tools:ignore="Suspicious0dp" />
+                android:textSize="22sp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -103,17 +97,15 @@
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_above="@id/ContinueLayout"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_gravity="center"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="20dp"
-        android:layout_weight="1"
         android:onClick="HomeLocation"
         android:scaleType="fitXY"
-        android:src="@drawable/ic_my_location"
-        tools:ignore="OnClick" />
+        android:src="@drawable/ic_my_location" />
 
     <LinearLayout
         android:id="@+id/ContinueLayout"

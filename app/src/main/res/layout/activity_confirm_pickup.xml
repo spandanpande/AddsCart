@@ -16,9 +16,11 @@
         app:itemTextColor="@color/green"
         app:menu="@menu/main_menu"
         />
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/CL1"
             android:layout_width="match_parent"
@@ -63,14 +65,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:padding="10dp">
 
                 <LinearLayout
                     android:id="@+id/secondlayout"
-                    android:layout_margin="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
                     android:gravity="center_horizontal"
                     android:orientation="horizontal">
 
@@ -79,8 +81,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="-5dp"
-                        android:gravity="center"
                         android:layout_marginBottom="6dp"
+                        android:gravity="center"
                         android:text="__"
                         android:textColor="@color/black" />
 
@@ -109,9 +111,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
                         android:gravity="center"
                         android:text="Pickup Date"
-                        android:layout_weight="1"
                         android:textColor="@color/black"
                         android:textSize="16sp" />
 
@@ -129,9 +131,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
                         android:gravity="center"
                         android:text="Confirm"
-                        android:layout_weight="1"
                         android:textColor="@color/green"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -299,8 +301,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
                     android:layout_marginHorizontal="30dp"
+                    android:layout_marginTop="20dp"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -310,20 +312,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:padding="10dp"
                         android:backgroundTint="@color/black"
                         android:gravity="center"
+                        android:padding="10dp"
                         android:text="Continue"
                         android:textAllCaps="false"
                         android:textColor="@color/white"
-                        android:textSize="18sp"/>
+                        android:textSize="18sp" />
 
 
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
     </RelativeLayout>
-
 
 
 </androidx.drawerlayout.widget.DrawerLayout>
