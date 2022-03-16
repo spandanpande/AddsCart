@@ -46,7 +46,7 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
     ImageView paperImage, plastic_image, metal_image, eWaste_image, iron_image, otherItem_image, addNewAddress;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
-    BottomSheetDialog sheetDialog;
+     Dialog sheetDialog;
 
 
 
@@ -78,14 +78,14 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
         dropdown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sheetDialog = new BottomSheetDialog(FormFillupActivity.this,R.style.BottomSheetStyle1);
+                sheetDialog = new Dialog(FormFillupActivity.this,R.style.BottomSheetStyle1);
 
                 view=getLayoutInflater().inflate(R.layout.activity_add_new_address,(LinearLayout)findViewById(R.id.sheet1));
                 LinearLayout LL_homeAddress=sheetDialog.findViewById(R.id.homeAddress);
                 Button addNewAddress=sheetDialog.findViewById(R.id.Add_New_Address);
                 TextView textAddress_type=sheetDialog.findViewById(R.id.txt_Addresstype);
                 TextView textAddress=sheetDialog.findViewById(R.id.txt_Address);
-
+                sheetDialog.getWindow().setGravity(Gravity.TOP);
                 sheetDialog.setContentView(view);
                 sheetDialog.show();
 
@@ -94,13 +94,14 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
         edt_address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sheetDialog = new BottomSheetDialog(FormFillupActivity.this,R.style.BottomSheetStyle1);
+                sheetDialog = new Dialog(FormFillupActivity.this,R.style.BottomSheetStyle1);
                 view=getLayoutInflater().inflate(R.layout.activity_add_new_address,(LinearLayout)findViewById(R.id.sheet1));
                 LinearLayout LL_homeAddress=sheetDialog.findViewById(R.id.homeAddress);
                 Button addNewAddress=sheetDialog.findViewById(R.id.Add_New_Address);
                 TextView textAddress_type=sheetDialog.findViewById(R.id.txt_Addresstype);
                 TextView textAddress=sheetDialog.findViewById(R.id.txt_Address);
                 sheetDialog.setContentView(view);
+                sheetDialog.getWindow().setGravity(Gravity.TOP);
                 sheetDialog.show();
 
             }
