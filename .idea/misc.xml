@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Ayan/Desktop/AS2DEV/New folder/AddsCart/app/src/main/res/layout/activity_confirmation.xml" value="0.15353260869565216" />
         <entry key="..\:/Users/Ayan/Desktop/AS2DEV/New folder/AddsCart/app/src/main/res/layout/activity_login_phone.xml" value="0.22546296296296298" />
         <entry key="..\:/Users/Ayan/Desktop/AS2DEV/New folder/AddsCart/app/src/main/res/layout/activity_select_location_from_map.xml" value="0.2" />
         <entry key="..\:/Users/Ayan/Desktop/AS2DEV/New folder/AddsCart/app/src/main/res/layout/activity_verify_number.xml" value="0.10998193315266486" />
@@ -17,7 +18,6 @@
         <entry key="..\:/Users/Mayan/AndroidStudioProjects/AddsCart/app/src/main/res/layout/activity_about_us.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/Mayan/AndroidStudioProjects/AddsCart/app/src/main/res/layout/activity_add_new_address.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/Mayan/AndroidStudioProjects/AddsCart/app/src/main/res/layout/activity_confirm_pickup.xml" value="0.14130434782608695" />
-        <entry key="..\:/Users/Mayan/AndroidStudioProjects/AddsCart/app/src/main/res/layout/activity_confirmation.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/Mayan/AndroidStudioProjects/AddsCart/app/src/main/res/layout/activity_donate_or_get.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/Mayan/AndroidStudioProjects/AddsCart/app/src/main/res/layout/activity_form_fillup.xml" value="0.22" />
         <entry key="..\:/Users/Mayan/AndroidStudioProjects/AddsCart/app/src/main/res/layout/activity_how_it_works.xml" value="0.14130434782608695" />
