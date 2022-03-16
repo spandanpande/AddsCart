@@ -15,6 +15,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -568,6 +569,25 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
                 i.putExtra("locality",userLocality);
                 i.putExtra("longAddress",UserAddressLine);
 
+                SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+
+// Creating an Editor object to edit(write to the file)
+                SharedPreferences.Editor myEdit = sharedPreferences.edit();
+
+// Storing the key and its value as the data fetched from edittext
+                myEdit.putString("Latitude", Double.toString(latGlobal));
+                myEdit.putString("Longitude", Double.toString(lonGlobal));
+                myEdit.putString("locationType",radioS);
+                myEdit.putString("LocationDetails",finalLocation);
+                myEdit.putString("pin", pin);
+                myEdit.putString("locality",userLocality);
+                myEdit.putString("longAddress", UserAddressLine);
+
+
+// Once the changes have been made,
+// we need to commit to apply those changes made,
+// otherwise, it will throw an error
+                myEdit.commit();
 
                 //now if location type selected then only go to next activity
                 if(radioS.length()==0){

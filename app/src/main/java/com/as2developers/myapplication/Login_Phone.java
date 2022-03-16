@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -39,11 +40,33 @@ public class Login_Phone extends AppCompatActivity {
         mPhoneNumber.requestFocus();
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
-
+        SharedPreferences sh = getSharedPreferences("MySharedPref", Context.MODE_PRIVATE);
         if (currentUser != null) {
-            Intent intent = new Intent(Login_Phone.this, SelectLocationFromMap.class);
-            startActivity(intent);
-            finish();
+            // The value will be default as empty string because for
+            // the very first time when the app is opened, there is nothing to show
+            String s1 = sh.getString("Latitude", "");
+            String s2 = sh.getString("Longitude", "");
+            String s3 = sh.getString("locationType", "");
+            String s4 = sh.getString("LocationDetails", "");
+            String s5 = sh.getString("pin", "");
+            String s6 = sh.getString("locality", "");
+            String s7 = sh.getString("longAddress", "");
+
+            if(!s1.equals("") && !s2.equals("")){
+                //we have the lat and long
+                startActivity(new Intent(Login_Phone.this, FormFillupActivity.class).putExtra("Latitude",s1)
+                        .putExtra("Longitude",s2)
+                        .putExtra("locationType",s3)
+                        .putExtra("LocationDetails",s4)
+                        .putExtra("pin",s5)
+                        .putExtra("locality",s6)
+                        .putExtra("longAddress",s7));
+                finish();
+            }else {
+                Intent intent = new Intent(Login_Phone.this, SelectLocationFromMap.class);
+                startActivity(intent);
+                finish();
+            }
         } else {
             mgetOTP.setOnClickListener(new View.OnClickListener() {
                 @Override

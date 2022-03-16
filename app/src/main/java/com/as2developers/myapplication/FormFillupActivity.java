@@ -49,7 +49,7 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
     ImageView paperImage, plastic_image, metal_image, eWaste_image, iron_image, otherItem_image, addNewAddress;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
-    BottomSheetDialog sheetDialog;
+    Dialog sheetDialog;
     String[] items = {"Paper", "Plastic", "Metal", "E-waste", "Iron", "Others"};
     HashMap<String, Boolean> map_item;
     String locationType, AddressLine, Lat, Lon, longAddress, locality;
@@ -124,7 +124,7 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
         dropdown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sheetDialog = new BottomSheetDialog(FormFillupActivity.this,R.style.BottomSheetStyle1);
+                sheetDialog = new Dialog(FormFillupActivity.this,R.style.BottomSheetStyle1);
                 View view = LayoutInflater.from(FormFillupActivity.this).inflate(R.layout.activity_add_new_address,(LinearLayout)findViewById(R.id.sheet1));
                 sheetDialog.setContentView(view);
                 TextView locationtype = sheetDialog.findViewById(R.id.txt_Addresstype);
@@ -132,11 +132,13 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
                 Button updateLocation = sheetDialog.findViewById(R.id.Add_New_Address);
                 locationtype.setText(getIntent().getStringExtra("locationType").toString());
                 txt_Address.setText(getIntent().getStringExtra("LocationDetails").toString());
+                sheetDialog.getWindow().setGravity(Gravity.TOP);
                 sheetDialog.show();
                 updateLocation.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        onBackPressed();
+                        startActivity(new Intent(getApplicationContext(),SelectLocationFromMap.class));
+                        finish();
                     }
                 });
 
@@ -316,5 +318,25 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
                 Toast.makeText(this, "Call Permission DENIED", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    public void EditAddress(View view) {
+        sheetDialog = new Dialog(FormFillupActivity.this,R.style.BottomSheetStyle1);
+        View v = LayoutInflater.from(FormFillupActivity.this).inflate(R.layout.activity_add_new_address,(LinearLayout)findViewById(R.id.sheet1));
+        sheetDialog.setContentView(v);
+        TextView locationtype = sheetDialog.findViewById(R.id.txt_Addresstype);
+        TextView txt_Address = sheetDialog.findViewById(R.id.txt_Address);
+        Button updateLocation = sheetDialog.findViewById(R.id.Add_New_Address);
+        locationtype.setText(getIntent().getStringExtra("locationType").toString());
+        txt_Address.setText(getIntent().getStringExtra("LocationDetails").toString());
+        sheetDialog.getWindow().setGravity(Gravity.TOP);
+        sheetDialog.show();
+        updateLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),SelectLocationFromMap.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                finish();
+            }
+        });
     }
 }

@@ -2,6 +2,7 @@ package com.as2developers.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -64,8 +65,8 @@ public class SplashScreen extends AppCompatActivity {
                     finish();
                 }
                 else{
-                    startActivity(new Intent(SplashScreen.this, Login_Phone.class));
-                    finish();
+                        startActivity(new Intent(SplashScreen.this, Login_Phone.class));
+                        finish();
                 }
 
             }

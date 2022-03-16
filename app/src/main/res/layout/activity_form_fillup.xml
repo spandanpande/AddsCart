@@ -551,6 +551,7 @@
                     android:paddingVertical="10dp"
                     android:text="Edit Address"
                     android:textAllCaps="false"
+                    android:onClick="EditAddress"
                     android:textColor="@color/white"
                     android:textSize="18sp" />
 
