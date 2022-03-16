@@ -167,7 +167,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
         client = LocationServices.getFusedLocationProviderClient(this);
 
 
-//asking the user to turn on the location
+        //asking the user to turn on the location
         TurnOnLocation();
         //TurnOnLocation();
         //checking the permissions
@@ -479,7 +479,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
         finalLocation = locality+","+name+","+country+","+pin;
         editText.setText(finalLocation);
 
-        sheetDialog.show();
+        //sheetDialog.show();
         addAddressToFirebase(finalLocation);
         Toast.makeText(this,  "lat: "+latS+", lan: "+lonS+" LocationName: "+latLngGlobal, Toast.LENGTH_SHORT).show();
 

@@ -23,12 +23,12 @@
             />
 
         <ImageButton
-            android:id="@+id/dropDrown"
+            android:id="@+id/dropDrown01"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:background="@color/White"
-            android:src="@drawable/ic_bootom1"></ImageButton>
+            android:src="@drawable/ic_bootom1"/>
     </LinearLayout>
 
 
