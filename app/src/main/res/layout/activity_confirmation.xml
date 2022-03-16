@@ -7,23 +7,6 @@
     tools:context=".confirmation">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/confirmationAnim"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:elevation="5dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:lottie_autoPlay="true"
-            app:lottie_rawRes="@raw/done_anim" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl3"
         android:layout_width="match_parent"
         android:layout_height="95dp"
@@ -63,8 +46,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:paddingVertical="10dp"
-                android:background="@color/gray">
+                android:background="@color/gray"
+                android:paddingVertical="10dp">
 
                 <ImageView
                     android:id="@+id/img5"
@@ -137,7 +120,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="2dp"
                         android:text="Request ID"
-                        android:textAlignment="center"/>
+                        android:textAlignment="center" />
 
                     <TextView
                         android:id="@+id/Request_id"
@@ -145,8 +128,8 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="2dp"
                         android:textAlignment="center"
-                        android:textSize="18sp"
-                        android:textColor="@color/material_on_background_emphasis_high_type" />
+                        android:textColor="@color/material_on_background_emphasis_high_type"
+                        android:textSize="18sp" />
 
                 </LinearLayout>
 
@@ -159,9 +142,9 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rv3"
                 android:layout_marginLeft="15dp"
-                android:paddingLeft="15dp"
                 android:layout_marginEnd="15dp"
-                android:paddingVertical="5dp">
+                android:paddingVertical="5dp"
+                android:paddingLeft="15dp">
 
                 <LinearLayout
                     android:id="@+id/ll1"
@@ -230,21 +213,22 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/img6"
-                    android:layout_marginLeft="15dp"
                     android:layout_centerVertical="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_toRightOf="@+id/img6"
                     android:orientation="vertical">
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Address - Home"/>
+                        android:text="Address - Home" />
+
                     <TextView
                         android:id="@+id/addressLine"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="18sp"
-                        android:textColor="@color/material_on_background_emphasis_high_type"/>
+                        android:textColor="@color/material_on_background_emphasis_high_type"
+                        android:textSize="18sp" />
                 </LinearLayout>
             </RelativeLayout>
 
