@@ -37,7 +37,7 @@ public class confirmation extends AppCompatActivity {
     FirebaseAuth mAuth;
     TextView reqId;
     String AddressLine,Items,date,mode,Lon,Lat,locality,longAddress,uniqueID,reqID;
-    LottieAnimationView lottieAnimationView;
+   // LottieAnimationView lottieAnimationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +49,7 @@ public class confirmation extends AppCompatActivity {
         items = findViewById(R.id.list);
         expectedDate = findViewById(R.id.expected_pickup);
         reqId = findViewById(R.id.Request_id);
-        lottieAnimationView = (LottieAnimationView) findViewById(R.id.confirmationAnim);
+       // lottieAnimationView = (LottieAnimationView) findViewById(R.id.confirmationAnim);
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
@@ -57,18 +57,6 @@ public class confirmation extends AppCompatActivity {
 
         //refId = database.getReference("orderId");
         reference = database.getReference("Orders").child(uniqueID);
-
-
-        //animation code
-        lottieAnimationView.animate().translationX(2000).setDuration(2000).setStartDelay(2900);
-        final MediaPlayer mp = MediaPlayer.create(this, R.raw.confirm_sound);
-        mp.start();
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//
-//            }
-//        },3000);
 
 
 //        refId.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -118,7 +106,7 @@ public class confirmation extends AppCompatActivity {
         longAddress = intent.getStringExtra("longAddress");
 
 
-        addressLine.setText(String.format("%s\n%s\n%s", AddressLine, locality, longAddress));
+        addressLine.setText(String.format("%s\n%s\n%s", AddressLine, locality!=null ? locality: "",longAddress!=null ? longAddress : ""));
         paymentMode.setText(mode);
         expectedDate.setText(date);
         items.setText(Items);

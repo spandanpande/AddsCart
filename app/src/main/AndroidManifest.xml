@@ -14,7 +14,10 @@
         android:label="@string/app_name"
         android:largeHeap="true"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MyApplication1">
+        android:theme="@style/Theme.MyApplication">
+        <activity
+            android:name=".ConfirmAnimationSound"
+            android:exported="false" />
         <activity
             android:name=".HowItWorks"
             android:exported="false" />
@@ -46,10 +49,13 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".SelectLocationFromMap"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name=".FormFillupActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
+
         <activity
             android:name=".SetDate"
             android:exported="false" />

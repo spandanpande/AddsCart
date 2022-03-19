@@ -15,6 +15,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -80,14 +81,25 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionDeniedResponse;
+import com.karumi.dexter.listener.PermissionGrantedResponse;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.single.PermissionListener;
 
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 public class SelectLocationFromMap extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+        //clients accessable point
+        // 15.772946, 74.450248 down || 15.959346, 74.565029 this for up
 
-
+    Double Dlat = 15.772946;
+    Double Dlon = 74.450248;
+    Double Tlat = 15.959346;
+    Double Tlon = 74.565029;
     //Initializing the variable
     SupportMapFragment supportMapFragment;
     FusedLocationProviderClient client;
@@ -132,18 +144,16 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_location_from_map);
-    //hooks for navigation bar
+        //hooks for navigation bar
         drawerLayout =findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
-        //TurnOnLocation();
-
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,R.string.dummy_content,R.string.dummy_content);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         //end
-
+        //uploading req. value to database
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
@@ -167,65 +177,140 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
         client = LocationServices.getFusedLocationProviderClient(this);
 
 
-        //asking the user to turn on the location
-        TurnOnLocation();
-        //TurnOnLocation();
-        //checking the permissions
-        if (ActivityCompat.checkSelfPermission(SelectLocationFromMap.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+        Dexter.withContext(getApplicationContext()).withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+                .withListener(new PermissionListener() {
+                    @Override
+                    public void onPermissionGranted(PermissionGrantedResponse permissionGrantedResponse) {
+                        //asking the user to turn on the location
+                        TurnOnLocation();
+                        //TurnOnLocation();
+                        //checking the permissions
+//                        if (ActivityCompat.checkSelfPermission(SelectLocationFromMap.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                            //if perm. is granted
+                            //now calling the method
+                            getCurrentLocation();
 
+                            //searchview code
+                            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                                @Override
+                                public boolean onQueryTextSubmit(String s) {
+                                    String location = searchView.getQuery().toString();
+                                    List<Address> addressList = null;
+                                    if(location!=null || !location.equals("")){
+                                        Geocoder geocoder = new Geocoder(SelectLocationFromMap.this);
+                                        try {
+                                            addressList = geocoder.getFromLocationName(location,1);
+                                        } catch (IOException e) {
+                                            e.printStackTrace();
+                                        }
+                                        if(addressList.isEmpty()){
+                                            Toast.makeText(SelectLocationFromMap.this, "Can't find this location,search nearby locations!", Toast.LENGTH_SHORT).show();
+                                        }else {
+                                            if(markerGlobal!=null){ //to remove previous location marker
+                                                markerGlobal.remove();
+                                            }
+                                            Address address = addressList.get(0);
+                                            LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                                            markerGlobal = googleMapGlobal.addMarker(new MarkerOptions().position(latLng).title(location));
+                                            optionsGlobal = new MarkerOptions().position(latLng).title(location);
+                                            //googleMapGlobal.addMarker(optionsGlobal).setIcon(BitmapFromVector(getApplicationContext(), R.drawable.ic_location));
+                                            googleMapGlobal.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+                                            //also i have to change the value of lat and lon
+                                            latLngGlobal = latLng;
+                                            latS = Double.toString(address.getLatitude());
+                                            lonS = Double.toString(address.getLongitude());
+                                            latGlobal = address.getLatitude();
+                                            lonGlobal = address.getLongitude();
+                                        }
 
+                                    }
+                                    return false;
+                                }
 
-            //if perm. is granted
-            //now calling the method
-            getCurrentLocation();
+                                @Override
+                                public boolean onQueryTextChange(String s) {
+                                    return false;
+                                }
+                            });
+//                        }else{
+                            //when  permission denied
+                            //again asking for permission
+//                            ActivityCompat.requestPermissions(SelectLocationFromMap.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},44);
+//                        }
+                    }
 
-            //searchview code
-            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String s) {
-                    String location = searchView.getQuery().toString();
-                    List<Address> addressList = null;
-                    if(location!=null || !location.equals("")){
-                        Geocoder geocoder = new Geocoder(SelectLocationFromMap.this);
-                        try {
-                            addressList = geocoder.getFromLocationName(location,1);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        if(addressList.isEmpty()){
-                            Toast.makeText(SelectLocationFromMap.this, "Can't find this location,search nearby locations!", Toast.LENGTH_SHORT).show();
-                        }else {
-                            if(markerGlobal!=null){ //to remove previous location marker
-                                markerGlobal.remove();
-                            }
-                            Address address = addressList.get(0);
-                            LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
-                            markerGlobal = googleMapGlobal.addMarker(new MarkerOptions().position(latLng).title(location));
-                            optionsGlobal = new MarkerOptions().position(latLng).title(location);
-                            //googleMapGlobal.addMarker(optionsGlobal).setIcon(BitmapFromVector(getApplicationContext(), R.drawable.ic_location));
-                            googleMapGlobal.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
-                            //also i have to change the value of lat and lon
-                            latLngGlobal = latLng;
-                            latS = Double.toString(address.getLatitude());
-                            lonS = Double.toString(address.getLongitude());
-                            latGlobal = address.getLatitude();
-                            lonGlobal = address.getLongitude();
-                        }
+                    @Override
+                    public void onPermissionDenied(PermissionDeniedResponse permissionDeniedResponse) {
 
                     }
-                    return false;
-                }
 
-                @Override
-                public boolean onQueryTextChange(String s) {
-                    return false;
-                }
-            });
-        }else{
-            //when  permission denied
-            //again asking for permission
-            ActivityCompat.requestPermissions(SelectLocationFromMap.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},44);
-        }
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(PermissionRequest permissionRequest, PermissionToken permissionToken) {
+                        permissionToken.continuePermissionRequest();
+                    }
+                }).check();
+
+
+
+//        //asking the user to turn on the location
+//        TurnOnLocation();
+//        //TurnOnLocation();
+//        //checking the permissions
+//        if (ActivityCompat.checkSelfPermission(SelectLocationFromMap.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+//
+//
+//
+//            //if perm. is granted
+//            //now calling the method
+//            getCurrentLocation();
+//
+//            //searchview code
+//            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//                @Override
+//                public boolean onQueryTextSubmit(String s) {
+//                    String location = searchView.getQuery().toString();
+//                    List<Address> addressList = null;
+//                    if(location!=null || !location.equals("")){
+//                        Geocoder geocoder = new Geocoder(SelectLocationFromMap.this);
+//                        try {
+//                            addressList = geocoder.getFromLocationName(location,1);
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
+//                        if(addressList.isEmpty()){
+//                            Toast.makeText(SelectLocationFromMap.this, "Can't find this location,search nearby locations!", Toast.LENGTH_SHORT).show();
+//                        }else {
+//                            if(markerGlobal!=null){ //to remove previous location marker
+//                                markerGlobal.remove();
+//                            }
+//                            Address address = addressList.get(0);
+//                            LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+//                            markerGlobal = googleMapGlobal.addMarker(new MarkerOptions().position(latLng).title(location));
+//                            optionsGlobal = new MarkerOptions().position(latLng).title(location);
+//                            //googleMapGlobal.addMarker(optionsGlobal).setIcon(BitmapFromVector(getApplicationContext(), R.drawable.ic_location));
+//                            googleMapGlobal.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+//                            //also i have to change the value of lat and lon
+//                            latLngGlobal = latLng;
+//                            latS = Double.toString(address.getLatitude());
+//                            lonS = Double.toString(address.getLongitude());
+//                            latGlobal = address.getLatitude();
+//                            lonGlobal = address.getLongitude();
+//                        }
+//
+//                    }
+//                    return false;
+//                }
+//
+//                @Override
+//                public boolean onQueryTextChange(String s) {
+//                    return false;
+//                }
+//            });
+//        }else{
+//            //when  permission denied
+//            //again asking for permission
+//            ActivityCompat.requestPermissions(SelectLocationFromMap.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},44);
+//        }
 
 
 
@@ -457,63 +542,64 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
     public void Continue(View view) {
         //when someone clicked on the Continue button
         //calling bottomSheetLayout
-        sheetDialog = new BottomSheetDialog(SelectLocationFromMap.this,R.style.BottomSheetStyle);
+        if(Dlat< latGlobal && latGlobal < Tlat && Dlon < lonGlobal && lonGlobal <Tlon){// if the selected location in our service area then
+            sheetDialog = new BottomSheetDialog(SelectLocationFromMap.this,R.style.BottomSheetStyle);
 
-        View v = LayoutInflater.from(SelectLocationFromMap.this).inflate(R.layout.location_confirm,(LinearLayout)findViewById(R.id.sheet));
-        sheetDialog.setContentView(v);
+            View v = LayoutInflater.from(SelectLocationFromMap.this).inflate(R.layout.location_confirm,(LinearLayout)findViewById(R.id.sheet));
+            sheetDialog.setContentView(v);
 
-        Geocoder geocoder = new Geocoder(this);
-        List<Address> addresses = null;
-        try {
-            addresses = geocoder.getFromLocation(latGlobal,lonGlobal,1);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String country = addresses.get(0).getCountryName();
-        String locality = addresses.get(0).getLocality();
-        String name = addresses.get(0).getAdminArea();
-        String pin = addresses.get(0).getPostalCode();
-        TextInputEditText editText = sheetDialog.findViewById(R.id.yourLocation);
-
-        //to share data to an another activity
-        finalLocation = locality+","+name+","+country+","+pin;
-        editText.setText(finalLocation);
-
-        //sheetDialog.show();
-        addAddressToFirebase(finalLocation);
-        Toast.makeText(this,  "lat: "+latS+", lan: "+lonS+" LocationName: "+latLngGlobal, Toast.LENGTH_SHORT).show();
-
-        uLocality = (TextInputEditText) sheetDialog.findViewById(R.id.UserLocality);
-        uAddressLine = (TextInputEditText) sheetDialog.findViewById(R.id.edtxt_addressLine);
-
-        next = (Button) sheetDialog.findViewById(R.id.nextBtn);
-        radioGroup = (RadioGroup) sheetDialog.findViewById(R.id.radio_Group);
-        sheetDialog.show();
-        radioS ="Home";
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                switch (i){
-                    case R.id.radio_home:
-                        radioS = "Home";
-                        Toast.makeText(SelectLocationFromMap.this, radioS, Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.ratio_office:
-                        radioS = "Office";
-                        Toast.makeText(SelectLocationFromMap.this, radioS, Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.radio_shop:
-                        radioS = "Shop";
-                        Toast.makeText(SelectLocationFromMap.this, radioS, Toast.LENGTH_SHORT).show();
-                        break;
-                    case R.id.radio_outlet:
-                        radioS = "Outlet/Mall";
-                        Toast.makeText(SelectLocationFromMap.this, radioS, Toast.LENGTH_SHORT).show();
-                        break;
-                }
+            Geocoder geocoder = new Geocoder(this);
+            List<Address> addresses = null;
+            try {
+                addresses = geocoder.getFromLocation(latGlobal,lonGlobal,1);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        });
-        //for keyboard shifting
+            String country = addresses.get(0).getCountryName();
+            String locality = addresses.get(0).getLocality();
+            String name = addresses.get(0).getAdminArea();
+            String pin = addresses.get(0).getPostalCode();
+            TextInputEditText editText = sheetDialog.findViewById(R.id.yourLocation);
+
+            //to share data to an another activity
+            finalLocation = locality+","+name+","+country+","+pin;
+            editText.setText(finalLocation);
+
+            //sheetDialog.show();
+            addAddressToFirebase(finalLocation);
+            Toast.makeText(this,  "lat: "+latS+", lan: "+lonS+" LocationName: "+latLngGlobal, Toast.LENGTH_SHORT).show();
+
+            uLocality = (TextInputEditText) sheetDialog.findViewById(R.id.UserLocality);
+            uAddressLine = (TextInputEditText) sheetDialog.findViewById(R.id.edtxt_addressLine);
+
+            next = (Button) sheetDialog.findViewById(R.id.nextBtn);
+            radioGroup = (RadioGroup) sheetDialog.findViewById(R.id.radio_Group);
+            sheetDialog.show();
+            radioS ="Home";
+            radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                    switch (i){
+                        case R.id.radio_home:
+                            radioS = "Home";
+                            Toast.makeText(SelectLocationFromMap.this, radioS, Toast.LENGTH_SHORT).show();
+                            break;
+                        case R.id.ratio_office:
+                            radioS = "Office";
+                            Toast.makeText(SelectLocationFromMap.this, radioS, Toast.LENGTH_SHORT).show();
+                            break;
+                        case R.id.radio_shop:
+                            radioS = "Shop";
+                            Toast.makeText(SelectLocationFromMap.this, radioS, Toast.LENGTH_SHORT).show();
+                            break;
+                        case R.id.radio_outlet:
+                            radioS = "Outlet/Mall";
+                            Toast.makeText(SelectLocationFromMap.this, radioS, Toast.LENGTH_SHORT).show();
+                            break;
+                    }
+                }
+            });
+            //for keyboard shifting
 //        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 //        showKeyboard(uLocality);
 //        showKeyboard(uAddressLine);
@@ -532,8 +618,8 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
 //            return false;
 //            }
 //        });
-        userLocality = uLocality.getText().toString();
-        UserAddressLine = uAddressLine.getText().toString();
+            userLocality = uLocality.getText().toString();
+            UserAddressLine = uAddressLine.getText().toString();
 
 //        uAddressLine.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 //            @Override
@@ -549,36 +635,58 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
 //                return false;
 //            }
 //        });
-        //after clicking next button
-        next = (Button) sheetDialog.findViewById(R.id.nextBtn);
-        next.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(SelectLocationFromMap.this,FormFillupActivity.class);
-                //passing the value
-                //getting some value
-                userLocality = uLocality.getText().toString();
-                UserAddressLine = uAddressLine.getText().toString();
-                finalLocation = editText.getText().toString();
-                i.putExtra("Latitude",Double.toString(latGlobal));
-                i.putExtra("Longitude",Double.toString(lonGlobal));
-                i.putExtra("locationType",radioS);
-                i.putExtra("LocationDetails",finalLocation);
-                i.putExtra("pin",pin);
-                i.putExtra("locality",userLocality);
-                i.putExtra("longAddress",UserAddressLine);
+            //after clicking next button
+            next = (Button) sheetDialog.findViewById(R.id.nextBtn);
+            next.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(SelectLocationFromMap.this,FormFillupActivity.class);
+                    //passing the value
+                    //getting some value
+                    userLocality = uLocality.getText().toString();
+                    UserAddressLine = uAddressLine.getText().toString();
+                    finalLocation = editText.getText().toString();
+                    i.putExtra("Latitude",Double.toString(latGlobal));
+                    i.putExtra("Longitude",Double.toString(lonGlobal));
+                    i.putExtra("locationType",radioS);
+                    i.putExtra("LocationDetails",finalLocation);
+                    i.putExtra("pin",pin);
+                    i.putExtra("locality",userLocality);
+                    i.putExtra("longAddress",UserAddressLine);
+
+                    SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+
+// Creating an Editor object to edit(write to the file)
+                    SharedPreferences.Editor myEdit = sharedPreferences.edit();
+
+// Storing the key and its value as the data fetched from edittext
+                    myEdit.putString("Latitude", Double.toString(latGlobal));
+                    myEdit.putString("Longitude", Double.toString(lonGlobal));
+                    myEdit.putString("locationType",radioS);
+                    myEdit.putString("LocationDetails",finalLocation);
+                    myEdit.putString("pin", pin);
+                    myEdit.putString("locality",userLocality);
+                    myEdit.putString("longAddress", UserAddressLine);
 
 
-                //now if location type selected then only go to next activity
-                if(radioS.length()==0){
-                    Toast.makeText(SelectLocationFromMap.this, "Please Select A location type.eg: home", Toast.LENGTH_SHORT).show();
-                }else{
-                    startActivity(i);
-                    Toast.makeText(SelectLocationFromMap.this, radioS, Toast.LENGTH_SHORT).show();
+// Once the changes have been made,
+// we need to commit to apply those changes made,
+// otherwise, it will throw an error
+                    myEdit.commit();
+
+                    //now if location type selected then only go to next activity
+                    if(radioS.length()==0){
+                        Toast.makeText(SelectLocationFromMap.this, "Please Select A location type.eg: home", Toast.LENGTH_SHORT).show();
+                    }else{
+                        startActivity(i);
+                        Toast.makeText(SelectLocationFromMap.this, radioS, Toast.LENGTH_SHORT).show();
+                    }
+
                 }
-
-            }
-        });
+            });
+        }else{
+            Toast.makeText(this, "Sorry!Currently our services are not aval. in this area!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void addAddressToFirebase(String finalLocation) {

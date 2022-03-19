@@ -27,7 +27,7 @@ public class Impact extends AppCompatActivity {
         proceed.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(Impact.this, confirmation.class);
+                Intent i = new Intent(Impact.this, ConfirmAnimationSound.class);
                 i.putExtra("mode","Donated to NGO");
                 i.putExtra("AddressLine",AddressLine);
                 i.putExtra("items",Items);

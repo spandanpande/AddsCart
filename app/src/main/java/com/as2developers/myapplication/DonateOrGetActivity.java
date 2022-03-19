@@ -180,7 +180,7 @@ public class DonateOrGetActivity extends AppCompatActivity {
         cash.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(DonateOrGetActivity.this,confirmation.class);
+                Intent i = new Intent(DonateOrGetActivity.this,ConfirmAnimationSound.class);
                 i.putExtra("mode","cash");
                 i.putExtra("AddressLine",AddressLine);
                 i.putExtra("items",ScrapItem);
