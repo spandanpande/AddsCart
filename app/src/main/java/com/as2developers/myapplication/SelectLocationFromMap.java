@@ -391,6 +391,89 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
         }
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (googleMapGlobal != null) {
+            googleMapGlobal.clear();
+
+            // add the markers just like how you did the first time
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
+            @SuppressLint("MissingPermission") Task<Location> task = client.getLastLocation();
+            task.addOnSuccessListener(new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                    //when success
+
+                    if(location!=null){
+                        //sync map
+                        supportMapFragment.getMapAsync(new OnMapReadyCallback() {
+                            //added after
+                            @Override
+                            public void onMapReady(@NonNull GoogleMap googleMap) {
+
+                                //All things are ready here to show the maps
+                                googleMapGlobal = googleMap; // puting this in global
+
+                                //Initialize lat lng
+                                LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
+
+                                //making home location global
+                                home = latLng;
+                                latLngGlobal = home;
+                                latGlobal = location.getLatitude();
+                                lonGlobal = location.getLongitude();
+
+                                homeLat = latGlobal;
+                                homeLon = lonGlobal;
+
+
+                                //creating marker options
+                                MarkerOptions options = new MarkerOptions().position(latLng).title("You are here!");
+                                //  optionsGlobal = options;
+                                //now zoom into the map
+                                googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,17)); //   <<---here we can change the ZOOM ratio..
+                                //adding marker on map
+                                googleMap.addMarker(options).setIcon(BitmapFromVector(getApplicationContext(), R.drawable.ic_location));
+                                googleMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+
+
+                                //making the data global to share in there activity
+                                latS = Double.toString(location.getLatitude());
+                                lonS = Double.toString(location.getLongitude());
+
+
+                                //when some one click on the search place options
+                                //places.initialize places
+
+                                fields = Arrays.asList(Place.Field.ID,Place.Field.NAME,Place.Field.LAT_LNG);
+
+                                Places.initialize(getApplicationContext(),"AIzaSyBCE8DVjURtaJp1rpbigQZD7Io-FZSmQIE"); //we have to put place api key here
+                                //create a new place cline instance
+                                PlacesClient placesClient = Places.createClient(getApplicationContext());
+                                //System.out.println(homeLat+" "+homeLon);
+                            }
+
+                        });
+                    }
+                }
+            });
+        }
+        Toast.makeText(this, "We came back with.."+latS, Toast.LENGTH_SHORT).show();
+    }
+
     //for location
     private void getCurrentLocation() {
         //initialize task location
@@ -434,6 +517,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
                             homeLat = latGlobal;
                             homeLon = lonGlobal;
 
+
                             //creating marker options
                             MarkerOptions options = new MarkerOptions().position(latLng).title("You are here!");
                             //  optionsGlobal = options;
@@ -457,7 +541,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
                             Places.initialize(getApplicationContext(),"AIzaSyBCE8DVjURtaJp1rpbigQZD7Io-FZSmQIE"); //we have to put place api key here
                             //create a new place cline instance
                             PlacesClient placesClient = Places.createClient(getApplicationContext());
-
+                            System.out.println(homeLat+" "+homeLon);
                         }
 
                     });
@@ -530,7 +614,6 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
         latLngGlobal = home;
         googleMapGlobal.animateCamera(CameraUpdateFactory.newLatLngZoom(home,17));
         if(markerGlobal!=null) markerGlobal.remove();
-
         latGlobal = homeLat;
         lonGlobal = homeLon;
 
@@ -774,4 +857,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
             startActivity(intent);
         }
     }
+
+
+
 }
