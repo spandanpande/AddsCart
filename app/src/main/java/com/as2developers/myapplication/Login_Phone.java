@@ -52,7 +52,7 @@ public class Login_Phone extends AppCompatActivity {
             String s6 = sh.getString("locality", "");
             String s7 = sh.getString("longAddress", "");
 
-            if(!s1.equals("") && !s2.equals("")){
+            if( s1 != null && s2 != null){
                 //we have the lat and long
                 startActivity(new Intent(Login_Phone.this, FormFillupActivity.class).putExtra("Latitude",s1)
                         .putExtra("Longitude",s2)

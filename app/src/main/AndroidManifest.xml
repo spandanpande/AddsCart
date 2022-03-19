@@ -49,10 +49,13 @@
             android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".SelectLocationFromMap"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
         <activity
             android:name=".FormFillupActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="stateAlwaysHidden"/>
+
         <activity
             android:name=".SetDate"
             android:exported="false" />
