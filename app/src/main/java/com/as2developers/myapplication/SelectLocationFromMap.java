@@ -93,8 +93,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class SelectLocationFromMap extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-        //clients accessable point
-        // 15.772946, 74.450248 down || 15.959346, 74.565029 this for up
+    //clients accessable point
+    // 15.772946, 74.450248 down || 15.959346, 74.565029 this for up
 
     Double Dlat = 15.772946;
     Double Dlon = 74.450248;
@@ -103,7 +103,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
     //Initializing the variable
     SupportMapFragment supportMapFragment;
     FusedLocationProviderClient client;
-    String latS,lonS;
+    String latS, lonS;
     ImageView searchBtn;
     SearchView searchView;
     LatLng home;
@@ -113,31 +113,32 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
     LatLng latLngGlobal;
     GoogleMap googleMapGlobal;
     private Marker markerGlobal;
-    private Double homeLat,homeLon;
-    String  myLocationName;
+    private Double homeLat, homeLon;
+    String myLocationName;
     BottomSheetDialog sheetDialog;
-    Double latGlobal,lonGlobal;
+    Double latGlobal, lonGlobal;
     MarkerOptions optionsGlobal;
     RadioGroup radioGroup;
     String radioValue;
     Button next;
-    String radioS,finalLocation,userLocality,UserAddressLine;
-    TextInputEditText uLocality,uAddressLine;
+    String radioS, finalLocation, userLocality, UserAddressLine;
+    TextInputEditText uLocality, uAddressLine;
     ImageButton ImgBtn;
     //for slide navigation bar
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
-    TextView WelcomeUser;
-    private static final int REQUEST_CALL =1;
+    TextView WelcomeUser, txt_houseNo;
+    private static final int REQUEST_CALL = 1;
     FirebaseAuth mAuth;
     FirebaseDatabase database;
     DatabaseReference ref;
+    boolean checkPermission = false;
     private static final int REQUEST_ENABLE_GPS = 516;
 
     //for turing on location
     private LocationRequest locationRequest;
-    public static  final int REQUEST_CHECK_SETTING = 1001;
+    public static final int REQUEST_CHECK_SETTING = 1001;
 
 
     @Override
@@ -145,10 +146,10 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_location_from_map);
         //hooks for navigation bar
-        drawerLayout =findViewById(R.id.drawer_layout);
+        drawerLayout = findViewById(R.id.drawer_layout);
         navigationView = findViewById(R.id.nav_view);
         navigationView.bringToFront();
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,R.string.dummy_content,R.string.dummy_content);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.dummy_content, R.string.dummy_content);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
@@ -157,26 +158,24 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
         database = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
-        if (user!=null){
+        if (user != null) {
             ref = database.getReference("Users").child(user.getPhoneNumber());
         }
 
         //to be done...
 
-        searchBtn = (ImageView)findViewById(R.id.searchBtn);
-        searchView = (SearchView)findViewById(R.id.searchView);
+        searchBtn = (ImageView) findViewById(R.id.searchBtn);
+        searchView = (SearchView) findViewById(R.id.searchView);
         ImgBtn = findViewById(R.id.Img);
 
         //if location is turn off the turn it on
-        searchView.clearFocus();
-        searchView.setFocusable(false);
+//        searchView.clearFocus();
+//        searchView.setFocusable(false);
         //noe assigning the variable
         supportMapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.google_map);
 
         //initialize the fused location
         client = LocationServices.getFusedLocationProviderClient(this);
-
-
         Dexter.withContext(getApplicationContext()).withPermission(Manifest.permission.ACCESS_FINE_LOCATION)
                 .withListener(new PermissionListener() {
                     @Override
@@ -186,55 +185,55 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
                         //TurnOnLocation();
                         //checking the permissions
 //                        if (ActivityCompat.checkSelfPermission(SelectLocationFromMap.this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                            //if perm. is granted
-                            //now calling the method
-                            getCurrentLocation();
+                        //if perm. is granted
+                        //now calling the method
+                        getCurrentLocation();
 
-                            //searchview code
-                            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                                @Override
-                                public boolean onQueryTextSubmit(String s) {
-                                    String location = searchView.getQuery().toString();
-                                    List<Address> addressList = null;
-                                    if(location!=null || !location.equals("")){
-                                        Geocoder geocoder = new Geocoder(SelectLocationFromMap.this);
-                                        try {
-                                            addressList = geocoder.getFromLocationName(location,1);
-                                        } catch (IOException e) {
-                                            e.printStackTrace();
-                                        }
-                                        if(addressList.isEmpty()){
-                                            Toast.makeText(SelectLocationFromMap.this, "Can't find this location,search nearby locations!", Toast.LENGTH_SHORT).show();
-                                        }else {
-                                            if(markerGlobal!=null){ //to remove previous location marker
-                                                markerGlobal.remove();
-                                            }
-                                            Address address = addressList.get(0);
-                                            LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
-                                            markerGlobal = googleMapGlobal.addMarker(new MarkerOptions().position(latLng).title(location));
-                                            optionsGlobal = new MarkerOptions().position(latLng).title(location);
-                                            //googleMapGlobal.addMarker(optionsGlobal).setIcon(BitmapFromVector(getApplicationContext(), R.drawable.ic_location));
-                                            googleMapGlobal.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
-                                            //also i have to change the value of lat and lon
-                                            latLngGlobal = latLng;
-                                            latS = Double.toString(address.getLatitude());
-                                            lonS = Double.toString(address.getLongitude());
-                                            latGlobal = address.getLatitude();
-                                            lonGlobal = address.getLongitude();
-                                        }
-
+                        //searchview code
+                        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                            @Override
+                            public boolean onQueryTextSubmit(String s) {
+                                String location = searchView.getQuery().toString();
+                                List<Address> addressList = null;
+                                if (location != null || !location.equals("")) {
+                                    Geocoder geocoder = new Geocoder(SelectLocationFromMap.this);
+                                    try {
+                                        addressList = geocoder.getFromLocationName(location, 1);
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
                                     }
-                                    return false;
-                                }
+                                    if (addressList.isEmpty()) {
+                                        Toast.makeText(SelectLocationFromMap.this, "Can't find this location,search nearby locations!", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        if (markerGlobal != null) { //to remove previous location marker
+                                            markerGlobal.remove();
+                                        }
+                                        Address address = addressList.get(0);
+                                        LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                                        markerGlobal = googleMapGlobal.addMarker(new MarkerOptions().position(latLng).title(location));
+                                        optionsGlobal = new MarkerOptions().position(latLng).title(location);
+                                        //googleMapGlobal.addMarker(optionsGlobal).setIcon(BitmapFromVector(getApplicationContext(), R.drawable.ic_location));
+                                        googleMapGlobal.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 15));
+                                        //also i have to change the value of lat and lon
+                                        latLngGlobal = latLng;
+                                        latS = Double.toString(address.getLatitude());
+                                        lonS = Double.toString(address.getLongitude());
+                                        latGlobal = address.getLatitude();
+                                        lonGlobal = address.getLongitude();
+                                    }
 
-                                @Override
-                                public boolean onQueryTextChange(String s) {
-                                    return false;
                                 }
-                            });
+                                return false;
+                            }
+
+                            @Override
+                            public boolean onQueryTextChange(String s) {
+                                return false;
+                            }
+                        });
 //                        }else{
-                            //when  permission denied
-                            //again asking for permission
+                        //when  permission denied
+                        //again asking for permission
 //                            ActivityCompat.requestPermissions(SelectLocationFromMap.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},44);
 //                        }
                     }
@@ -249,7 +248,6 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
                         permissionToken.continuePermissionRequest();
                     }
                 }).check();
-
 
 
 //        //asking the user to turn on the location
@@ -313,7 +311,6 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
 //        }
 
 
-
         ImgBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -362,12 +359,12 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
                     LocationSettingsResponse response = task.getResult(ApiException.class);
                     Toast.makeText(SelectLocationFromMap.this, "Gps is On in your device!", Toast.LENGTH_SHORT).show();
                 } catch (ApiException e) {
-                    switch (e.getStatusCode()){
+                    switch (e.getStatusCode()) {
                         case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
 
                             try {
                                 ResolvableApiException resolvableApiException = (ResolvableApiException) e;
-                                resolvableApiException.startResolutionForResult(SelectLocationFromMap.this,REQUEST_CHECK_SETTING);
+                                resolvableApiException.startResolutionForResult(SelectLocationFromMap.this, REQUEST_CHECK_SETTING);
                             } catch (IntentSender.SendIntentException sendIntentException) {
                                 sendIntentException.printStackTrace();
                             }
@@ -383,10 +380,9 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
     //for drawable
     @Override
     public void onBackPressed() {
-        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
-        }
-        else{
+        } else {
             super.onBackPressed();
         }
     }
@@ -412,7 +408,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
             public void onSuccess(Location location) {
                 //when success
 
-                if(location!=null){
+                if (location != null) {
                     //sync map
                     supportMapFragment.getMapAsync(new OnMapReadyCallback() {
                         //added after
@@ -423,7 +419,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
                             googleMapGlobal = googleMap; // puting this in global
 
                             //Initialize lat lng
-                            LatLng latLng = new LatLng(location.getLatitude(),location.getLongitude());
+                            LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
 
                             //making home location global
                             home = latLng;
@@ -438,7 +434,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
                             MarkerOptions options = new MarkerOptions().position(latLng).title("You are here!");
                             //  optionsGlobal = options;
                             //now zoom into the map
-                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng,17)); //   <<---here we can change the ZOOM ratio..
+                            googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17)); //   <<---here we can change the ZOOM ratio..
                             //adding marker on map
                             googleMap.addMarker(options).setIcon(BitmapFromVector(getApplicationContext(), R.drawable.ic_location));
                             googleMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
@@ -447,14 +443,15 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
                             //making the data global to share in there activity
                             latS = Double.toString(location.getLatitude());
                             lonS = Double.toString(location.getLongitude());
+                            Toast.makeText(SelectLocationFromMap.this, "Lat:" + latS + " Lon: " + lonS, Toast.LENGTH_SHORT).show();
 
 
                             //when some one click on the search place options
                             //places.initialize places
 
-                            fields = Arrays.asList(Place.Field.ID,Place.Field.NAME,Place.Field.LAT_LNG);
+                            fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG);
 
-                            Places.initialize(getApplicationContext(),"AIzaSyBCE8DVjURtaJp1rpbigQZD7Io-FZSmQIE"); //we have to put place api key here
+                            Places.initialize(getApplicationContext(), "AIzaSyBCE8DVjURtaJp1rpbigQZD7Io-FZSmQIE"); //we have to put place api key here
                             //create a new place cline instance
                             PlacesClient placesClient = Places.createClient(getApplicationContext());
 
@@ -472,12 +469,12 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == REQUEST_CHECK_SETTING){
-            switch (resultCode){
+        if (requestCode == REQUEST_CHECK_SETTING) {
+            switch (resultCode) {
                 case Activity.RESULT_OK:
-                    Toast.makeText(this, "GPS is turing on..", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "GPS is turning on..", Toast.LENGTH_SHORT).show();
                     getCurrentLocation();
-                    startActivity(new Intent(this,SelectLocationFromMap.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    startActivity(new Intent(this, SelectLocationFromMap.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     finish();
                     break;
                 case Activity.RESULT_CANCELED:
@@ -486,8 +483,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
             }
         }
 
-        switch (requestCode)
-        {
+        switch (requestCode) {
             case place_piker_req_code:
                 Place place = Autocomplete.getPlaceFromIntent(data);
                 LocationName = place.getName();
@@ -495,7 +491,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
                 MarkerOptions options = new MarkerOptions().position(latLngGlobal).title(LocationName);
                 googleMapGlobal.moveCamera(CameraUpdateFactory.newLatLng(latLngGlobal));
                 //now zoom into the map
-                googleMapGlobal.animateCamera(CameraUpdateFactory.newLatLngZoom(latLngGlobal,17)); //   <<---here we can change the ZOOM ratio..
+                googleMapGlobal.animateCamera(CameraUpdateFactory.newLatLngZoom(latLngGlobal, 17)); //   <<---here we can change the ZOOM ratio..
 
                 //adding marker on map
                 googleMapGlobal.addMarker(options).setIcon(BitmapFromVector(getApplicationContext(), R.drawable.ic_location));
@@ -507,19 +503,19 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
     @SuppressLint("MissingSuperCall")
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if(requestCode==44){
-            if(grantResults.length > 0  && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+        if (requestCode == 44) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 //when permission granted call method
                 getCurrentLocation();
-            }else{
+            } else {
                 Toast.makeText(this, "Location Permission DENIED", Toast.LENGTH_SHORT).show();
             }
         }
-        if(requestCode==REQUEST_CALL){
-            if(grantResults.length > 0  && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+        if (requestCode == REQUEST_CALL) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 //when permission granted call method
                 makePhoneCall();
-            }else{
+            } else {
                 Toast.makeText(this, "Call Permission DENIED", Toast.LENGTH_SHORT).show();
             }
         }
@@ -527,9 +523,10 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
 
     public void HomeLocation(View view) {
         //if someone click on the search button
+        //getCurrentLocation();
         latLngGlobal = home;
-        googleMapGlobal.animateCamera(CameraUpdateFactory.newLatLngZoom(home,17));
-        if(markerGlobal!=null) markerGlobal.remove();
+        googleMapGlobal.animateCamera(CameraUpdateFactory.newLatLngZoom(home, 17));
+        if (markerGlobal != null) markerGlobal.remove();
 
         latGlobal = homeLat;
         lonGlobal = homeLon;
@@ -542,16 +539,16 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
     public void Continue(View view) {
         //when someone clicked on the Continue button
         //calling bottomSheetLayout
-        if(Dlat< latGlobal && latGlobal < Tlat && Dlon < lonGlobal && lonGlobal <Tlon){// if the selected location in our service area then
-            sheetDialog = new BottomSheetDialog(SelectLocationFromMap.this,R.style.BottomSheetStyle);
+        if (Dlat < latGlobal && latGlobal < Tlat && Dlon < lonGlobal && lonGlobal < Tlon) {// if the selected location in our service area then
+            sheetDialog = new BottomSheetDialog(SelectLocationFromMap.this, R.style.BottomSheetStyle);
 
-            View v = LayoutInflater.from(SelectLocationFromMap.this).inflate(R.layout.location_confirm,(LinearLayout)findViewById(R.id.sheet));
+            View v = LayoutInflater.from(SelectLocationFromMap.this).inflate(R.layout.location_confirm, (LinearLayout) findViewById(R.id.sheet));
             sheetDialog.setContentView(v);
 
             Geocoder geocoder = new Geocoder(this);
             List<Address> addresses = null;
             try {
-                addresses = geocoder.getFromLocation(latGlobal,lonGlobal,1);
+                addresses = geocoder.getFromLocation(latGlobal, lonGlobal, 1);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -562,12 +559,12 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
             TextInputEditText editText = sheetDialog.findViewById(R.id.yourLocation);
 
             //to share data to an another activity
-            finalLocation = locality+","+name+","+country+","+pin;
+            finalLocation = locality + "," + name + "," + country + "," + pin;
             editText.setText(finalLocation);
 
             //sheetDialog.show();
             addAddressToFirebase(finalLocation);
-            Toast.makeText(this,  "lat: "+latS+", lan: "+lonS+" LocationName: "+latLngGlobal, Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "lat: " + latS + ", lan: " + lonS + " LocationName: " + latLngGlobal, Toast.LENGTH_SHORT).show();
 
             uLocality = (TextInputEditText) sheetDialog.findViewById(R.id.UserLocality);
             uAddressLine = (TextInputEditText) sheetDialog.findViewById(R.id.edtxt_addressLine);
@@ -575,11 +572,11 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
             next = (Button) sheetDialog.findViewById(R.id.nextBtn);
             radioGroup = (RadioGroup) sheetDialog.findViewById(R.id.radio_Group);
             sheetDialog.show();
-            radioS ="Home";
+            radioS = "Home";
             radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                    switch (i){
+                    switch (i) {
                         case R.id.radio_home:
                             radioS = "Home";
                             Toast.makeText(SelectLocationFromMap.this, radioS, Toast.LENGTH_SHORT).show();
@@ -640,21 +637,26 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
             next.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent i = new Intent(SelectLocationFromMap.this,FormFillupActivity.class);
-                    //passing the value
-                    //getting some value
                     userLocality = uLocality.getText().toString();
                     UserAddressLine = uAddressLine.getText().toString();
                     finalLocation = editText.getText().toString();
-                    i.putExtra("Latitude",Double.toString(latGlobal));
-                    i.putExtra("Longitude",Double.toString(lonGlobal));
-                    i.putExtra("locationType",radioS);
-                    i.putExtra("LocationDetails",finalLocation);
-                    i.putExtra("pin",pin);
-                    i.putExtra("locality",userLocality);
-                    i.putExtra("longAddress",UserAddressLine);
+                    if (UserAddressLine.isEmpty()) {
+                        Toast.makeText(SelectLocationFromMap.this, "Enter House No.", Toast.LENGTH_SHORT).show();
+                        uAddressLine.setError("Field can't be empty!!");
+                        return;
+                    }
+                    Intent i = new Intent(SelectLocationFromMap.this, FormFillupActivity.class);
+                    //passing the value
+                    //getting some value
+                    i.putExtra("Latitude", Double.toString(latGlobal));
+                    i.putExtra("Longitude", Double.toString(lonGlobal));
+                    i.putExtra("locationType", radioS);
+                    i.putExtra("LocationDetails", finalLocation);
+                    i.putExtra("pin", pin);
+                    i.putExtra("locality", userLocality);
+                    i.putExtra("longAddress", UserAddressLine);
 
-                    SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+                    SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref", MODE_PRIVATE);
 
 // Creating an Editor object to edit(write to the file)
                     SharedPreferences.Editor myEdit = sharedPreferences.edit();
@@ -662,10 +664,10 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
 // Storing the key and its value as the data fetched from edittext
                     myEdit.putString("Latitude", Double.toString(latGlobal));
                     myEdit.putString("Longitude", Double.toString(lonGlobal));
-                    myEdit.putString("locationType",radioS);
-                    myEdit.putString("LocationDetails",finalLocation);
+                    myEdit.putString("locationType", radioS);
+                    myEdit.putString("LocationDetails", finalLocation);
                     myEdit.putString("pin", pin);
-                    myEdit.putString("locality",userLocality);
+                    myEdit.putString("locality", userLocality);
                     myEdit.putString("longAddress", UserAddressLine);
 
 
@@ -675,16 +677,16 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
                     myEdit.commit();
 
                     //now if location type selected then only go to next activity
-                    if(radioS.length()==0){
+                    if (radioS.length() == 0) {
                         Toast.makeText(SelectLocationFromMap.this, "Please Select A location type.eg: home", Toast.LENGTH_SHORT).show();
-                    }else{
+                    } else {
                         startActivity(i);
                         Toast.makeText(SelectLocationFromMap.this, radioS, Toast.LENGTH_SHORT).show();
                     }
 
                 }
             });
-        }else{
+        } else {
             Toast.makeText(this, "Sorry!Currently our services are not aval. in this area!", Toast.LENGTH_SHORT).show();
         }
     }
@@ -696,7 +698,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
 
     private void hideKeyBoard(EditText editText) {
         InputMethodManager manager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        manager.hideSoftInputFromWindow(editText.getApplicationWindowToken(),0);
+        manager.hideSoftInputFromWindow(editText.getApplicationWindowToken(), 0);
     }
 
 //    private void showKeyboard(EditText editText) {
@@ -734,16 +736,16 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.profile:
-                Intent i = new Intent(getApplicationContext(),ProfilePage.class);
+                Intent i = new Intent(getApplicationContext(), ProfilePage.class);
                 startActivity(i);
                 break;
             case R.id.howItWorks:
-                startActivity(new Intent(this,HowItWorks.class));
+                startActivity(new Intent(this, HowItWorks.class));
                 break;
             case R.id.aboutUs:
-                startActivity(new Intent(this,AboutUs.class));
+                startActivity(new Intent(this, AboutUs.class));
                 break;
             case R.id.call_us:
                 makePhoneCall();
@@ -755,20 +757,20 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
                 Toast.makeText(this, "Logging out..", Toast.LENGTH_SHORT).show();
                 //Toast.makeText(SelectLocationFromMap.this, "Back to Home Page", Toast.LENGTH_SHORT).show();
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(SelectLocationFromMap.this,Login_Phone.class));
+                startActivity(new Intent(SelectLocationFromMap.this, Login_Phone.class));
                 finish();
                 break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
-    private void makePhoneCall(){
 
-        if(ContextCompat.checkSelfPermission(this,Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.CALL_PHONE}, REQUEST_CALL);
-        }
-        else{
-            String phoneNo = "tel:"+"8867825522";
+    private void makePhoneCall() {
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_CALL);
+        } else {
+            String phoneNo = "tel:" + "8867825522";
             Intent intent = new Intent(Intent.ACTION_CALL);
             intent.setData(Uri.parse(phoneNo));
             startActivity(intent);
