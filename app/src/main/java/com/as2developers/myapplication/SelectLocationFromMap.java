@@ -775,6 +775,8 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
     private void addAddressToFirebase(String finalLocation) {
 
         ref.child("address").setValue(finalLocation);
+        ref.child("latitude").setValue(Double.toString(latGlobal));
+        ref.child("longitude").setValue(Double.toString(lonGlobal));
     }
 
     private void hideKeyBoard(EditText editText) {
