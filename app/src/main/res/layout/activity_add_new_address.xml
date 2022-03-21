@@ -81,12 +81,13 @@
        android:gravity="center"
        android:layout_marginTop="20dp"
        android:orientation="horizontal">
+
        <TextView
            android:layout_width="170dp"
            android:layout_height="wrap_content"
            android:paddingBottom="8dp"
            android:textColor="#BAB4B4"
-           android:text="__________________________"></TextView>
+           android:text="__________________________" />
 
        <TextView
            android:layout_width="20dp"
@@ -96,12 +97,14 @@
            android:textColor="#989797"
            android:textSize="17dp"
            android:textStyle="normal" />
+
        <TextView
            android:layout_width="170dp"
            android:layout_height="wrap_content"
            android:paddingBottom="8dp"
            android:textColor="#BAB4B4"
-           android:text=" __________________________"></TextView>
+           android:text="__________________________" />
+
    </LinearLayout>
 
     <LinearLayout
@@ -113,7 +116,7 @@
         <ImageView
             android:layout_width="25dp"
             android:layout_height="20dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="1dp"
             android:src="@drawable/addnewaddress"
             android:layout_gravity="center"></ImageView>
 
@@ -122,7 +125,7 @@
             android:layout_width="134dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="1dp"
             android:gravity="center"
             android:paddingVertical="10dp"
             android:text="Add New Address"
