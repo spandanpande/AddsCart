@@ -129,7 +129,7 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
                 sheetDialog.setContentView(view);
                 TextView locationtype = sheetDialog.findViewById(R.id.txt_Addresstype);
                 TextView txt_Address = sheetDialog.findViewById(R.id.txt_Address);
-                Button updateLocation = sheetDialog.findViewById(R.id.Add_New_Address);
+                TextView updateLocation = sheetDialog.findViewById(R.id.Add_New_Address);
                 locationtype.setText(getIntent().getStringExtra("locationType").toString());
                 txt_Address.setText(getIntent().getStringExtra("LocationDetails").toString());
                 sheetDialog.getWindow().setGravity(Gravity.TOP);

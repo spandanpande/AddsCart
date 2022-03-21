@@ -29,7 +29,7 @@
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="15dp"
             android:layout_marginBottom="15dp"
             android:paddingHorizontal="5dp"
             android:paddingVertical="5dp"
@@ -68,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/txt"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="110dp"
+        android:layout_marginTop="40dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -187,6 +187,7 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/ll3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -231,10 +232,10 @@
         android:id="@+id/button3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
         android:layout_marginHorizontal="30dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="60dp"
         android:backgroundTint="@color/black"
         android:elevation="10dp"
         android:paddingVertical="10dp"

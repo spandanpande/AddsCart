@@ -102,7 +102,7 @@
         android:layout_below="@id/button2"
         android:layout_marginTop="15dp"
         android:gravity="center"
-        android:text="Your Scrap Amount, Reusable Clothes, Toys,\n Stationary and Electronics to Trusted NGO's"
+        android:text=" Donate Your Scrap Amount, Reusable Clothes, Toys,\n Stationary and Electronics to Trusted NGO's"
         android:textColor="@color/black"
         android:textSize="15dp">
 
