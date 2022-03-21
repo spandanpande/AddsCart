@@ -86,6 +86,7 @@
                 android:layout_gravity="center"
                 android:background="@drawable/search_bg"
                 android:elevation="5dp"
+                app:queryBackground="@null"
                 android:iconifiedByDefault="false"
                 android:queryHint="Search your location.."
                 android:textSize="22sp" />
@@ -124,6 +125,7 @@
             android:backgroundTint="@color/black"
             android:text="Continue"
             android:textSize="18sp"
+            android:enabled="false"
             android:paddingVertical="10dp"
             android:textAllCaps="false"
             android:onClick="Continue"

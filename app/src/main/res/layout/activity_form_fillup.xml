@@ -327,7 +327,7 @@
                                 android:layout_weight="1"
                                 android:gravity="center"
                                 android:paddingLeft="13dp"
-                                android:text="Oil container,\nHard/soft"
+                                android:text="Oil container,\nHard/Soft"
                                 android:textColor="@color/black"
                                 android:textSize="12sp" />
 
@@ -337,7 +337,7 @@
                                 android:layout_weight="1"
                                 android:gravity="center"
                                 android:paddingLeft="13dp"
-                                android:text="Utensils,\ncoolers,drums"
+                                android:text="Utensils,\nCoolers,Drums"
                                 android:textColor="@color/black"
                                 android:textSize="12sp" />
 
@@ -538,7 +538,7 @@
                                 android:layout_weight="1"
                                 android:gravity="center"
                                 android:paddingLeft="13dp"
-                                android:text="Beer bottles,\nmachines etc"
+                                android:text="Beer bottles,\nMachines etc"
                                 android:textColor="@color/black"
                                 android:textSize="12sp" />
 

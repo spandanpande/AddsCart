@@ -132,7 +132,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
     MarkerOptions optionsGlobal;
     RadioGroup radioGroup;
     String radioValue;
-    Button next;
+    Button next,continueBtn;
     String radioS,finalLocation,userLocality,UserAddressLine;
     TextInputEditText uLocality,uAddressLine;
     ImageButton ImgBtn;
@@ -173,6 +173,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+        continueBtn = (Button) findViewById(R.id.continueBtn);
         //end
         //uploading req. value to database
         database = FirebaseDatabase.getInstance();
@@ -598,53 +599,63 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
 //        });
             //after clicking next button
             next = (Button) sheetDialog.findViewById(R.id.nextBtn);
-            next.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent i = new Intent(SelectLocationFromMap.this,FormFillupActivity.class);
-                    //passing the value
-                    //getting some value
-                    userLocality = uLocality.getText().toString();
-                    UserAddressLine = uAddressLine.getText().toString();
-                    finalLocation = editText.getText().toString();
-                    i.putExtra("Latitude",Double.toString(latGlobal));
-                    i.putExtra("Longitude",Double.toString(lonGlobal));
-                    i.putExtra("locationType",radioS);
-                    i.putExtra("LocationDetails",finalLocation);
-                    i.putExtra("pin",pin);
-                    i.putExtra("locality",userLocality);
-                    i.putExtra("longAddress",UserAddressLine);
 
-                    SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref",MODE_PRIVATE);
+
+                next.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent i = new Intent(SelectLocationFromMap.this,FormFillupActivity.class);
+                        //passing the value
+                        //getting some value
+                        userLocality = uLocality.getText().toString();
+                        UserAddressLine = uAddressLine.getText().toString();
+                        finalLocation = editText.getText().toString();
+                        i.putExtra("Latitude",Double.toString(latGlobal));
+                        i.putExtra("Longitude",Double.toString(lonGlobal));
+                        i.putExtra("locationType",radioS);
+                        i.putExtra("LocationDetails",finalLocation);
+                        i.putExtra("pin",pin);
+                        i.putExtra("locality",userLocality);
+                        i.putExtra("longAddress",UserAddressLine);
+
+                        SharedPreferences sharedPreferences = getSharedPreferences("MySharedPref",MODE_PRIVATE);
 
 // Creating an Editor object to edit(write to the file)
-                    SharedPreferences.Editor myEdit = sharedPreferences.edit();
+                        SharedPreferences.Editor myEdit = sharedPreferences.edit();
 
 // Storing the key and its value as the data fetched from edittext
-                    myEdit.putString("Latitude", Double.toString(latGlobal));
-                    myEdit.putString("Longitude", Double.toString(lonGlobal));
-                    myEdit.putString("locationType",radioS);
-                    myEdit.putString("LocationDetails",finalLocation);
-                    myEdit.putString("pin", pin);
-                    myEdit.putString("locality",userLocality);
-                    myEdit.putString("longAddress", UserAddressLine);
+                        myEdit.putString("Latitude", Double.toString(latGlobal));
+                        myEdit.putString("Longitude", Double.toString(lonGlobal));
+                        myEdit.putString("locationType",radioS);
+                        myEdit.putString("LocationDetails",finalLocation);
+                        myEdit.putString("pin", pin!=null?pin:"");
+                        myEdit.putString("locality",userLocality);
+                        myEdit.putString("longAddress", UserAddressLine);
 
 
 // Once the changes have been made,
 // we need to commit to apply those changes made,
 // otherwise, it will throw an error
-                    myEdit.commit();
+                        myEdit.commit();
 
-                    //now if location type selected then only go to next activity
-                    if(radioS.length()==0){
-                        Toast.makeText(SelectLocationFromMap.this, "Please Select A location type.eg: home", Toast.LENGTH_SHORT).show();
-                    }else{
-                        startActivity(i);
-                        Toast.makeText(SelectLocationFromMap.this, radioS, Toast.LENGTH_SHORT).show();
+                        //now if location type selected then only go to next activity
+                        //also we have to select the house number
+                        if(radioS.length()==0){
+                            Toast.makeText(SelectLocationFromMap.this, "Please Select A location type.eg: home", Toast.LENGTH_SHORT).show();
+                        }else{
+                            if(!userLocality.isEmpty()){
+                                startActivity(i);
+                                Toast.makeText(SelectLocationFromMap.this, radioS, Toast.LENGTH_SHORT).show();
+                                //System.out.println(userLocality+"  "+UserAddressLine);
+                            }else{
+                                Toast.makeText(SelectLocationFromMap.this, "Please enter H/No,Plot No!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
                     }
+                });
 
-                }
-            });
+
         }else{
             Toast.makeText(this, "Sorry!Currently our services are not aval. in this area!", Toast.LENGTH_SHORT).show();
         }
@@ -866,6 +877,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
                 //create a new place cline instance
                 PlacesClient placesClient = Places.createClient(getApplicationContext());
                 System.out.println(homeLat+" "+homeLon);
+                continueBtn.setEnabled(true);
             }
 
         });
