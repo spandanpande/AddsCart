@@ -76,8 +76,8 @@ public class ConfirmPickupActivity extends AppCompatActivity implements Navigati
         txt_pickupTime.setText(temp +"\n10AM-6PM");
         scarpItem_txt.setText(getIntent().getStringExtra("items"));
         txt_itemPickup.setText(ItemCount);
-        txt_Address.setText(String.format("%s\n%s\n%s",getIntent().getStringExtra("locality")!=null?getIntent().getStringExtra("locality"):"", getIntent().getStringExtra("AddressLine")!=null?getIntent().getStringExtra("AddressLine"):"",
-                getIntent().getStringExtra("longAddress")!=null?getIntent().getStringExtra("longAddress"):""));  //null checking
+        txt_Address.setText(String.format("%s\n%s\n%s",getIntent().getStringExtra("locality")!=null?getIntent().getStringExtra("locality"):"",getIntent().getStringExtra("longAddress")!=null?getIntent().getStringExtra("longAddress"):"", getIntent().getStringExtra("AddressLine")!=null?getIntent().getStringExtra("AddressLine"):""
+                ));  //null checking
 
         continue_btn.setOnClickListener(new View.OnClickListener() {
             @Override

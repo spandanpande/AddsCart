@@ -86,7 +86,10 @@ public class confirmation extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Toast.makeText(confirmation.this, "Back to Home Page", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(confirmation.this,FormFillupActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                Intent i=new Intent(confirmation.this,SelectLocationFromMap.class);
+
+                startActivity(i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+
                 finish();
             }
         });
@@ -125,7 +128,8 @@ public class confirmation extends AppCompatActivity {
         });
 
         //doing null check
-        addressLine.setText(String.format("%s\n%s\n%s", locality!=null? locality:"",AddressLine!=null?AddressLine:null, longAddress!=null?longAddress:""));
+        addressLine.setText(String.format("%s\n%s\n%s", getIntent().getStringExtra("locality")!=null?getIntent().getStringExtra("locality"):"",getIntent().getStringExtra("longAddress")!=null?getIntent().getStringExtra("longAddress"):"", getIntent().getStringExtra("AddressLine")!=null?getIntent().getStringExtra("AddressLine"):""
+        ));
         paymentMode.setText(mode);
         expectedDate.setText(date);
         items.setText(Items);
