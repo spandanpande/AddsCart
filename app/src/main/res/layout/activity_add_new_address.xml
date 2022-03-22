@@ -38,6 +38,7 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/custom_background_white_20r_gray_border"
             android:orientation="vertical"
+
             android:padding="10dp">
 
             <TextView
@@ -74,28 +75,61 @@
 
      </androidx.recyclerview.widget.RecyclerView>-->
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:text="or"
-        android:textColor="#989797"
-        android:textSize="17dp"
-        android:textStyle="normal" />
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:gravity="center"
+       android:layout_marginTop="20dp"
+       android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/Add_New_Address"
+       <TextView
+           android:layout_width="170dp"
+           android:layout_height="wrap_content"
+           android:paddingBottom="8dp"
+           android:textColor="#BAB4B4"
+           android:text="__________________________" />
+
+       <TextView
+           android:layout_width="20dp"
+           android:layout_height="wrap_content"
+           android:gravity="center"
+           android:text="or"
+           android:textColor="#989797"
+           android:textSize="17dp"
+           android:textStyle="normal" />
+
+       <TextView
+           android:layout_width="170dp"
+           android:layout_height="wrap_content"
+           android:paddingBottom="8dp"
+           android:textColor="#BAB4B4"
+           android:text="__________________________" />
+
+   </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginHorizontal="30dp"
-        android:layout_marginTop="5dp"
-        android:backgroundTint="@color/black"
-        android:clickable="false"
-        android:paddingVertical="10dp"
-        android:text="Add New Address"
-        android:textAllCaps="false"
-        android:textColor="@color/white" />
+        android:gravity="center"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="20dp"
+            android:layout_marginTop="1dp"
+            android:src="@drawable/addnewaddress"
+            android:layout_gravity="center"></ImageView>
+
+        <TextView
+            android:id="@+id/Add_New_Address"
+            android:layout_width="134dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="1dp"
+            android:gravity="center"
+            android:paddingVertical="10dp"
+            android:text="Add New Address"
+            android:textColor="@color/green" />
+    </LinearLayout>
 
 </LinearLayout>

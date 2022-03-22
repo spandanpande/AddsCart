@@ -107,6 +107,9 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
         dropdown = findViewById(R.id.dropDrown);
 
 
+
+
+
         // All Material CardView
         card1 = findViewById(R.id.card1);
         card2 = findViewById(R.id.card2);
@@ -137,6 +140,7 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
         fAuth = FirebaseAuth.getInstance();
         fdata = FirebaseDatabase.getInstance();
 
+
         dropdown.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -145,7 +149,8 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
                 sheetDialog.setContentView(view);
                 TextView locationtype = sheetDialog.findViewById(R.id.txt_Addresstype);
                 TextView txt_Address = sheetDialog.findViewById(R.id.txt_Address);
-                Button updateLocation = sheetDialog.findViewById(R.id.Add_New_Address);
+                TextView updateLocation = sheetDialog.findViewById(R.id.Add_New_Address);
+                ImageButton dropdown2=sheetDialog.findViewById(R.id.dropDrown01);
                 locationtype.setText(getIntent().getStringExtra("locationType").toString());
                 txt_Address.setText(getIntent().getStringExtra("LocationDetails").toString());
                 sheetDialog.getWindow().setGravity(Gravity.TOP);
@@ -155,6 +160,12 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
                     public void onClick(View v) {
                         startActivity(new Intent(getApplicationContext(),SelectLocationFromMap.class));
                         finish();
+                    }
+                });
+                dropdown2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        sheetDialog.dismiss();
                     }
                 });
 

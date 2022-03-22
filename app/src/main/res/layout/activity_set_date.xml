@@ -22,6 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
+
         <RelativeLayout
             android:id="@+id/firstLayout"
             android:layout_width="match_parent"
@@ -42,12 +43,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
-                android:layout_marginLeft="20dp"
-                android:layout_marginBottom="15dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginBottom="18dp"
                 android:layout_toEndOf="@id/back"
                 android:text="Sell scrap"
                 android:textColor="@color/white"
-                android:textSize="25sp" />
+                android:textSize="24sp" />
         </RelativeLayout>
 
         <LinearLayout
@@ -124,14 +125,16 @@
             android:layout_below="@id/secondlayout"
             android:layout_width="match_parent"
             android:layout_height="100dp"
-            tools:ignore="Orientation"
-            android:layout_marginLeft="30dp">
+            android:gravity="center"
+            tools:ignore="Orientation">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textSize="34dp"
+                android:textSize="28dp"
+                android:gravity="center"
                 android:textColor="#222222"
                 android:textStyle="bold"
+                android:layout_marginTop="15dp"
                 android:text="Select a date for scrap pickup"/>
         </LinearLayout>
 
@@ -168,8 +171,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginHorizontal="30dp"
-                android:paddingVertical="10dp"
                 android:backgroundTint="#29BB8A"
+                android:paddingVertical="10dp"
                 android:text="Select a Date"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
@@ -223,7 +226,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginHorizontal="30dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="25dp"
             android:backgroundTint="@color/black"
             android:onClick="Continue"
             android:paddingVertical="10dp"
