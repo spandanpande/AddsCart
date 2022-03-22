@@ -108,7 +108,7 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:hint="Locality"
+            android:hint="H/No, Plot No"
             >
 
             <com.google.android.material.textfield.TextInputEditText
@@ -125,7 +125,7 @@
             android:layout_height="70dp"
             app:counterTextColor="@color/black"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:hint="Address line"
+            android:hint="Locality"
             >
 
             <com.google.android.material.textfield.TextInputEditText

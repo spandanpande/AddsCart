@@ -176,7 +176,7 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
         getpaper.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                paper_price.setText((CharSequence) snapshot.getValue());
+                paper_price.setText(snapshot.getValue().toString().trim()+"/kg");
             }
 
             @Override
@@ -188,7 +188,7 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
         getplastic.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                plastic_price.setText((CharSequence) snapshot.getValue());
+                plastic_price.setText(snapshot.getValue().toString().trim()+"/kg");
             }
 
             @Override
@@ -200,7 +200,7 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
         getmetal.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                metal_price.setText((CharSequence) snapshot.getValue());
+                metal_price.setText(snapshot.getValue().toString().trim()+"/kg");
             }
 
             @Override
@@ -212,7 +212,7 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
         getothers.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                otherItems_price.setText((CharSequence) snapshot.getValue());
+                otherItems_price.setText(snapshot.getValue().toString().trim()+"/kg");
             }
 
             @Override
@@ -224,7 +224,7 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
         getewaste.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                eWsate_price.setText((CharSequence) snapshot.getValue());
+                eWsate_price.setText(snapshot.getValue().toString().trim()+"/kg");
             }
 
             @Override
@@ -236,7 +236,7 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
         getiron.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                iron_price.setText((CharSequence) snapshot.getValue());
+                iron_price.setText(snapshot.getValue().toString().trim()+"/kg");
             }
 
             @Override
@@ -334,7 +334,7 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
             ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.CALL_PHONE}, REQUEST_CALL);
         }
         else{
-            String phoneNo = "tel:"+"8867825522";
+            String phoneNo = "tel:"+"8867825523";
             Intent intent = new Intent(Intent.ACTION_CALL);
             intent.setData(Uri.parse(phoneNo));
             startActivity(intent);

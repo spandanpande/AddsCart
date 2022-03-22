@@ -76,7 +76,8 @@ public class ConfirmPickupActivity extends AppCompatActivity implements Navigati
         txt_pickupTime.setText(temp +"\n10AM-6PM");
         scarpItem_txt.setText(getIntent().getStringExtra("items"));
         txt_itemPickup.setText(ItemCount);
-        txt_Address.setText(String.format("%s\n%s\n%s", getIntent().getStringExtra("AddressLine"), getIntent().getStringExtra("locality"), getIntent().getStringExtra("longAddress")));  //Error
+        txt_Address.setText(String.format("%s\n%s\n%s",getIntent().getStringExtra("locality")!=null?getIntent().getStringExtra("locality"):"", getIntent().getStringExtra("AddressLine")!=null?getIntent().getStringExtra("AddressLine"):"",
+                getIntent().getStringExtra("longAddress")!=null?getIntent().getStringExtra("longAddress"):""));  //null checking
 
         continue_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,7 +144,7 @@ public class ConfirmPickupActivity extends AppCompatActivity implements Navigati
             ActivityCompat.requestPermissions(this,new String[] {Manifest.permission.CALL_PHONE}, REQUEST_CALL);
         }
         else{
-            String phoneNo = "tel:"+"8867825522";
+            String phoneNo = "tel:"+"8867825523";
             Intent intent = new Intent(Intent.ACTION_CALL);
             intent.setData(Uri.parse(phoneNo));
             startActivity(intent);
