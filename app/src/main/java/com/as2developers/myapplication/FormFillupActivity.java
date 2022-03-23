@@ -47,7 +47,8 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
     LinearLayout linearLayout_location, linearLayoutAddress, nameLayout, fistLayout, secondLayout, thirdLayout,
             fourthLayout, fifthLayout, sixthLayout, btn_Layout;
     TextView pickup_laction, homelocation, homeAddress_text, txt_goodmorning, txt_name,
-            paper, paper_price, metal, metal_price, plastic, plastic_price, eWaste, eWsate_price, iron, iron_price, otherItems, otherItems_price;
+            paper, paper_price, metal, metal_price, plastic, plastic_price, eWaste,
+            eWsate_price, iron, iron_price, otherItems, otherItems_price;
     Button btn_continue;
     MaterialCardView card1, card2, card3, card4, card5, card6;
     ImageButton ImgBtn;
@@ -106,6 +107,7 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
         otherItems_price = findViewById(R.id.otheritems_price);
         btn_continue = findViewById(R.id.btn_continue);
         dropdown = findViewById(R.id.dropDrown);
+
 
 
         // All Material CardView
@@ -174,9 +176,11 @@ public class FormFillupActivity extends AppCompatActivity implements NavigationV
                 TextView locationtype = sheetDialog.findViewById(R.id.txt_Addresstype);
                 TextView txt_Address = sheetDialog.findViewById(R.id.txt_Address);
                 TextView updateLocation = sheetDialog.findViewById(R.id.Add_New_Address);
+                TextView txt_houseNo = sheetDialog.findViewById(R.id.txt_houseNo);;
                 ImageButton dropdown2=sheetDialog.findViewById(R.id.dropDrown01);
                 locationtype.setText(getIntent().getStringExtra("locationType").toString());
-                txt_Address.setText(getIntent().getStringExtra("LocationDetails").toString());
+                txt_Address.setText(AddressLine);
+                txt_houseNo.setText(locality);
                 sheetDialog.getWindow().setGravity(Gravity.TOP);
                 sheetDialog.show();
                 updateLocation.setOnClickListener(new View.OnClickListener() {

@@ -118,7 +118,7 @@ public class confirmation extends AppCompatActivity {
                     String data = dataSnapshot.getValue(String.class);
                     ItemType.add(data);
                 }
-                reqId.setText(String.valueOf(ItemType.size()));
+                reqId.setText(String.valueOf(ItemType.size()-1));
             }
 
             @Override
