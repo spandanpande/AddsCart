@@ -113,6 +113,8 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/UserLocality"
+                android:singleLine="true"
+                android:nextFocusDown="@id/edtxt_addressLine"
                 android:textColor="@color/black"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -131,6 +133,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:textSize="20dp"
+                android:singleLine="true"
                 android:textColor="@color/black"
                 android:layout_height="wrap_content"
                 android:id="@+id/edtxt_addressLine"
