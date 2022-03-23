@@ -171,7 +171,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
         navigationView.bringToFront();
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawerLayout,R.string.dummy_content,R.string.dummy_content);
         drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
+        //toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
         continueBtn = (Button) findViewById(R.id.continueBtn);
         //end
@@ -384,7 +384,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
             public void onComplete(@NonNull Task<LocationSettingsResponse> task) {
                 try {
                     LocationSettingsResponse response = task.getResult(ApiException.class);
-                    Toast.makeText(SelectLocationFromMap.this, "Gps is On in your device!", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(SelectLocationFromMap.this, "Gps is On in your device!", Toast.LENGTH_SHORT).show();
                     //getCurrentLocation();
                 } catch (ApiException e) {
                     switch (e.getStatusCode()){
@@ -430,13 +430,13 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
         if(requestCode == REQUEST_CHECK_SETTING){
             switch (resultCode){
                 case Activity.RESULT_OK:
-                    Toast.makeText(this, "GPS is turing on..", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(this, "GPS is turing on..", Toast.LENGTH_SHORT).show();
                     //getCurrentLocation();
                     /*startActivity(new Intent(this,SelectLocationFromMap.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     finish();*/
                     break;
                 case Activity.RESULT_CANCELED:
-                    Toast.makeText(this, "GPS have to be turn on..", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(this, "GPS have to be turn on..", Toast.LENGTH_SHORT).show();
                     break;
 
             }
@@ -529,7 +529,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
 
             //sheetDialog.show();
             addAddressToFirebase(finalLocation);
-            Toast.makeText(this,  "lat: "+latS+", lan: "+lonS+" LocationName: "+latLngGlobal, Toast.LENGTH_SHORT).show();
+           // Toast.makeText(this,  "lat: "+latS+", lan: "+lonS+" LocationName: "+latLngGlobal, Toast.LENGTH_SHORT).show();
 
             uLocality = (TextInputEditText) sheetDialog.findViewById(R.id.UserLocality);
             uAddressLine = (TextInputEditText) sheetDialog.findViewById(R.id.edtxt_addressLine);
@@ -544,19 +544,19 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
                     switch (i){
                         case R.id.radio_home:
                             radioS = "Home";
-                            Toast.makeText(SelectLocationFromMap.this, radioS, Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(SelectLocationFromMap.this, radioS, Toast.LENGTH_SHORT).show();
                             break;
                         case R.id.ratio_office:
                             radioS = "Office";
-                            Toast.makeText(SelectLocationFromMap.this, radioS, Toast.LENGTH_SHORT).show();
+                          //  Toast.makeText(SelectLocationFromMap.this, radioS, Toast.LENGTH_SHORT).show();
                             break;
                         case R.id.radio_shop:
                             radioS = "Shop";
-                            Toast.makeText(SelectLocationFromMap.this, radioS, Toast.LENGTH_SHORT).show();
+                          //  Toast.makeText(SelectLocationFromMap.this, radioS, Toast.LENGTH_SHORT).show();
                             break;
                         case R.id.radio_outlet:
                             radioS = "Outlet/Mall";
-                            Toast.makeText(SelectLocationFromMap.this, radioS, Toast.LENGTH_SHORT).show();
+                           // Toast.makeText(SelectLocationFromMap.this, radioS, Toast.LENGTH_SHORT).show();
                             break;
                     }
                 }
@@ -628,7 +628,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
                         myEdit.putString("Longitude", Double.toString(lonGlobal));
                         myEdit.putString("locationType",radioS);
                         myEdit.putString("LocationDetails",finalLocation);
-                        myEdit.putString("pin", pin!=null?pin:"");
+                        myEdit.putString("pin", pin);
                         myEdit.putString("locality",userLocality);
                         myEdit.putString("longAddress", UserAddressLine);
 
@@ -657,7 +657,7 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
 
 
         }else{
-            Toast.makeText(this, "Sorry!Currently our services are not aval. in this area!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Sorry!Currently our services are not available in this area!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -883,8 +883,6 @@ public class SelectLocationFromMap extends AppCompatActivity implements Navigati
         });
     }
 }
-
-
 
 
 

@@ -538,7 +538,7 @@
                                 android:layout_weight="1"
                                 android:gravity="center"
                                 android:paddingLeft="13dp"
-                                android:text="Beer bottles,\nMachines etc"
+                                android:text="Machines etc"
                                 android:textColor="@color/black"
                                 android:textSize="12sp" />
 

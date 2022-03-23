@@ -123,6 +123,8 @@ public class Verify_Number extends AppCompatActivity {
                     Intent intent = new Intent(Verify_Number.this, SelectLocationFromMap.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
+                    //ayan
+                    finish();
 
                 } else {
                     String message = "Something is wrong, we will fix it soon...";

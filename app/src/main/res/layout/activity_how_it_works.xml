@@ -44,7 +44,7 @@
                 android:layout_marginStart="15dp"
                 android:paddingHorizontal="5dp"
                 android:paddingVertical="5dp"
-                android:text="Sell scrap"
+                android:text="How it works"
                 android:textColor="@color/white"
                 android:textSize="24sp" />
 
